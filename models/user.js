@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const bcrypt = require("bcrypt");
 
 const accountTypes = ["Pharmacist", "Consumer", "InventoryManager", "Admin"];
+const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
   {
@@ -12,5 +14,11 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
+  return next();
+});
 
 module.exports = mongoose.model("User", userSchema);
