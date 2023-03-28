@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 
-const accountTypes = ["Pharmacist", "Consumer", "InventoryManager", "Admin"];
+const accountTypes = ["Pharmacist", "Consumer", "Inventory Manager", "Admin"];
 const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
