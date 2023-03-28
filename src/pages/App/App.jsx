@@ -1,28 +1,18 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import AuthPage from "../AuthPage/AuthPage";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [user, setUser] = useState(null);
 
   return (
     <div className="App">
+      {user ? "" : <AuthPage setUser={setUser} />}
       {/* <Routes>
         <Route path="" element=""/>
         <Route path="" element=""/>
       </Routes> */}
-      <h1>React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }

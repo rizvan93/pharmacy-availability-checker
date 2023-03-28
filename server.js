@@ -4,7 +4,7 @@ const logger = require("morgan");
 require("dotenv").config();
 require("./config/database");
 
-//const usersRouter = require("./routes/usersRouter")
+const usersRouter = require("./routes/usersRouter");
 //const pharmacistsRouter = require("./routes/pharmacistsRouter")
 //const consumersRouter = require("./routes/consumersRouter")
 //const storesRouter = require("./routes/storesRouter")
@@ -16,7 +16,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
 
-//app.use("/api/users", usersRouter)
+app.use("/api/users", usersRouter);
 //app.use("/api/pharmacists", pharmacistsRouter)
 //app.use("/api/consumers", consumersRouter)
 //app.use("/api/stores", storesRouter)
