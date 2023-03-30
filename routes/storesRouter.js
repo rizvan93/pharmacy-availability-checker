@@ -4,6 +4,7 @@ const storesController = require("../controllers/storesController");
 
 router.get("/seed", storesController.seed);
 
+router.post("/", storesController.create);
 router.get("/", storesController.index);
 router.delete("/:id", storesController.delete);
 

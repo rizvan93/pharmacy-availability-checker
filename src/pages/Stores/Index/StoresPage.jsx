@@ -18,10 +18,6 @@ const StoresPage = () => {
     setStores(stores.filter((store) => store._id !== id));
   };
 
-  const addThisStore = () => {
-    setStores([...stores, { name: "Store 4", location: "over the rainbow" }]);
-  };
-
   return (
     <>
       <h1>Stores</h1>
@@ -29,7 +25,6 @@ const StoresPage = () => {
         <button>Add New</button>
       </Link>
       <StoresTable stores={stores} removeFromStores={removeFromStores} />
-      <button onClick={addThisStore}>Add Seed</button>
     </>
   );
 };

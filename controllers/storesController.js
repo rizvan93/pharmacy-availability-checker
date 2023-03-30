@@ -12,6 +12,20 @@ const seed = async (req, res) => {
   }
 };
 
+const create = async (req, res) => {
+  if (!req.body.name)
+    res.status(400).json({ error: "New store must have a name" });
+  if (!req.body.location)
+    res.status(400).json({ error: "New store must have a location" });
+
+  try {
+    const newStore = await Store.create(req.body);
+    res.status(200).json(newStore);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const index = async (req, res) => {
   try {
     const stores = await Store.find({});
@@ -32,6 +46,7 @@ const deleteStore = async (req, res) => {
 };
 
 module.exports = {
+  create,
   index,
   delete: deleteStore,
   seed,
