@@ -4,11 +4,11 @@ const logger = require("morgan");
 require("dotenv").config();
 require("./config/database");
 
-const usersRouter = require("./routes/usersRouter");
-//const pharmacistsRouter = require("./routes/pharmacistsRouter")
-//const consumersRouter = require("./routes/consumersRouter")
-//const storesRouter = require("./routes/storesRouter")
-//const medicinesRouter = require("./routes/medicinesRouter")
+const usersRouter = require("./routes/usersRouter"); //-> Adelyn
+//const pharmacistsRouter = require("./routes/pharmacistsRouter") -> Irvin
+//const consumersRouter = require("./routes/consumersRouter") -> Irvin
+//const storesRouter = require("./routes/storesRouter") -> Rizvan
+//const medicinesRouter = require("./routes/medicinesRouter") -> Noel
 
 const app = express();
 

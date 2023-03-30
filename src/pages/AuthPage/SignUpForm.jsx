@@ -11,9 +11,19 @@ const SignUpForm = () => {
   };
   const [data, setData] = useState(blankData);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(data);
+    //fire off a post request
+
+    const response = await fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const resData = await response.json();
+    //confirm the response is correct
     setData(blankData);
   };
 
