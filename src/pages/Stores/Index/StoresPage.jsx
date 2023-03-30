@@ -14,13 +14,22 @@ const StoresPage = () => {
     getStores();
   }, []);
 
+  const removeFromStores = (id) => {
+    setStores(stores.filter((store) => store._id !== id));
+  };
+
+  const addThisStore = () => {
+    setStores([...stores, { name: "Store 4", location: "over the rainbow" }]);
+  };
+
   return (
     <>
       <h1>Stores</h1>
       <Link to="/stores/new">
         <button>Add New</button>
       </Link>
-      <StoresTable stores={stores} />
+      <StoresTable stores={stores} removeFromStores={removeFromStores} />
+      <button onClick={addThisStore}>Add Seed</button>
     </>
   );
 };

@@ -3,8 +3,8 @@ const Store = require("../models/Store");
 const seed = async (req, res) => {
   try {
     const newStore = await Store.create({
-      name: "Store 2",
-      location: "Somewhere else in Singapore",
+      name: "Store 1",
+      location: "Somewhere in Singapore",
     });
     res.status(200).json(newStore);
   } catch (error) {
@@ -21,4 +21,18 @@ const index = async (req, res) => {
   }
 };
 
-module.exports = { index, seed };
+const deleteStore = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Store.findByIdAndDelete(id);
+    res.status(200);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+module.exports = {
+  index,
+  delete: deleteStore,
+  seed,
+};
