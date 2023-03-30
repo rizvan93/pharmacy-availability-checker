@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const StoreForm = ({ addToStores }) => {
+const StoreForm = () => {
   const [form, setForm] = useState({
     name: "",
     location: "",
@@ -11,7 +11,7 @@ const StoreForm = ({ addToStores }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const createStore = async (setState) => {
+    const createStore = async () => {
       const response = await fetch("/api/stores", {
         method: "POST",
         headers: {
@@ -19,11 +19,14 @@ const StoreForm = ({ addToStores }) => {
         },
         body: JSON.stringify(form),
       });
-      const newStore = await response.json();
+      if (response.ok) {
+        navigate("/stores");
+      } else {
+        console.log("unable to create");
+      }
     };
 
-    createStore(addToStores);
-    navigate("/stores");
+    createStore();
   };
 
   const handleChange = (event) => {
@@ -32,20 +35,27 @@ const StoreForm = ({ addToStores }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Name:{" "}
-        <input name="name" value={form.name} onChange={handleChange} required />
-      </label>
-      <label>
-        Location:{" "}
-        <input
-          name="location"
-          value={form.location}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <button>Add Store</button>
+      <fieldset>
+        <label>
+          Name:{" "}
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Location:{" "}
+          <input
+            name="location"
+            value={form.location}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <button>Add Store</button>
+      </fieldset>
     </form>
   );
 };

@@ -26,6 +26,19 @@ const create = async (req, res) => {
   }
 };
 
+const show = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const store = await Store.findById(id);
+    if (store) {
+      return res.status(200).json(store);
+    }
+    return res.status(404).json({ error: "store not found" });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const index = async (req, res) => {
   try {
     const stores = await Store.find({});
@@ -47,6 +60,7 @@ const deleteStore = async (req, res) => {
 
 module.exports = {
   create,
+  show,
   index,
   delete: deleteStore,
   seed,
