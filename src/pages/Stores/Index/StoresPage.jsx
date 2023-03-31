@@ -20,7 +20,9 @@ const StoresPage = () => {
 
   return (
     <>
-      <h1>Stores</h1>
+      <h1 className="text-3xl font-bold underline font-sans text-wPurple">
+        Stores
+      </h1>
       <Link to="/stores/new">
         <button>Add New</button>
       </Link>

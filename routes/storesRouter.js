@@ -8,5 +8,6 @@ router.post("/", storesController.create);
 router.get("/:id", storesController.show);
 router.get("/", storesController.index);
 router.delete("/:id", storesController.delete);
+router.put("/:id", storesController.update);
 
 module.exports = router;
