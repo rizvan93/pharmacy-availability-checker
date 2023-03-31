@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const stockSchema = new Schema({
   medicine: { type: mongoose.Types.ObjectId, ref: "Medicine", required: true },
-  qty: { type: Number, min: 0, required: true },
+  quantity: { type: Number, min: 0, required: true },
 });
 
 const storeSchema = new Schema({
