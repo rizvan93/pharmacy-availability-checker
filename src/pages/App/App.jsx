@@ -8,7 +8,9 @@ import MedicinesPage from "../Medicine/Index/MedicinesPage";
 import AddMedicinePage from "../Medicine/Create/AddMedicinePage";
 import UserPage from "../User/UserPage";
 import NavBar from "../../components/NavBar/NavBar";
+import CreateUserPage from "../User/CreateUserPage";
 import "./App.css";
+
 
 function App() {
   const [user, setUser] = useState(1);
@@ -20,6 +22,7 @@ function App() {
       <Routes>
         {/* <Route path="" element=""/> */}
         <Route path="/users" element={<UserPage />} />
+        <Route path="/users/new" element={<CreateUserPage />} />
         <Route path="/stores" element={<StoresPage />} />
         <Route path="/stores/new" element={<CreateStorePage />} />
         <Route path="/stores/:id/edit" element={<EditStorePage />} />

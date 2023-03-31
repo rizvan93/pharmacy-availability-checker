@@ -1,7 +1,13 @@
 const User = require("../models/User");
 
-const create = (req, res) => {
-  res.status(200).json({ message: "create new user" });
+const create = async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 // const login -> We do together
