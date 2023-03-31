@@ -12,8 +12,9 @@ const create = async (req, res) => {
 const seed = async (req, res) => {
   try {
       const newMedicine = await Medicine.create({
-        brand: "Panadol",
-        type: "Paracetamol",
+        name: "Paracetamol",
+        type: "tablet",
+        packCount: "16",
         dose: 500,
         uom: "mg",
       });
