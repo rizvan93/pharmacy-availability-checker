@@ -2,7 +2,7 @@ import StoresTableRow from "./StoresTableRow";
 
 const StoresTable = ({ stores, removeFromStores }) => {
   return (
-    <table>
+    <table className="border-separate border border-wPurple-10 table-fixed">
       <tbody>
         {stores?.map((store) => (
           <StoresTableRow
