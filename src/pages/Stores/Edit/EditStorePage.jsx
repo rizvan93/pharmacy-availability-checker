@@ -13,7 +13,7 @@ const EditStorePage = () => {
       setStore(data);
     };
     getStore();
-  }, []);
+  }, [id]);
 
   return (
     <>
