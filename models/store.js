@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const stockSchema = newSchema({
+const stockSchema = new Schema({
   medicine: { type: mongoose.Types.ObjectId, ref: "Medicine", required: true },
   qty: { type: Number, min: 0, required: true },
 });

@@ -23,7 +23,7 @@ const create = async (req, res) => {
     res.status(400).json({ error: "Please enter a contact number" });
   try {
     const newConsumer = await Consumer.create(req.body);
-    res.status(200).json({ message: "create new consumer" });
+    res.status(200).json(newConsumer);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
