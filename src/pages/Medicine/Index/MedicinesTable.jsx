@@ -1,10 +1,10 @@
 import MedicineRow from "./MedicineRow";
 
-const MedicinesTable = ({ medicine, removeMedicine }) => {
+const MedicinesTable = ({ medicines, removeMedicine }) => {
   return (
     <table>
       <tbody>
-        {medicine?.map((medicine) => (
+        {medicines?.map((medicine) => (
           <MedicineRow
             medicine={medicine}
             key={medicine._id}

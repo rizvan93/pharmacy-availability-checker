@@ -1,28 +1,27 @@
 import { Link } from "react-router-dom";
 
+
 const MedicineRow = ({ medicine, removeMedicine }) => {
-  const onDelete = () => {
-    const deleteMedicine = async (id) => {
-      const response = await fetch(`/api/medicines/${id}`, {
+  const onDelete = async () => {
+    try {
+      const response = await fetch(`/api/medicines/${medicine._id}`, {
         method: "DELETE",
       });
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        removeMedicine(medicine._id);
       } else {
         console.log("unable to delete");
       }
-    };
-
-    deleteMedicine(medicine._id);
-    removeMedicine(medicine._id);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <tr>
       <td>{medicine.name}</td>
       <td>
-        <Link to={`/medicine/${medicine._id}/edit`}>
+        <Link to={`/medicines/${medicine._id}/edit`}>
           <button>✏️</button>
         </Link>
         <button onClick={onDelete}>🗙</button>
