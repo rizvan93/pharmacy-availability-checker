@@ -1,6 +1,6 @@
 const MedicineStockForm = ({ medicine, store, setStore }) => {
-  const stock = store?.stocks.find((s) => s.medicine === medicine._id) || 0;
-  console.log(`${medicine.name}, qty: ${stock.quantity}`);
+  const stock = store?.stocks.find((s) => s.medicine === medicine._id);
+  const quantity = stock?.quantity || 0;
   const handleChange = (event) => {
     const newStock = {
       medicine: medicine._id,
@@ -22,7 +22,7 @@ const MedicineStockForm = ({ medicine, store, setStore }) => {
       <input
         name="quantity"
         type="number"
-        defaultValue={stock.quantity}
+        defaultValue={quantity}
         onChange={handleChange}
       />
     </label>
