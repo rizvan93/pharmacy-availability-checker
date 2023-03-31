@@ -11,13 +11,13 @@ const create = async (req, res) => {
 
 const seed = async (req, res) => {
   try {
-      const newMedicine = await Medicine.create({
-        name: "Paracetamol",
-        type: "tablet",
-        packCount: "16",
-        dose: 500,
-        uom: "mg",
-      });
+    const newMedicine = await Medicine.create({
+      name: "Ibuprofen",
+      type: "tablet",
+      packCount: "12",
+      dose: 200,
+      uom: "mg",
+    });
     res.status(200).json(newMedicine);
   } catch (error) {
     res.status(500).json({ error });

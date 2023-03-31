@@ -8,6 +8,7 @@ import MedicinesPage from "../Medicine/Index/MedicinesPage";
 import AddMedicinePage from "../Medicine/Create/AddMedicinePage";
 import EditMedicineForm from "../Medicine/Edit/EditMedicineForm";
 import UserPage from "../User/UserPage";
+import NavBar from "../../components/NavBar/NavBar";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   return (
     <div className="App">
       {user ? "" : <AuthPage setUser={setUser} />}
+      <div><NavBar user={user} />
       <Routes>
         {/* <Route path="" element=""/> */}
         <Route path="/users" element={<UserPage />} />
@@ -26,6 +28,7 @@ function App() {
         <Route path="/medicines/new" element={<AddMedicinePage />} />
         <Route path="/medicines/:id/edit" element={<EditMedicineForm />} />
       </Routes>
+      </div>
     </div>
   );
 }
