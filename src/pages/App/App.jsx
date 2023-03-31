@@ -4,6 +4,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import CreateStorePage from "../Stores/Create/CreateStorePage";
 import EditStorePage from "../Stores/Edit/EditStorePage";
 import StoresPage from "../Stores/Index/StoresPage";
+import UserPage from "../User/UserPage";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       {user ? "" : <AuthPage setUser={setUser} />}
       <Routes>
         {/* <Route path="" element=""/> */}
+        <Route path="/users" element={<UserPage />} />
         <Route path="/stores" element={<StoresPage />} />
         <Route path="/stores/new" element={<CreateStorePage />} />
         <Route path="/stores/:id/edit" element={<EditStorePage />} />
