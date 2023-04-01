@@ -8,7 +8,7 @@ const consumerSchema = new Schema(
       { type: mongoose.Types.ObjectId, ref: "Pharmacist" },
     ],
     email: { type: String, trim: true, lowercase: true },
-    contact: { type: String, trim: true },
+    // contact: { type: String, trim: true },
   },
   { timestamps: true }
 );

@@ -1,5 +1,8 @@
 const Consumer = require("../models/Consumer");
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+
+const SALT_ROUNDS = 10;
 
 // const show = (req, res) => {
 //   res.status(200).json({ message: "show consumer" });
@@ -26,11 +29,21 @@ const seed = async (req, res) => {
 const create = async (req, res) => {
   if (!req.body.email)
     res.status(400).json({ error: "Please enter an email address" });
-  if (!req.body.contact)
-    res.status(400).json({ error: "Please enter a contact number" });
+  // if (!req.body.contact)
+  //   res.status(400).json({ error: "Please enter a contact number" });
   try {
-    const newConsumer = await Consumer.create(req.body);
-    res.status(200).json(newConsumer);
+    const { email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    const newConsumer = await Consumer.create({ email });
+
+    const newUser = await User.create({
+      userId: newConsumer.email,
+      password: hashedPassword,
+      accountType: "Consumer",
+      accountId: newConsumer._id,
+    });
+    res.status(200).json(newUser);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
