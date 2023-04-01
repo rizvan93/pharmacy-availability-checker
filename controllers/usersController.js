@@ -43,9 +43,19 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const show = async (req, res) => {
+  try {
+    const showUser = await User.findById(req.params.id);
+    res.status(200).send(showUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   create,
   index,
   update,
   delete: deleteUser,
+  show
 };
