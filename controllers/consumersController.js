@@ -12,7 +12,6 @@ const seed = async (req, res) => {
   try {
     const newConsumer = await Consumer.create({
       email: "newconsumer@gmail.com",
-      contact: "12345678",
     });
     const newUser = await User.create({
       userId: newConsumer.email,
