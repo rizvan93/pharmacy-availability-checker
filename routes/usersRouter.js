@@ -10,4 +10,6 @@ router.get("/", usersController.index);
 
 router.delete("/:id", usersController.delete);
 
+router.get("/:id", usersController.show);
+
 module.exports = router;
