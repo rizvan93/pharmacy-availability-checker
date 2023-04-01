@@ -1,4 +1,5 @@
 const Consumer = require("../models/Consumer");
+const User = require("../models/User");
 
 // const show = (req, res) => {
 //   res.status(200).json({ message: "show consumer" });
@@ -9,6 +10,12 @@ const seed = async (req, res) => {
     const newConsumer = await Consumer.create({
       email: "newconsumer@gmail.com",
       contact: "12345678",
+    });
+    const newUser = await User.create({
+      userId: newConsumer.email,
+      password: "1234",
+      accountType: "Consumer",
+      accountId: newConsumer._id,
     });
     res.status(200).json(newConsumer);
   } catch (error) {

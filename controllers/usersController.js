@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/User");
 
 const create = (req, res) => {
   res.status(200).json({ message: "create new user" });

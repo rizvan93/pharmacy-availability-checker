@@ -7,7 +7,7 @@ const consumerSchema = new Schema(
     bookmarkedPharmacists: [
       { type: mongoose.Types.ObjectId, ref: "Pharmacist" },
     ],
-    email: [{ type: String, trim: true, lowercase: true }],
+    email: { type: String, trim: true, lowercase: true },
     contact: { type: String, trim: true },
   },
   { timestamps: true }

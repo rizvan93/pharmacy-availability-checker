@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 
 const medicineSchema = new Schema(
   {
-    brand: { type: String, required: true },
+    name: { type: String, required: true },
     type: { type: String, required: true },
+    packCount: { type: String, required: true },
     dose: { type: Number, required: true, min: 1 },
     uom: { type: String, required: true },
   },
