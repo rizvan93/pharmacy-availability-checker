@@ -23,21 +23,21 @@ export default function CheckIn() {
     setSelectedStore(event.target.value);
   };
 
-  const handleCheckIn = () => {
-    fetch(`/api/stores/${selectedStore}/checkin`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pharmacistId: pharmacist._id })
+const handleCheckIn = () => {
+fetch(`/api/stores/pharmacists/${selectedStore}/checkin`, {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ storeId: selectedStore })
+})
+    .then(response => {
+      if (response.ok) {
+        alert('Checked in successfully!');
+      } else {
+        alert('Failed to check in!');
+      }
     })
-      .then(response => {
-        if (response.ok) {
-          alert('Checked in successfully!');
-        } else {
-          alert('Failed to check in!');
-        }
-      })
-      .catch(error => console.error(error));
-  };
+    .catch(error => console.error(error));
+};
 
   if (!pharmacist) {
     return <p>Loading...</p>;

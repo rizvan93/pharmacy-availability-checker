@@ -9,4 +9,5 @@ router.get("/:id", pharmacistController.Index);
 
 
 
+
 module.exports = router;

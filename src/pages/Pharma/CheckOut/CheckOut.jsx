@@ -5,8 +5,8 @@ export default function CheckOut() {
   const [pharmacistId, setPharmacistId] = useState('');
 
   useEffect(() => {
-    // Fetch the currently checked-in store for the pharmacist
-    fetch('/api/stores/:id/checked-in')
+    // Fetch the currently checkedIn store for the pharmacist
+    fetch('/api/stores/:id/checkedIn')
       .then(response => response.json())
       .then(data => {
         if (data) {
