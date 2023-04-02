@@ -40,40 +40,46 @@ const UserCreateForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset>
-        <label>
-          Name:{" "}
+      <fieldset className="px-10 py-6">
+        <label> Name:{" "}
+        <br />
           <input
             name="name"
             value={user.name}
             onChange={handleChange}
             required
+            className="mb-4 bg-gray-200 p-2"
           />
         </label>
+        <br />
 
-        <label>
-          Email:{" "}
+        <label> Email:{" "}
+        <br />
           <input
             name="email"
             value={user.email}
             onChange={handleChange}
             required
+            className="mb-4 bg-gray-200 p-2"
           />
         </label>
+        <br />
 
-        <label>
-          Password:{" "}
+        <label> Password:{" "}
+        <br />
           <input
             name="password"
             value={user.password}
             onChange={handleChange}
             required
+            className="mb-4 bg-gray-200 p-2"
           />
         </label>
+        <br />
 
-        <label>
-        Account Type:
-        <select name="accountType" value={user.accountType} onChange={handleChange}>
+        <label> Account Type:
+        <br />
+        <select name="accountType" value={user.accountType} onChange={handleChange} className="mb-4 bg-gray-200 p-2">
           <option value="">Select an Option</option> 
           {accountTypes.map((type, index) => (
             <option value={type} key={index}>
@@ -82,8 +88,9 @@ const UserCreateForm = () => {
           ))}
         </select>
       </label>
-
-        <button>Add New User</button>
+      <br />
+      <br />
+        <button className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4">Add New User</button>
       </fieldset>
     </form>
   );

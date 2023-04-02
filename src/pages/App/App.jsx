@@ -21,6 +21,7 @@ function App() {
     <div className="App">
       {user ? "" : <AuthPage setUser={setUser} />}
       <div><NavBar user={user} />
+      <br />
       <Routes>
         {/* <Route path="" element=""/> */}
         <Route path="/users" element={<UserPage />} />

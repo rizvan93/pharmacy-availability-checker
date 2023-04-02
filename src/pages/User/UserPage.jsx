@@ -33,35 +33,40 @@ useEffect(() => {
 };
 
     return (
-        <>
-        <Link to="/users/new">
-            <button>Add New User</button>
-        </Link>
+        <div className="px-4 py-8">
+
+        <div className="flex justify-between items-center">
 
         <UserTypeFilter handleFilter={handleFilter} />
+        <br />
 
-        <h1>User</h1>
-        <table>
-        <thead>
+        <Link to="/users/new">
+            <button className="inline-block bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4 rounded-full">Add New User</button>
+        </Link>
+        </div>
+        
+        <br />
+        <table className="w-full">
+        <thead className="bg-[#e2e8f0] text-black">
             <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th></th>
+                <th class="px-4 py-3">Name</th>
+                <th class="px-4 py-3">Role</th>
+                <th class="px-4 py-3">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
         {filteredUsers.map((user) => (
             <tr key={user._id}>
-            <td>
-            <Link to={`/users/${user._id}`}>{user.name}</Link>
+            <td className="border-b border-gray-300 py-3">
+            <Link to={`/users/${user._id}`} className="text-wAqua hover:text-wAqua-50">{user.name}</Link>
             </td>
-            <td>{user.accountType}</td>
-            <td><UserDeleteButton id={user._id} delUser={handleDelete} /></td>
+            <td className="border-b border-gray-300 py-3">{user.accountType}</td>
+            <td className="border-b border-gray-300 py-3"><UserDeleteButton id={user._id} delUser={handleDelete} /></td>
             </tr>
         ))}
         </tbody>
         </table>
        
-        </>
+        </div>
     );
 };
