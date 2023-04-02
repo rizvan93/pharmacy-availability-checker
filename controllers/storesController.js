@@ -1,10 +1,11 @@
 const Store = require("../models/Store");
+const Pharmacist = require("../models/pharmacist");
 
 const seed = async (req, res) => {
   try {
     const newStore = await Store.create({
       name: "Store 1",
-      location: "Somewhere in Singapore",
+      location: "ttt",
     });
     res.status(200).json(newStore);
   } catch (error) {
@@ -75,6 +76,93 @@ const update = async (req, res) => {
   }
 };
 
+//-------------------------------------------Pharmacist
+const allStores = async (req, res) => {
+  try {
+    const stores = await Store.find();
+    res.status(200).json(stores);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+const checkIn = async (req, res) => {
+  try {
+    const pharmacist = await Pharmacist.findById(req.params.id);
+    const store = await Store.findById(req.body.storeId);
+
+    if (!pharmacist) {
+      return res.status(404).json({ message: "Pharmacist not found" });
+    }
+
+    if (!store) {
+      return res.status(404).json({ message: "Store not found" });
+    }
+
+    pharmacist.defaultStore = store._id;
+    await pharmacist.save();
+
+    store.pharmacists.addToSet(pharmacist._id);
+    await store.save();
+
+    res.status(200).json({ message: "Check-in successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+const showCheckedInStore = async (req, res) => {
+  try {
+    const pharmacistId = req.params.id;
+    const pharmacist = await Pharmacist.findById(pharmacistId).populate(
+      "defaultStore"
+    );
+    if (!pharmacist) {
+      return res.status(404).json({ message: "Pharmacist not found" });
+    }
+    const store = pharmacist.defaultStore;
+    if (!store) {
+      return res.status(404).json({ message: "Store not found" });
+    }
+    res.status(200).json(store);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+const checkoutPharmacist = async (req, res) => {
+  try {
+    const pharmacistId = req.params.id;
+    const pharmacist = await Pharmacist.findById(pharmacistId);
+    if (!pharmacist) {
+      return res.status(404).json({ message: "Pharmacist not found" });
+    }
+    const storeId = pharmacist.defaultStore;
+    if (!storeId) {
+      return res
+        .status(404)
+        .json({ message: "Pharmacist is not checked in to any store" });
+    }
+    const store = await Store.findById(storeId);
+    if (!store) {
+      return res.status(404).json({ message: "Store not found" });
+    }
+    store.pharmacists = store.pharmacists.filter(
+      (id) => id.toString() !== pharmacistId
+    );
+    await store.save();
+    pharmacist.defaultStore = null;
+    await pharmacist.save();
+    res.status(200).json({ message: "Pharmacist checked out successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 module.exports = {
   create,
   show,
@@ -82,4 +170,9 @@ module.exports = {
   delete: deleteStore,
   update,
   seed,
+
+  allStores, //Drop down box of all stores for the pharmacist to select to checkinto
+  checkIn, // Pharmacist to checkin to selected store
+  showCheckedInStore, // CheckOut page of currently check-ed in store
+  checkoutPharmacist, // Checkout button
 };
