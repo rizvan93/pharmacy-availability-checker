@@ -15,12 +15,28 @@ export default function UserInfoPage() {
 
   return (
     <>
-      <p>{user.name}</p> 
-      <p>{user.email}</p> 
-      <p>{user.accountType}</p> 
-      <Link to={`/users/${user._id}/edit`}>
-            <button>Edit Details</button>
+    <h1 className="px-10 font-bold">User Details</h1>
+    <div className="flex justify-center">
+    <table>
+    <tr>
+      <th className="pr-2 py-2">Name</th>
+      <td>{user.name}</td>
+    </tr>
+    <tr>
+      <th className="pr-2 py-2">Email</th>
+      <td>{user.email}</td>
+    </tr> 
+    <tr>
+      <th className="pr-5 py-2">Account Type</th>
+      <td>{user.accountType}</td>
+    </tr> 
+      </table>
+      </div>
+      <div className="flex justify-center py-5">
+    <Link to={`/users/${user._id}/edit`}>
+            <button className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4" >Edit Details</button>
         </Link>
+    </div>
     </>
   );
 }

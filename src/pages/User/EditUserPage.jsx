@@ -17,7 +17,7 @@ export default function EditStorePage () {
 
   return (
     <>
-      <h1>Edit Information</h1>
+      <h1 className="px-10 font-bold">Edit Information</h1>
       <UserEditForm />
     </>
   );

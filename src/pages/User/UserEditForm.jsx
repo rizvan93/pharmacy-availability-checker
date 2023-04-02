@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UserEditForm() {
 
   const { id } = useParams();
   const [users, setUsers] = useState({ name: '', accountType: '' });
+  const navigate = useNavigate ();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,6 +33,7 @@ export default function UserEditForm() {
       });
       const updatedUser = await response.json();
       setUsers(updatedUser);
+      navigate("/users");
     } catch (error) {
       console.error(error);
     }
@@ -39,34 +41,35 @@ export default function UserEditForm() {
 
 return (
   <>
-    <fieldset>
-      <legend>User Information</legend>
-      <label>
-        Name:{" "}
+    <fieldset className="px-10 py-6">
+      <label> Name:{" "}
+      <br />
         <input 
           name="name" 
           value={users.name} 
-          onChange={handleChange} />
+          onChange={handleChange} 
+          className="mb-4 bg-gray-200 p-2"/>
       </label>
       <br />
-      <label>
-        Email:{" "}
+      <label> Email:{" "}
+      <br />
         <input 
           name="email" 
           value={users.email} 
-          onChange={handleChange} />
+          onChange={handleChange}
+          className="mb-4 bg-gray-200 p-2"/>
       </label>
       <br />
-      <label>
-        Account Type:{" "}
+      <label> Account Type:{" "}
+      <br />
         <input
           name="accountType"
           value={users.accountType}
           onChange={handleChange}
-        />
+          className="mb-4 bg-gray-200 p-2"/>
       </label>
       <br />
-      <button onClick={handleUpdate}>Update</button>
+      <button onClick={handleUpdate} className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4">Update</button>
     </fieldset>
   </>
 );

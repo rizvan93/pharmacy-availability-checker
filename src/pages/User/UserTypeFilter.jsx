@@ -9,8 +9,7 @@ export default function UserTypeFilter({ handleFilter }) {
   };
 
   return (
-    <div>
-    <label>Account Type:</label>
+    <div className="border-2 border-wAqua">
     <select value={filter} onChange={handleChange}>
     <option value="">All Roles</option>
     <option value="Pharmacist">Pharmacist</option>
