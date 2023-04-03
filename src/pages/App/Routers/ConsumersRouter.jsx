@@ -8,11 +8,11 @@ import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailability
 const ConsumersRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<ConsumersMainPage />} />
       <Route path="/new" element={<ConsumerSignUpPage />} />
       <Route path="/pharmacists" element={<PharmAvailabilityPage />} />
       <Route path="/medicines" element={<MedSearchPage />} />
       <Route path="/medicines/:id" element={<MedAvailabilityPage />} />
+      <Route path="/*" element={<ConsumersMainPage />} />
     </Routes>
   );
 };
