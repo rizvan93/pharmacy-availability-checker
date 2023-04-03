@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 const MedicineForm = () => {
   const [medicine, setMedicine] = useState({
-    brand: "",
-    type: "",
-    packCount: "",
-    dose: "",
-    uom: "",
+    name: "",
+    manufacturer: "",
+    form: "",
+    quantity: "",
+    strength: "",
   });
   const navigate = useNavigate();
 
@@ -48,38 +48,38 @@ const MedicineForm = () => {
             required
           />
         </label>
-                <label>
-          Type:{" "}
+        <label>
+          Manufacturer:{" "}
           <input
-            name="type"
-            value={medicine.type}
-            onChange={handleChange}
-            required
-          />
-        </label>
-                <label>
-          Pack Count:{" "}
-          <input
-            name="packCount"
-            value={medicine.packCount}
-            onChange={handleChange}
-            required
-          />
-        </label>
-                <label>
-          Dose:{" "}
-          <input
-            name="dose"
-            value={medicine.dose}
+            name="manufacturer"
+            value={medicine.manufacturer}
             onChange={handleChange}
             required
           />
         </label>
         <label>
-          UOM:{" "}
+          Form:{" "}
           <input
-            name="uom"
-            value={medicine.uom}
+            name="form"
+            value={medicine.form}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Quantity:{" "}
+          <input
+            name="quantity"
+            value={medicine.quantity}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Strength:{" "}
+          <input
+            name="strength"
+            value={medicine.strength}
             onChange={handleChange}
             required
           />

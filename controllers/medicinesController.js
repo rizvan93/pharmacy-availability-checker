@@ -10,17 +10,53 @@ const create = async (req, res) => {
 };
 
 const seed = async (req, res) => {
+  const ENTRIES_COUNT = 200;
+  const LIQUID_QTYs = ["50 ml", "75 ml", "100 ml"];
+  const PILL_QTYs = ["Pack of 12", "Pack of 24", "Pack of 48"];
+  const POWDER_QTYs = ["75 g", "150g", "200g"];
+
   try {
-    const newMedicine = await Medicine.create({
-      name: "Ibuprofen",
-      type: "tablet",
-      packCount: "12",
-      dose: 200,
-      uom: "mg",
+    const response = await fetch(
+      `https://data.gov.sg/api/action/datastore_search?resource_id=43668192-c352-4420-9731-01043c67c471&limit=${ENTRIES_COUNT}`
+    );
+    const data = await response.json();
+
+    const rawMedicines = data.result.records;
+    parsedMedicines = [];
+    rawMedicines.forEach((m) => {
+      const i = [];
+      if (
+        m.dosage_form.includes("TABLET") ||
+        m.dosage_form.includes("CAPSULE") ||
+        m.dosage_form.includes("LOZENGE")
+      ) {
+        i.push(...PILL_QTYs);
+      } else if (
+        m.dosage_form.includes("SYRUP") ||
+        m.dosage_form.includes("SOLUTION")
+      ) {
+        i.push(...LIQUID_QTYs);
+      } else if (m.dosage_form.includes("POWDER")) {
+        i.push(...POWDER_QTYs);
+      }
+
+      i.forEach((qty) => {
+        const medicine = {
+          name: m.product_name || "medicine",
+          manufacturer: m.manufacturer.split("&&")[0],
+          form: m.dosage_form.split("&&")[0],
+          quantity: qty,
+          strength: m.strength.split("&&")[0],
+        };
+        parsedMedicines.push(medicine);
+      });
     });
-    res.status(200).json(newMedicine);
+
+    const created = parsedMedicines.map((m) => Medicine.create(m));
+    await Promise.all(created);
+    res.status(200).json(parsedMedicines);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 };
 
@@ -34,9 +70,13 @@ const show = async (req, res) => {
 };
 
 const index = async (req, res) => {
+  const query = req.query || {};
+  for (const key in query) {
+    query[key] = new RegExp(`.*${query[key]}.*`, "i");
+  }
   try {
-    const allMedicines = await Medicine.find({});
-    res.status(200).json(allMedicines);
+    const medicines = await Medicine.find(query);
+    res.status(200).json(medicines);
   } catch (error) {
     res.status(400).json({ error });
   }
