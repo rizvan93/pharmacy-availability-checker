@@ -9,7 +9,11 @@ import AddMedicinePage from "../Medicine/Create/AddMedicinePage";
 import EditMedicineForm from "../Medicine/Edit/EditMedicineForm";
 import UserPage from "../User/UserPage";
 import NavBar from "../../components/NavBar/NavBar";
+import CreateUserPage from "../User/CreateUserPage";
+import UserInfoPage from "../User/UserInfoPage";
+import EditUserPage from "../User/EditUserPage";
 import "./App.css";
+
 
 function App() {
   const [user, setUser] = useState(1);
@@ -18,9 +22,13 @@ function App() {
     <div className="App">
       {user ? "" : <AuthPage setUser={setUser} />}
       <div><NavBar user={user} />
+      <br />
       <Routes>
         {/* <Route path="" element=""/> */}
         <Route path="/users" element={<UserPage />} />
+        <Route path="/users/new" element={<CreateUserPage />} />
+        <Route path="/users/:id" element={<UserInfoPage />} />
+        <Route path="/users/:id/edit" element={<EditUserPage />} />
         <Route path="/stores" element={<StoresPage />} />
         <Route path="/stores/new" element={<CreateStorePage />} />
         <Route path="/stores/:id/edit" element={<EditStorePage />} />
