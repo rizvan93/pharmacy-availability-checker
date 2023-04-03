@@ -1,25 +1,14 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthPage from "../AuthPage/AuthPage";
-import ConsumersMainPage from "../Consumers/Index/ConsumersMainPage";
-import MedAvailabilityPage from "../Consumers/MedChecker/MedAvailabilityPage";
-import PharmAvailabilityPage from "../Consumers/PharmChecker/PharmAvailabilityPage";
-import CreateStorePage from "../Stores/Create/CreateStorePage";
-import EditStorePage from "../Stores/Edit/EditStorePage";
-import StoresPage from "../Stores/Index/StoresPage";
-import MedicinesPage from "../Medicine/Index/MedicinesPage";
-import AddMedicinePage from "../Medicine/Create/AddMedicinePage";
-import EditMedicineForm from "../Medicine/Edit/EditMedicineForm";
-import UserPage from "../User/UserPage";
 import NavBar from "../../components/NavBar/NavBar";
-import CheckIn from "../Pharma/CheckIn/CheckIn";
-import CheckOut from "../Pharma/CheckOut/CheckOut";
-import CreateUserPage from "../User/CreateUserPage";
-import UserInfoPage from "../User/UserInfoPage";
-import EditUserPage from "../User/EditUserPage";
 import "./App.css";
-import MedAvailabilityStores from "../Consumers/MedChecker/MedAvailabilityStores";
-import ConsumerSignUpPage from "../Consumers/Create/ConsumerSignUpPage";
+
+import StoresRouter from "./Routers/StoresRouter";
+import UsersRouter from "./Routers/UsersRouter";
+import ConsumersRouter from "./Routers/ConsumersRouter";
+import MedicinesRouter from "./Routers/MedicinesRouter";
+import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
 function App() {
   const [user, setUser] = useState(1);
@@ -31,34 +20,12 @@ function App() {
         <NavBar user={user} />
         <br />
         <Routes>
-          {/* <Route path="" element=""/> */}
-          <Route path="/users" element={<UserPage />} />
-          <Route path="/users/new" element={<CreateUserPage />} />
-          <Route path="/users/:id" element={<UserInfoPage />} />
-          <Route path="/users/:id/edit" element={<EditUserPage />} />
-          <Route path="/users/new" element={<ConsumerSignUpPage />} />
-          <Route path="/stores" element={<StoresPage />} />
-          <Route path="/stores/new" element={<CreateStorePage />} />
-          <Route path="/stores/:id/edit" element={<EditStorePage />} />
-          <Route path="/consumers" element={<ConsumersMainPage />} />
-          <Route
-            path="/consumers/pharmacists"
-            element={<PharmAvailabilityPage />}
-          />
-          <Route
-            path="/consumers/medicines"
-            element={<MedAvailabilityPage />}
-          />
-          <Route path="/medicines" element={<MedicinesPage />} />
-          <Route path="/medicines/new" element={<AddMedicinePage />} />
-          <Route
-            path="/consumers/medicines/available"
-            element={<MedAvailabilityStores />}
-          />
-          <Route path="/medicines/:id/edit" element={<EditMedicineForm />} />
-        <Route path="/pharmacists/:id" element={<CheckIn />} />
-        <Route path="/pharmacists/:id/checkout" element={<CheckOut />} />
-      </Routes>
+          <Route path="/users/*" element={<UsersRouter />} />
+          <Route path="/stores/*" element={<StoresRouter />} />
+          <Route path="/consumers/*" element={<ConsumersRouter />} />
+          <Route path="/medicines/*" element={<MedicinesRouter />} />
+          <Route path="/pharmacists/*" element={<PharmacistsRouter />} />
+        </Routes>
       </div>
     </div>
   );
