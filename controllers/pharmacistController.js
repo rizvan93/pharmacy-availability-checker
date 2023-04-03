@@ -1,4 +1,5 @@
 const Pharmacist = require("../models/pharmacist");
+const Store = require("../models/store");
 
 const seed = async (req, res) => {
   try {
@@ -13,7 +14,7 @@ const seed = async (req, res) => {
   }
 };
 
-const Index = async (req, res) => {
+const show = async (req, res) => {
   try {
     const pharmacist = await Pharmacist.findById(req.params.id).populate(
       "defaultStore"
@@ -28,7 +29,30 @@ const Index = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, defaultName } = req.body;
+
+    const updatedPharmacist = await Pharmacist.findByIdAndUpdate(
+      id,
+      { name },
+      { new: true }
+    );
+
+    const store = await Store.findOne({ name: defaultStore });
+    updatedPharmacist.defaultStore = store._id;
+    await updatedPharmacist.save();
+
+    res.status(200).json({ updatedPharmacist });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   seed,
-  Index,
+  show,
+  update,
 };
