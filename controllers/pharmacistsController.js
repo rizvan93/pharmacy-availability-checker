@@ -1,37 +1,48 @@
 const Pharmacist = require("../models/Pharmacist");
 const Store = require("../models/Store");
+const User = require("../models/User");
 
-const checkIn = async (req, res) => {
-  const { storeId } = req.body;
-  const pharmacist = await Pharmacist.findById(req.user._id);
-  const store = await Store.findById(storeId);
+const seed = async (req, res) => {
   try {
-    if (!store) {
-      return res.status(404).json({ error: "Store not found" });
-    }
-    pharmacist.checkedInStore = store._id;
-    await pharmacist.save();
-    return res.status(200).json({ message: `Checked in to ${store.name}` });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "Server error" });
-  }
-};
-
-const checkOut = async (req, res) => {
-  const pharmacist = await Pharmacist.findById(req.user._id);
-  try {
-    if (!pharmacist.checkedInStore) {
-      return res.status(400).json({ error: "Not checked in to any store" });
-    }
-    const store = await Store.findById(pharmacist.checkedInStore);
-    pharmacist.checkedInStore = null;
-    await pharmacist.save();
-    return res.status(200).json({ message: `Checked out from ${store.name}` });
+    // const newStore = await Store.create({
+    //   name: "Orchard Ion",
+    //   location: "Orchard Road",
+    //   pharmacists: [newPharmacist._id],
+    // });
+    // const newPharmacist = await Pharmacist.create({
+    //   name: "Kelly Lee",
+    //   defaultStore: newStore._id,
+    //   checkedInStore: null,
+    // });
+    // const newUser = await User.create({
+    //   userId: "kellylee@gmail.com",
+    //   password: "1234",
+    //   accountType: "Pharmacist",
+    //   accountId: newPharmacist._id,
+    // });
+    const newStore = await Store.create({
+      name: "Paragon",
+      location: "Orchard Road",
+    });
+    const newPharmacist = await Pharmacist.create({
+      name: "Mike Loh",
+      defaultStore: newStore._id,
+      checkedInStore: null,
+    });
+    const newUser = await User.create({
+      userId: "mikeloh@gmail.com",
+      password: "1234",
+      accountType: "Pharmacist",
+      accountId: newPharmacist._id,
+    });
+    res.status(200).json(newUser);
   } catch (error) {
     console.error(error);
-    return res.status(500).json(error);
+    console.log(error);
+    res.status(500).json({ error });
   }
 };
 
-module.exports = (checkIn, checkOut);
+const edit = async (req, res) => {};
+
+module.exports = { seed, edit };

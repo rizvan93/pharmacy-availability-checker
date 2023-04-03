@@ -13,6 +13,7 @@ import UserPage from "../User/UserPage";
 import "./App.css";
 import MedAvailabilityStores from "../Consumers/MedChecker/MedAvailabilityStores";
 import ConsumerSignUpPage from "../Consumers/Create/ConsumerSignUpPage";
+import PharmacistIndexPage from "../Consumers/PharmChecker/PharmacistIndexPage";
 
 function App() {
   const [user, setUser] = useState(1);
@@ -39,6 +40,7 @@ function App() {
           path="/consumers/medicines/available"
           element={<MedAvailabilityStores />}
         />
+        <Route path="/pharmacists" element={<PharmacistIndexPage />} />
       </Routes>
     </div>
   );
