@@ -13,8 +13,6 @@ export default function UserTypeFilter({ handleFilter }) {
     <select value={filter} onChange={handleChange}>
     <option value="">All Roles</option>
     <option value="Pharmacist">Pharmacist</option>
-    <option value="Pharmacist">Consumer</option>
-    <option value="InventoryManager">Inventory Manager</option>
     <option value="Admin">Admin</option>
     </select>
     </div>

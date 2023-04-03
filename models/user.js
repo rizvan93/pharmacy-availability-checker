@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 
-const accountTypes = ["Pharmacist", "Consumer", "Inventory Manager", "Admin"];
+const accountTypes = ["Pharmacist", "Admin"];
 const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
@@ -13,7 +13,7 @@ const userSchema = new Schema(
       type: String, 
       required: true
     },
-    email: { 
+    userId: { 
       type: String, 
       required: true, 
       unique: true

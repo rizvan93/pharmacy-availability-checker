@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const accountTypes = ["Pharmacist", "Consumer", "Inventory Manager", "Admin"];
+const accountTypes = ["Pharmacist", "Admin"];
 
 const UserCreateForm = () => {
   const [user, setUser] = useState({
     name: "",
-    email: "",
+    userId: "",
     password: "",
     accountType: "",
   });
@@ -53,11 +53,11 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label> Email:{" "}
+        <label> User ID:{" "}
         <br />
           <input
-            name="email"
-            value={user.email}
+            name="userId"
+            value={user.userId}
             onChange={handleChange}
             required
             className="mb-4 bg-gray-200 p-2"
