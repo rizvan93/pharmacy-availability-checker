@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import BotttomNavBar from "../../../components/ConsumerNavBar/BottomNavBar";
+import TopNavBar from "../../../components/ConsumerNavBar/TopNavBar";
 
 export default function ConsumersMainPage() {
   return (
-    <>
-      <Link to={"/consumers/pharmacists"}>
-        <h1>Check Pharmacist Availability</h1>
-      </Link>
-      <Link to={"/consumers/medicines"}>
-        <h1>Check Medicine Availability</h1>
-      </Link>
-    </>
+    <div className="bg-wAqua-10 min-h-screen">
+    <TopNavBar />
+    <br/>
+
+      <div className="container mx-auto p-4 flex flex-col justify-center items-center">
+      <div className="bg-white rounded-lg shadow-md p-4 mb-4">01</div>
+      <div className="bg-white rounded-lg shadow-md p-4">01</div>
+      </div>
+    <BotttomNavBar />
+    </div>
   );
 }
