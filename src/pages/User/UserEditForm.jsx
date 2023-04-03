@@ -51,11 +51,11 @@ return (
           className="mb-4 bg-gray-200 p-2"/>
       </label>
       <br />
-      <label> Email:{" "}
+      <label> User ID:{" "}
       <br />
         <input 
-          name="email" 
-          value={users.email} 
+          name="userId" 
+          value={users.userId} 
           onChange={handleChange}
           className="mb-4 bg-gray-200 p-2"/>
       </label>
