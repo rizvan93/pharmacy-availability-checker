@@ -34,9 +34,10 @@ const show = async (req, res) => {
 };
 
 const index = async (req, res) => {
+  const query = req.query || {};
   try {
-    const allMedicines = await Medicine.find({});
-    res.status(200).json(allMedicines);
+    const medicines = await Medicine.find(query);
+    res.status(200).json(medicines);
   } catch (error) {
     res.status(400).json({ error });
   }
