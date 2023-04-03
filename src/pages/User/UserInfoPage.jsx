@@ -23,8 +23,8 @@ export default function UserInfoPage() {
       <td>{user.name}</td>
     </tr>
     <tr>
-      <th className="pr-2 py-2">Email</th>
-      <td>{user.email}</td>
+      <th className="pr-2 py-2">User ID</th>
+      <td>{user.userId}</td>
     </tr> 
     <tr>
       <th className="pr-5 py-2">Account Type</th>
