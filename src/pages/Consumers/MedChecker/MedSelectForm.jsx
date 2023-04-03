@@ -1,6 +1,6 @@
 import MedSelectOption from "./MedSelectOption";
 
-const MedSelectForm = ({ medicines, setMedicines, field }) => {
+const MedSelectForm = ({ medicines, setMedicines, field, toTitleCase }) => {
   const uniqueOptions = new Set(medicines?.map((m) => m[field]));
   const options = Array.from(uniqueOptions);
 
@@ -16,7 +16,7 @@ const MedSelectForm = ({ medicines, setMedicines, field }) => {
         <select onChange={handleChange}>
           <option value="">Select {field}</option>
           {options?.map((o, index) => (
-            <MedSelectOption option={o} key={index} />
+            <MedSelectOption option={toTitleCase(o)} key={index} />
           ))}
         </select>
       </label>
