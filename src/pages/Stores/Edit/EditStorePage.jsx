@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import EditStoreForm from "./EditStoreForm";
 
 const EditStorePage = () => {
   const { id } = useParams();
@@ -12,12 +13,12 @@ const EditStorePage = () => {
       setStore(data);
     };
     getStore();
-    // geMedicines()
-  }, []);
+  }, [id]);
 
   return (
     <>
       <h1>Edit Store</h1>
+      <EditStoreForm store={store} setStore={setStore} />
     </>
   );
 };

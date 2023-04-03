@@ -58,10 +58,28 @@ const deleteStore = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  const updatedStore = req.body;
+  console.log(updatedStore);
+
+  try {
+    if (!updatedStore) return res.status(400).json({ error: "error updating" });
+    const store = await Store.findByIdAndUpdate(id, updatedStore, {
+      new: true,
+    });
+    console.log(store);
+    res.status(200).json(store);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   create,
   show,
   index,
   delete: deleteStore,
+  update,
   seed,
 };

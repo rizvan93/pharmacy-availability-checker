@@ -1,16 +1,36 @@
+//changed to sentence case
+
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 
-const accountTypes = ["Pharmacist", "Consumer", "Inventory Manager", "Admin"];
+const accountTypes = ["Pharmacist", "Admin"];
 const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
   {
-    userId: { type: String, required: true, unique: true, minLength: 6 },
-    password: { type: String, required: true },
-    accountType: { type: String, enum: accountTypes, required: true },
-    accountId: { type: mongoose.Types.ObjectId, refPath: "accountType" },
+    name: { 
+      type: String, 
+      required: true
+    },
+    userId: { 
+      type: String, 
+      required: true, 
+      unique: true
+    },
+    password: { 
+      type: String, 
+      required: true 
+    },
+    accountType: { 
+      type: String, 
+      enum: accountTypes, 
+      required: true 
+    },
+    accountId: { 
+      type: mongoose.Types.ObjectId, 
+      refPath: "accountType" 
+    },
   },
   { timestamps: true }
 );
