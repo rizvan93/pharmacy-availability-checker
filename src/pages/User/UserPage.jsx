@@ -49,9 +49,9 @@ useEffect(() => {
         <table className="w-full">
         <thead className="bg-[#e2e8f0] text-black">
             <tr>
-                <th class="px-4 py-3">Name</th>
-                <th class="px-4 py-3">Role</th>
-                <th class="px-4 py-3">Action</th>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Role</th>
+                <th className="px-4 py-3">Action</th>
             </tr>
         </thead>
         <tbody className="text-center">

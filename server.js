@@ -5,7 +5,7 @@ require("dotenv").config();
 require("./config/database");
 
 const usersRouter = require("./routes/usersRouter"); //-> Adelyn
-//const pharmacistsRouter = require("./routes/pharmacistsRouter") -> Irvin
+const pharmacistsRouter = require("./routes/pharmacistsRouter")
 //const consumersRouter = require("./routes/consumersRouter") -> Irvin
 const storesRouter = require("./routes/storesRouter");
 const medicinesRouter = require("./routes/medicinesRouter")
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
 
 app.use("/api/users", usersRouter);
-//app.use("/api/pharmacists", pharmacistsRouter)
+app.use("/api/pharmacists", pharmacistsRouter)
 //app.use("/api/consumers", consumersRouter)
 app.use("/api/stores", storesRouter);
 app.use("/api/medicines", medicinesRouter)

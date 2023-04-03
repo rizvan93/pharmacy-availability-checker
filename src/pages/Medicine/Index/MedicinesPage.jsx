@@ -21,9 +21,10 @@ const MedicinesPage = () => {
 
   return (
     <>
-      <h1>Medicines</h1>
+      <br />
+      <h1 className="text-3xl font-bold underline font-sans text-wPurple">Medicines</h1>
       <Link to="/medicines/new">
-        <button>Add New Medicine Here</button>
+        <button className="inline-block bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4 rounded-full">Add New Medicine Here</button>
       </Link>
       <MedicinesTable medicines={medicines} removeMedicine={removeMedicine} />
     </>

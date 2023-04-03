@@ -9,6 +9,8 @@ import AddMedicinePage from "../Medicine/Create/AddMedicinePage";
 import EditMedicineForm from "../Medicine/Edit/EditMedicineForm";
 import UserPage from "../User/UserPage";
 import NavBar from "../../components/NavBar/NavBar";
+import CheckIn from "../Pharma/CheckIn/CheckIn";
+import CheckOut from "../Pharma/CheckOut/CheckOut";
 import CreateUserPage from "../User/CreateUserPage";
 import UserInfoPage from "../User/UserInfoPage";
 import EditUserPage from "../User/EditUserPage";
@@ -35,6 +37,8 @@ function App() {
         <Route path="/medicines" element={<MedicinesPage />} />
         <Route path="/medicines/new" element={<AddMedicinePage />} />
         <Route path="/medicines/:id/edit" element={<EditMedicineForm />} />
+        <Route path="/pharmacists/:id" element={<CheckIn />} />
+        <Route path="/pharmacists/:id/checkout" element={<CheckOut />} />
       </Routes>
       </div>
     </div>
