@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const medicinesController = require("../controllers/medicinesController");
-const isAuth = require("../controllers/auth");
+const { isAuth } = require("../controllers/auth");
 
 // router.get("/seed", medicinesController.seed);
 

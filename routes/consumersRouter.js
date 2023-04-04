@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const consumersController = require("../controllers/consumersController");
-const isAuth = require("../controllers/auth");
+const { isAuth, isUser } = require("../controllers/auth");
 
 // const isAuth = authController.isAuth;
 // const isUser = authController.isUser;
@@ -10,6 +10,6 @@ const isAuth = require("../controllers/auth");
 // router.get("/", consumersController.show);
 
 router.post("/", consumersController.create);
-router.put("/:id", isAuth(["Consumer"]), consumersController.update);
+router.put("/:id", isAuth(["Consumer"]), isUser, consumersController.update);
 
 module.exports = router;
