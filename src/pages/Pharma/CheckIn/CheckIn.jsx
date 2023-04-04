@@ -64,7 +64,7 @@ export default function CheckIn() {
         Select a store:
         <select value={selectedStore} onChange={handleSelectStore}>
           <option value="">-- Select a store --</option>
-          {stores.map(((store)) => (
+          {stores.map((store) => (
             <option key={store._id} value={store._id}>
               {store.name} - {store.location}
             </option>
@@ -76,4 +76,3 @@ export default function CheckIn() {
     </>
   );
 }
-
