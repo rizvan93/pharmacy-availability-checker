@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const pharmacistController = require("../controllers/pharmacistController");
-// const storesController = require("../controllers/storesController");
+const isAuth = require("../controllers/auth");
 
-router.get("/seed", pharmacistController.seed);
+// router.get("/seed", pharmacistController.seed);
 
 //Pharma check-in by ID
-router.get("/:id", pharmacistController.Index); //controller name should be show
+router.get("/:id", isAuth(["Pharmacist"]), pharmacistController.show);
 //router.put("/:id, pharmacistController.update) -> add route for edit: edit pharmacist's name and default store
-
-// router.put(":/id/checkIn", storesController.checkIn)
 
 module.exports = router;

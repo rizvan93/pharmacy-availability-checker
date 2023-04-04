@@ -12,10 +12,12 @@ const StoreForm = () => {
     event.preventDefault();
 
     const createStore = async () => {
+      const token = localStorage.getItem("token");
       const response = await fetch("/api/stores", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: ["bearer", token],
         },
         body: JSON.stringify(form),
       });

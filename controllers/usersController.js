@@ -1,4 +1,12 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const EXPIRIES = {
+  Admin: "6h",
+  Pharmacist: "3d",
+  Consumer: "7d",
+};
 
 const create = async (req, res) => {
   try {
@@ -10,7 +18,38 @@ const create = async (req, res) => {
   }
 };
 
-// const login -> We do together
+const login = async (req, res) => {
+  const { userId, password } = req.body;
+  const userAttempt = { userId, password };
+
+  try {
+    const user = await User.findOne({ userId: userAttempt.userId });
+    if (!user) {
+      return res.status(404).json({ message: "wrong user" });
+    }
+    const passwordMatch = await bcrypt.compare(
+      userAttempt.password,
+      user.password
+    );
+    if (!passwordMatch) {
+      return res.status(404).json({ message: "wrong password" });
+    }
+
+    const payload = {
+      name: user.name,
+      accountType: user.accountType,
+      accountId: user.accountId,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: EXPIRIES[user.accountType],
+    });
+
+    return res.status(200).json(token);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 const index = async (req, res) => {
   try {
@@ -23,11 +62,9 @@ const index = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -54,8 +91,9 @@ const show = async (req, res) => {
 
 module.exports = {
   create,
+  login,
   index,
   update,
   delete: deleteUser,
-  show
+  show,
 };
