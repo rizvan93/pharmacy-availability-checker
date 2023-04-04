@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 const StoresTableRow = ({ store, removeFromStores }) => {
   const onDelete = () => {
     const deleteStore = async (id) => {
+      const token = localStorage.getItem("token");
       const response = await fetch(`/api/stores/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: ["bearer", token],
+        },
       });
       if (response.ok) {
         const data = await response.json();

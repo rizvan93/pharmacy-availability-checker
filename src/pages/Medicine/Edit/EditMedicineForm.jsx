@@ -7,12 +7,12 @@ export default function EditMedicineForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMedicine = async () => {
+    const getMedicine = async () => {
       const response = await fetch(`/api/medicines/${id}`);
       const medicine = await response.json();
       setMedicine(medicine);
     };
-    fetchMedicine();
+    getMedicine();
   }, [id]);
 
   const handleChange = (event) => {
@@ -23,10 +23,12 @@ export default function EditMedicineForm() {
   };
 
   const handleUpdate = async () => {
+    const token = localStorage.getItem("token");
     const response = await fetch(`/api/medicines/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: ["bearer", token],
       },
       body: JSON.stringify(medicine),
     });

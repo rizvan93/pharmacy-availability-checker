@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserEditForm from "./UserEditForm";
 
-export default function EditStorePage () {
+export default function EditUserPage() {
   const { id } = useParams();
   const [users, setUsers] = useState();
 
@@ -21,4 +21,4 @@ export default function EditStorePage () {
       <UserEditForm />
     </>
   );
-};
+}

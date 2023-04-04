@@ -17,10 +17,12 @@ const UserCreateForm = () => {
     console.log("handleSubmit called");
 
     const createUser = async () => {
+      const token = localStorage.getItem("token");
       const response = await fetch("/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: ["bearer", token],
         },
         body: JSON.stringify(user),
       });
@@ -41,8 +43,9 @@ const UserCreateForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset className="px-10 py-6">
-        <label> Name:{" "}
-        <br />
+        <label>
+          {" "}
+          Name: <br />
           <input
             name="name"
             value={user.name}
@@ -53,8 +56,9 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label> User ID:{" "}
-        <br />
+        <label>
+          {" "}
+          User ID: <br />
           <input
             name="userId"
             value={user.userId}
@@ -65,8 +69,9 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label> Password:{" "}
-        <br />
+        <label>
+          {" "}
+          Password: <br />
           <input
             name="password"
             value={user.password}
@@ -77,20 +82,29 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label> Account Type:
+        <label>
+          {" "}
+          Account Type:
+          <br />
+          <select
+            name="accountType"
+            value={user.accountType}
+            onChange={handleChange}
+            className="mb-4 bg-gray-200 p-2"
+          >
+            <option value="">Select an Option</option>
+            {accountTypes.map((type, index) => (
+              <option value={type} key={index}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </label>
         <br />
-        <select name="accountType" value={user.accountType} onChange={handleChange} className="mb-4 bg-gray-200 p-2">
-          <option value="">Select an Option</option> 
-          {accountTypes.map((type, index) => (
-            <option value={type} key={index}>
-            {type}
-            </option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <br />
-        <button className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4">Add New User</button>
+        <br />
+        <button className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4">
+          Add New User
+        </button>
       </fieldset>
     </form>
   );
