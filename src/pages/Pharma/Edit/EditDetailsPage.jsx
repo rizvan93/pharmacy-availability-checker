@@ -88,13 +88,12 @@ export default function EditDetailsPage() {
         />
         <br />
         <label>Default Store:</label>
-        <select
-          name="defaultStore"
-          value={pharmacist.defaultStore}
-          onChange={handleInputChange}
-        >
+        <select name="defaultStore" onChange={handleInputChange}>
           {stores.map((store) => (
-            <option key={store._id} value={store.name}>
+            <option
+              value={store.name}
+              selected={store.name === pharmacist.defaultStore.name}
+            >
               {store.name}
             </option>
           ))}
