@@ -5,11 +5,11 @@ const { Schema } = mongoose;
 
 const medicineSchema = new Schema(
   {
-    name: { type: String, required: true },
-    type: { type: String, required: true },
-    packCount: { type: String, required: true },
-    dose: { type: Number, required: true, min: 1 },
-    uom: { type: String, required: true },
+    name: { type: String, required: true, lowercase: true, trim: true },
+    manufacturer: { type: String, required: true, lowercase: true, trim: true },
+    form: { type: String, required: true, lowercase: true, trim: true },
+    quantity: { type: String, required: true, lowercase: true, trim: true },
+    strength: { type: String, required: true, lowercase: true, trim: true },
   },
   { timestamps: true }
 );

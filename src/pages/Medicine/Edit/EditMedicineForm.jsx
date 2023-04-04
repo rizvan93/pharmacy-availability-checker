@@ -42,24 +42,32 @@ export default function EditMedicineForm() {
           <input name="name" value={medicine.name} onChange={handleChange} />
         </label>
         <label>
-          Type:
-          <input name="type" value={medicine.type} onChange={handleChange} />
-        </label>
-        <label>
-          Pack Count:
+          Manufacturer:
           <input
-            name="packCount"
-            value={medicine.packCount}
+            name="manufacturer"
+            value={medicine.manufacturer}
             onChange={handleChange}
           />
         </label>
         <label>
-          Dose:
-          <input name="dose" value={medicine.dose} onChange={handleChange} />
+          Form:
+          <input name="form" value={medicine.form} onChange={handleChange} />
         </label>
         <label>
-          UOM:
-          <input name="uom" value={medicine.uom} onChange={handleChange} />
+          Quantity:
+          <input
+            name="quantity"
+            value={medicine.quantity}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Strength:
+          <input
+            name="strength"
+            value={medicine.strength}
+            onChange={handleChange}
+          />
         </label>
         <br />
         <button onClick={handleUpdate}>Update Medicine</button>
