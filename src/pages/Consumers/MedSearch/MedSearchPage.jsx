@@ -5,18 +5,25 @@ import MedCard from "./MedCard";
 import MedNameForm from "./MedNameForm";
 import MedSelectForm from "./MedSelectForm";
 
+const DISPLAY_LIMIT = 20;
+
 const MedAvailability = () => {
   const [medicines, setMedicines] = useState(null);
 
   const [medicinesFilteredForm, setMedicinesFilteredForm] = useState(null);
+
   useEffect(() => {
-    setMedicinesFilteredForm(medicines);
+    if (medicines?.length < DISPLAY_LIMIT) {
+      setMedicinesFilteredForm(medicines);
+    }
   }, [medicines]);
 
   const [medicinesFilteredQuantity, setMedicinesFilteredQuantity] =
     useState(null);
+
   useEffect(() => {
-    setMedicinesFilteredQuantity(medicinesFilteredForm);
+    if (medicinesFilteredForm?.length < DISPLAY_LIMIT)
+      setMedicinesFilteredQuantity(medicinesFilteredForm);
   }, [medicinesFilteredForm]);
 
   const toTitleCase = (str) => {
