@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // import useParams hook
 import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function CheckIn() {
   const { id } = useParams(); // get the id parameter from the URL
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState("");
   const [pharmacist, setPharmacist] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

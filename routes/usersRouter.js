@@ -3,6 +3,8 @@ const router = express.Router();
 const usersController = require("../controllers/usersController");
 const isAuth = require("../controllers/auth");
 
+router.get("/seed", usersController.seed);
+
 router.post("/", isAuth(["Admin"]), usersController.create);
 router.post("/login", usersController.login);
 router.put("/:id", isAuth(["Admin"]), usersController.update);
