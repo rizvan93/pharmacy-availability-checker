@@ -4,7 +4,7 @@ import TopNavBar from "../../../components/ConsumerNavBar/TopNavBar";
 export default function PharmAvailability() {
   return (
     <>
-      <TopNavBar />
+      <TopNavBar backButton={true} />
       <h1>List of Pharmacists</h1>
       <BotttomNavBar />
     </>

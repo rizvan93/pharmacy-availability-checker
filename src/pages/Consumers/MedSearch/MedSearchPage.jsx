@@ -27,7 +27,7 @@ const MedAvailability = () => {
 
   return (
     <>
-      <TopNavBar />
+      <TopNavBar backButton={true} />
       <h1>Medicine availability</h1>;
       <MedNameForm setMedicines={setMedicines} />
       <MedSelectForm
