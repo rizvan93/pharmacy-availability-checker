@@ -16,6 +16,8 @@ const isAuth = (authorized) => (req, res, next) => {
 };
 
 const isUser = (req, res, next) => {
+  if (!AUTHENTICATE) return next();
+
   const authorization = req.headers.authorization;
   const token = authorization.split(",")[1];
   const user = jwt.verify(token, process.env.JWT_SECRET);
