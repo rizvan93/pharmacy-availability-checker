@@ -4,32 +4,32 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 
-const accountTypes = ["Pharmacist", "Admin"];
+const accountTypes = ["Pharmacist", "Admin", "Consumer"];
 const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
   {
-    name: { 
-      type: String, 
-      required: true
+    name: {
+      type: String,
+      required: true,
     },
-    userId: { 
-      type: String, 
-      required: true, 
-      unique: true
+    userId: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    password: { 
-      type: String, 
-      required: true 
+    password: {
+      type: String,
+      required: true,
     },
-    accountType: { 
-      type: String, 
-      enum: accountTypes, 
-      required: true 
+    accountType: {
+      type: String,
+      enum: accountTypes,
+      required: true,
     },
-    accountId: { 
-      type: mongoose.Types.ObjectId, 
-      refPath: "accountType" 
+    accountId: {
+      type: mongoose.Types.ObjectId,
+      refPath: "accountType",
     },
   },
   { timestamps: true }

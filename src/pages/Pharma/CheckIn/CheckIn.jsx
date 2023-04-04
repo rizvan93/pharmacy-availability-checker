@@ -9,7 +9,12 @@ export default function CheckIn() {
   const [pharmacist, setPharmacist] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/pharmacists/${id}`) // use the id parameter in the fetch URL
+    const token = localStorage.getItem("token");
+    fetch(`/api/pharmacists/${id}`, {
+      headers: {
+        Authorization: ["bearer", token],
+      },
+    }) // use the id parameter in the fetch URL
       .then((response) => response.json())
       .then((data) => setPharmacist(data))
       .catch((error) => console.error(error));
@@ -25,9 +30,13 @@ export default function CheckIn() {
   };
 
   const handleCheckIn = () => {
+    const token = localStorage.getItem("token");
     fetch(`/api/stores/pharmacists/${selectedStore}/checkin`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: ["bearer", token],
+      },
       body: JSON.stringify({ storeId: selectedStore }),
     })
       .then((response) => {
@@ -55,7 +64,7 @@ export default function CheckIn() {
         Select a store:
         <select value={selectedStore} onChange={handleSelectStore}>
           <option value="">-- Select a store --</option>
-          {stores.map((store) => (
+          {stores.map(((store)) => (
             <option key={store._id} value={store._id}>
               {store.name} - {store.location}
             </option>
@@ -67,3 +76,4 @@ export default function CheckIn() {
     </>
   );
 }
+

@@ -26,22 +26,24 @@ const seed = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  if (!req.body.email)
-    res.status(400).json({ error: "Please enter an email address" });
-  // if (!req.body.contact)
-  //   res.status(400).json({ error: "Please enter a contact number" });
+  const { name, userId, password } = req.body;
+
+  if (!userId) {
+    return res.status(400).json({ error: "Please enter an email address" });
+  }
+
   try {
-    const { email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-
-    const newConsumer = await Consumer.create({ email });
-
-    const newUser = await User.create({
-      userId: newConsumer.email,
-      password: hashedPassword,
+    const newConsumer = await Consumer.create({ email: userId });
+    const user = {
+      name,
+      userId,
+      password,
       accountType: "Consumer",
       accountId: newConsumer._id,
-    });
+    };
+    console.log(user);
+    const newUser = await User.create(user);
+
     res.status(200).json(newUser);
   } catch (error) {
     console.log(error);

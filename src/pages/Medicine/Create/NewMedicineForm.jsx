@@ -15,10 +15,12 @@ const MedicineForm = () => {
     event.preventDefault();
 
     const createMedicine = async () => {
+      const token = localStorage.getItem("token");
       const response = await fetch("/api/medicines", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: ["bearer", token],
         },
         body: JSON.stringify(medicine),
       });

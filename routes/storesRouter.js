@@ -1,23 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const storesController = require("../controllers/storesController");
+const isAuth = require("../controllers/auth");
 
-router.get("/seed", storesController.seed);
+// router.get("/seed", storesController.seed);
 
-router.post("/", storesController.create);
-router.get("/:id/checkedIn", storesController.showCheckedInStore); //change id to pharmacistId
-router.get("/:id", storesController.show); //-> remove this (no need to show store)
+router.post("/", isAuth(["Admin"]), storesController.create);
+router.get(
+  "/:id/checkedIn",
+  isAuth(["Pharmacist"]),
+  storesController.showCheckedInStore
+); //change id to pharmacistId
+router.get("/:id", storesController.show);
 router.get("/", storesController.index);
-router.delete("/:id", storesController.delete);
-router.put("/:id", storesController.update);
+router.delete("/:id", isAuth(["Admin"]), storesController.delete);
+router.put("/:id", isAuth(["Admin"]), storesController.update);
 
-// Get all stores
-router.get("/all", storesController.allStores); //get rid of this
 // Check-in the pharmacist into selected store
-router.put("/pharmacists/:id/checkin", storesController.checkIn);
+router.put(
+  "/pharmacists/:id/checkin",
+  isAuth(["Pharmacist"]),
+  storesController.checkIn
+);
 // Checkout the pharmacist from the store
-router.put("/:id/checkout", storesController.checkoutPharmacist);
-//change id to pharmacistId for check in and out
+router.put(
+  "/pharmacists/:id/checkout",
+  isAuth(["Pharmacist"]),
+  storesController.checkoutPharmacist
+);
 
 //move all the pharmacist find, checkin and checkout to pharmacist router
 
