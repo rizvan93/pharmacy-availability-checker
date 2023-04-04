@@ -11,7 +11,7 @@ import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
 function App() {
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState(null);
 
   return (
     <div className="App">
@@ -20,6 +20,7 @@ function App() {
         <NavBar user={user} />
         <br />
         <Routes>
+          <Route path="login" element={<AuthPage setUser={setUser} />} />
           <Route path="/users/*" element={<UsersRouter />} />
           <Route path="/stores/*" element={<StoresRouter />} />
           <Route path="/consumers/*" element={<ConsumersRouter />} />
