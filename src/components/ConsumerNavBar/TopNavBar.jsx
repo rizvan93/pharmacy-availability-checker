@@ -10,7 +10,7 @@ export default function TopNavBar({ user, backButton }) {
   };
 
   return (
-    <div className="bg-white py-3">
+    <div className="bg-white py-3 fixed inset-x-0 top-0">
       <div className="container mx-auto flex justify-between items-center">
         {backButton ? (
           <button onClick={handleBack}>BACK</button>
