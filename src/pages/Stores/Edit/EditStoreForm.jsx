@@ -8,7 +8,12 @@ const EditStoreForm = ({ store, setStore }) => {
 
   useEffect(() => {
     const getMedicines = async () => {
-      const response = await fetch("/api/medicines");
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/medicines", {
+        headers: {
+          Authorization: ["bearer", token],
+        },
+      });
       const data = await response.json();
       setMedicines(data);
     };

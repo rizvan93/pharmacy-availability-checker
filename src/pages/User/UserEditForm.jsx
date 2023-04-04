@@ -2,25 +2,28 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UserEditForm() {
-
   const { id } = useParams();
-  const [users, setUsers] = useState({ name: '', accountType: '' });
-  const navigate = useNavigate ();
+  const [users, setUsers] = useState({ name: "", accountType: "" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch (`/api/users/${id}`);
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/users/${id}`, {
+        headers: {
+          Authorization: ["bearer", token],
+        },
+      });
       const user = await response.json();
-      setUsers(user);
-    }
-    fetchUsers()
-  }, [id])
+    };
+    fetchUsers();
+  }, [id]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const key = event.target.name;
     const value = event.target.value;
-    setUsers({...users, [key]: value})
-  }
+    setUsers({ ...users, [key]: value });
+  };
 
   const handleUpdate = async (event) => {
     try {
@@ -39,38 +42,49 @@ export default function UserEditForm() {
     }
   };
 
-return (
-  <>
-    <fieldset className="px-10 py-6">
-      <label> Name:{" "}
-      <br />
-        <input 
-          name="name" 
-          value={users.name} 
-          onChange={handleChange} 
-          className="mb-4 bg-gray-200 p-2"/>
-      </label>
-      <br />
-      <label> User ID:{" "}
-      <br />
-        <input 
-          name="userId" 
-          value={users.userId} 
-          onChange={handleChange}
-          className="mb-4 bg-gray-200 p-2"/>
-      </label>
-      <br />
-      <label> Account Type:{" "}
-      <br />
-        <input
-          name="accountType"
-          value={users.accountType}
-          onChange={handleChange}
-          className="mb-4 bg-gray-200 p-2"/>
-      </label>
-      <br />
-      <button onClick={handleUpdate} className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4">Update</button>
-    </fieldset>
-  </>
-);
+  return (
+    <>
+      <fieldset className="px-10 py-6">
+        <label>
+          {" "}
+          Name: <br />
+          <input
+            name="name"
+            value={users.name}
+            onChange={handleChange}
+            className="mb-4 bg-gray-200 p-2"
+          />
+        </label>
+        <br />
+        <label>
+          {" "}
+          User ID: <br />
+          <input
+            name="userId"
+            value={users.userId}
+            onChange={handleChange}
+            className="mb-4 bg-gray-200 p-2"
+          />
+        </label>
+        <br />
+        <label>
+          {" "}
+          Account Type: <br />
+          <input
+            name="accountType"
+            value={users.accountType}
+            onChange={handleChange}
+            className="mb-4 bg-gray-200 p-2"
+          />
+        </label>
+        <br />
+        <button
+          onClick={handleUpdate}
+          className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4"
+        >
+          Update
+        </button>
+      </fieldset>
+    </>
+  );
 }
