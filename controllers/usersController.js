@@ -8,6 +8,16 @@ const EXPIRIES = {
   Consumer: "7d",
 };
 
+const seed = async (req, res) => {
+  const newUser = await User.create({
+    name: "Admin",
+    userId: "admin",
+    password: "password",
+    accountType: "admin",
+  });
+  res.status(200).json(newUser);
+};
+
 const create = async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -96,4 +106,5 @@ module.exports = {
   update,
   delete: deleteUser,
   show,
+  seed,
 };

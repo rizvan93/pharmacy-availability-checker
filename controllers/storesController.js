@@ -1,5 +1,5 @@
 const Store = require("../models/Store");
-const Pharmacist = require("../models/pharmacist");
+const Pharmacist = require("../models/Pharmacist");
 
 const seed = async (req, res) => {
   try {

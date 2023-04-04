@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/usersController");
-const isAuth = require("../controllers/auth");
+const { isAuth } = require("../controllers/auth");
+
+router.get("/seed", usersController.seed);
 
 router.post("/", isAuth(["Admin"]), usersController.create);
 router.post("/login", usersController.login);

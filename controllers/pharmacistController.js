@@ -1,4 +1,5 @@
-const Pharmacist = require("../models/pharmacist");
+const Pharmacist = require("../models/Pharmacist");
+const Store = require("../models/Store");
 
 const seed = async (req, res) => {
   try {
@@ -28,7 +29,30 @@ const show = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, defaultStore } = req.body;
+
+    const updatedPharmacist = await Pharmacist.findByIdAndUpdate(
+      id,
+      { name },
+      { new: true }
+    );
+
+    const store = await Store.findOne({ name: defaultStore });
+    updatedPharmacist.defaultStore = store._id;
+    await updatedPharmacist.save();
+
+    res.status(200).json({ updatedPharmacist });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   seed,
   show,
+  update,
 };
