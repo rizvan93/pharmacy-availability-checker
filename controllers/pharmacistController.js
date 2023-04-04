@@ -1,5 +1,5 @@
-const Pharmacist = require("../models/pharmacist");
-const Store = require("../models/store");
+const Pharmacist = require("../models/Pharmacist");
+const Store = require("../models/Store");
 
 const seed = async (req, res) => {
   try {
@@ -32,7 +32,7 @@ const show = async (req, res) => {
 const update = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, defaultName } = req.body;
+    const { name, defaultStore } = req.body;
 
     const updatedPharmacist = await Pharmacist.findByIdAndUpdate(
       id,

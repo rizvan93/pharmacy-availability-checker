@@ -46,7 +46,7 @@ export default function CheckIn() {
 
   return (
     <>
-      <Link to={"/consumers/pharmacists"}>
+      <Link to={`/pharmacists/${id}/edit`}>
         <button>Edit Details</button>
       </Link>
       <h1>Check In</h1>
