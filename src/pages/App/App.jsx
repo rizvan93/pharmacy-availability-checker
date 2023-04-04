@@ -14,9 +14,11 @@ import PharmacistsRouter from "./Routers/PharmacistsRouter";
 function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const decoded = jwt_decode(token);
-    setUser(decoded);
+    const token = localStorage.getItem("token") || null;
+    if (token) {
+      const decoded = jwt_decode(token);
+      setUser(decoded);
+    }
   }, []);
 
   return (

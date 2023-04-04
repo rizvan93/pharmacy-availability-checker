@@ -79,7 +79,7 @@ const update = async (req, res) => {
 //-------------------------------------------Pharmacist
 const checkIn = async (req, res) => {
   try {
-    const pharmacist = req.params.id;
+    const pharmacist = req.params.id; //token.user
     const store = await Store.findById(req.body.storeId);
 
     if (!store) {

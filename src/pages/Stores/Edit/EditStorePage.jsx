@@ -8,12 +8,7 @@ const EditStorePage = () => {
 
   useEffect(() => {
     const getStore = async () => {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`/api/stores/${id}`, {
-        headers: {
-          Authorization: ["bearer", token],
-        },
-      });
+      const response = await fetch(`/api/stores/${id}`);
       const data = await response.json();
       setStore(data);
     };

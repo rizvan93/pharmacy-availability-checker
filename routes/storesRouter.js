@@ -11,7 +11,7 @@ router.get(
   isAuth(["Pharmacist"]),
   storesController.showCheckedInStore
 ); //change id to pharmacistId
-router.get("/:id", storesController.show); //-> remove this (no need to show store)
+router.get("/:id", storesController.show);
 router.get("/", storesController.index);
 router.delete("/:id", isAuth(["Admin"]), storesController.delete);
 router.put("/:id", isAuth(["Admin"]), storesController.update);

@@ -8,7 +8,7 @@ export default function UserPage() {
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-    async function fetchUsers() {
+    async function getUsers() {
       const token = localStorage.getItem("token");
       const response = await fetch("/api/users", {
         headers: {
@@ -19,7 +19,7 @@ export default function UserPage() {
       setUsers(data);
       setFilteredUsers(data);
     }
-    fetchUsers();
+    getUsers();
   }, []);
 
   const handleFilter = (filter) => {
@@ -39,12 +39,12 @@ export default function UserPage() {
 
   return (
     <div className="px-4 py-8">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <UserTypeFilter handleFilter={handleFilter} />
         <br />
 
         <Link to="/users/new">
-          <button className="inline-block bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4 rounded-full">
+          <button className="inline-block rounded-full bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
             Add New User
           </button>
         </Link>

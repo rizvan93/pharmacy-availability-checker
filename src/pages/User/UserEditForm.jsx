@@ -80,7 +80,7 @@ export default function UserEditForm() {
         <br />
         <button
           onClick={handleUpdate}
-          className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4"
+          className="bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50"
         >
           Update
         </button>
