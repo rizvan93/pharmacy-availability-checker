@@ -43,7 +43,7 @@ const MedAvailability = () => {
         toTitleCase={toTitleCase}
       />
       {medicinesFilteredQuantity?.map((m) => (
-        <MedCard medicine={m} toTitleCase={toTitleCase} />
+        <MedCard medicine={m} toTitleCase={toTitleCase} key={m._id} />
       ))}
       <BotttomNavBar />
     </>
