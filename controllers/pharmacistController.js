@@ -13,7 +13,7 @@ const seed = async (req, res) => {
   }
 };
 
-const Index = async (req, res) => {
+const show = async (req, res) => {
   try {
     const pharmacist = await Pharmacist.findById(req.params.id).populate(
       "defaultStore"
@@ -30,5 +30,5 @@ const Index = async (req, res) => {
 
 module.exports = {
   seed,
-  Index,
+  show,
 };

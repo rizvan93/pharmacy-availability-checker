@@ -24,15 +24,6 @@ const seed = async (req, res) => {
   }
 };
 
-const show = async (req, res) => {
-  try {
-    const medicine = await Medicine.findById(req.params.id);
-    res.status(200).json(medicine);
-  } catch (error) {
-    res.status(400).json({ error });
-  }
-};
-
 const index = async (req, res) => {
   try {
     const allMedicines = await Medicine.find({});
@@ -69,6 +60,5 @@ module.exports = {
   seed,
   index,
   delete: deleteMedicine,
-  show,
   update,
 };

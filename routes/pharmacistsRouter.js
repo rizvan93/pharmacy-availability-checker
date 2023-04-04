@@ -6,9 +6,7 @@ const pharmacistController = require("../controllers/pharmacistController");
 router.get("/seed", pharmacistController.seed);
 
 //Pharma check-in by ID
-router.get("/:id", pharmacistController.Index); //controller name should be show
+router.get("/:id", pharmacistController.show); //controller name should be show
 //router.put("/:id, pharmacistController.update) -> add route for edit: edit pharmacist's name and default store
-
-// router.put(":/id/checkIn", storesController.checkIn)
 
 module.exports = router;
