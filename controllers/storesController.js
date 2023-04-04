@@ -77,16 +77,6 @@ const update = async (req, res) => {
 };
 
 //-------------------------------------------Pharmacist
-const allStores = async (req, res) => {
-  try {
-    const stores = await Store.find();
-    res.status(200).json(stores);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server Error" });
-  }
-};
-
 const checkIn = async (req, res) => {
   try {
     const pharmacist = req.params.id;
@@ -109,42 +99,30 @@ const checkIn = async (req, res) => {
 const showCheckedInStore = async (req, res) => {
   const pharmacistId = req.params.id;
 
-  const stores = await Store.find({
+  const store = await Store.findOne({
     pharmacists: pharmacistId,
   });
-  res.status(200).json(stores);
+
+  res.status(200).json(store);
 };
 
 const checkoutPharmacist = async (req, res) => {
-  // try {
-  //   const pharmacistId = req.params.id;
-  //   const pharmacist = await Pharmacist.findById(pharmacistId);
-  //   if (!pharmacist) {
-  //     return res.status(404).json({ message: "Pharmacist not found" });
-  //   }
-  //   const storeId = pharmacist.defaultStore;
-  //   if (!storeId) {
-  //     return res
-  //       .status(404)
-  //       .json({ message: "Pharmacist is not checked in to any store" });
-  //   }
-  //   const store = await Store.findOne({
-  //     pharmacists: pharmacistId,
-  //   });
-  //   if (!store) {
-  //     return res.status(404).json({ message: "Store not found" });
-  //   }
-  //   store.pharmacists = store.pharmacists.filter(
-  //     (id) => id.toString() !== pharmacistId
-  //   );
-  //   await store.save();
-  //   pharmacist.defaultStore = null;
-  //   await pharmacist.save();
-  //   res.status(200).json({ message: "Pharmacist checked out successfully" });
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ message: "Server Error" });
-  // }
+  try {
+    const pharmacist = req.params.id;
+    const store = await Store.findById(req.body.storeId);
+
+    if (!store) {
+      return res.status(404).json({ message: "Store not found" });
+    }
+
+    store.pharmacists.pull(pharmacist);
+    await store.save();
+
+    res.status(200).json({ message: "Check-out successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error", error });
+  }
 };
 
 module.exports = {
@@ -155,7 +133,6 @@ module.exports = {
   update,
   seed,
 
-  allStores, //Drop down box of all stores for the pharmacist to select to checkinto
   checkIn, // Pharmacist to checkin to selected store
   showCheckedInStore, // CheckOut page of currently check-ed in store
   checkoutPharmacist, // Checkout button

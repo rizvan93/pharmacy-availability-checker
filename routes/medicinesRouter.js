@@ -6,7 +6,6 @@ router.get("/seed", medicinesController.seed);
 
 router.get("/", medicinesController.index);
 router.post("/", medicinesController.create);
-router.get("/:id", medicinesController.show); //not really necessary (currently not in use)
 router.delete("/:id", medicinesController.delete);
 router.put("/:id", medicinesController.update);
 
