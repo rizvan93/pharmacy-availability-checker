@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // import useParams hook
+import { useParams, useNavigate } from 'react-router-dom'; 
 
 export default function CheckIn() {
   const { id } = useParams(); // get the id parameter from the URL
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState('');
   const [pharmacist, setPharmacist] = useState(null);
+      const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/api/pharmacists/${id}`) // use the id parameter in the fetch URL
@@ -24,6 +25,7 @@ export default function CheckIn() {
   };
 
 const handleCheckIn = () => {
+
 fetch(`/api/stores/pharmacists/${selectedStore}/checkin`, {
   method: 'PUT',
   headers: { 'Content-Type': 'application/json' },
@@ -31,7 +33,7 @@ fetch(`/api/stores/pharmacists/${selectedStore}/checkin`, {
 })
     .then(response => {
       if (response.ok) {
-        alert('Checked in successfully!');
+        navigate(`/pharmacists/${id}/checkout`)
       } else {
         alert('Failed to check in!');
       }
