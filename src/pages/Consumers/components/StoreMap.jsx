@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import StoreMarker from "./StoreMarker";
 
 const StoreMap = ({ stores }) => {
@@ -14,9 +14,7 @@ const StoreMap = ({ stores }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {stores?.map((s) => (
-        <Marker position={[s.lat, s.lon]} key={s._id}>
-          <Popup>{s.name}</Popup>
-        </Marker>
+        <StoreMarker store={s} key={s._id} />
       ))}
     </MapContainer>
   );
