@@ -1,25 +1,31 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import BotttomNavBar from "../../../components/ConsumerNavBar/BottomNavBar";
 import TopNavBar from "../../../components/ConsumerNavBar/TopNavBar";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import StoreMap from "../components/StoreMap";
 
 const MedAvailabilityPage = () => {
   const { id } = useParams();
+  const [stores, setStores] = useState();
+
+  useEffect(() => {
+    const getStores = async () => {
+      const response = await fetch("/api/stores");
+      const data = await response.json();
+      setStores(
+        data.map((s) => {
+          return { name: s.name, lat: s.lat, lon: s.lon, _id: s._id };
+        })
+      );
+    };
+    getStores();
+  }, [id]);
+
   return (
     <>
       <TopNavBar backButton={true} />
       <h1>Display Availability in Stores</h1>
-      <MapContainer
-        className="h-[30vh]"
-        center={[1.352638, 103.813529]}
-        zoom={9.5}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-      </MapContainer>
+      <StoreMap stores={stores} />
       <BotttomNavBar />
     </>
   );
