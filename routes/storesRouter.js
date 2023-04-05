@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const storesController = require("../controllers/storesController");
-const { isAuth } = require("../controllers/auth");
+const isAuth = require("../controllers/auth");
 
 // router.get("/seed", storesController.seed);
 

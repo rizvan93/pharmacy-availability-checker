@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export default function CheckIn() {
-  const { id } = useParams(); // get the id parameter from the URL
+  const { id } = useParams();
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState("");
   const [pharmacist, setPharmacist] = useState(null);
@@ -11,11 +12,14 @@ export default function CheckIn() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`/api/pharmacists/${id}`, {
+    const decodedToken = jwt_decode(token);
+    const pharmacistId = decodedToken.user._id;
+
+    fetch(`/api/pharmacists/${pharmacistId}`, {
       headers: {
         Authorization: ["bearer", token],
       },
-    }) // use the id parameter in the fetch URL
+    })
       .then((response) => response.json())
       .then((data) => setPharmacist(data))
       .catch((error) => console.error(error));
@@ -24,7 +28,7 @@ export default function CheckIn() {
       .then((response) => response.json())
       .then((data) => setStores(data))
       .catch((error) => console.error(error));
-  }, [id]); // add id as a dependency of the useEffect hook
+  }, [id]);
 
   const handleSelectStore = (event) => {
     setSelectedStore(event.target.value);
@@ -56,10 +60,7 @@ export default function CheckIn() {
 
   return (
     <>
-      <Link to={`/pharmacists/${id}/edit`}>
-        <button>Edit Details</button>
-      </Link>
-      <h1>Check In</h1>
+      <h1>Check In Page</h1>
       <p>Pharmacist: {pharmacist.name}</p>
       <label>
         Select a store:
@@ -74,6 +75,10 @@ export default function CheckIn() {
       </label>
       <br />
       <button onClick={handleCheckIn}>Check In</button>
+      <br />
+            <Link to={`/pharmacists/${id}/edit`}>
+        <button>Edit Details</button>
+      </Link>
     </>
   );
 }

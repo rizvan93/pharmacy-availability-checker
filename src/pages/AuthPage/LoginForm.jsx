@@ -3,18 +3,25 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 const HOME_PAGES = {
-  Consumer: "/",
-  Admin: "/users",
-  Pharmacist: "/pharmacists",
+  Consumer: () => {
+    return "/";
+  },
+  Admin: () => {
+    return "/users";
+  },
+  Pharmacist: () => {
+    const token = localStorage.getItem("token");
+    const decoded = jwt_decode(token);
+    const id = decoded.accountId;
+    return `/pharmacists/${id}`;
+  },
 };
-
 const LoginForm = ({ setUser }) => {
   const [loginAttempt, setLoginAttempt] = useState({
     userId: "",
     password: "",
   });
   const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -28,21 +35,19 @@ const LoginForm = ({ setUser }) => {
       const data = await response.json();
       localStorage.setItem("token", data);
       const decodedUser = jwt_decode(data);
-      console.log(decodedUser);
       setUser(decodedUser);
-      navigate(HOME_PAGES[decodedUser.accountType]);
+      console.log(HOME_PAGES[decodedUser.accountType]());
+      navigate(HOME_PAGES[decodedUser.accountType]());
     } catch (error) {
       console.log(error);
     }
   };
-
   const handleChange = (event) => {
     setLoginAttempt({
       ...loginAttempt,
       [event.target.name]: event.target.value,
     });
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -65,5 +70,4 @@ const LoginForm = ({ setUser }) => {
     </form>
   );
 };
-
 export default LoginForm;

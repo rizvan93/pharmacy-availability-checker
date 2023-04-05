@@ -10,10 +10,10 @@ const EXPIRIES = {
 
 const seed = async (req, res) => {
   const newUser = await User.create({
-    name: "Admin",
-    userId: "Admin",
-    password: "123",
-    accountType: "Admin",
+    name: "QQQ",
+    userId: "QQQ",
+    password: "111",
+    accountType: "Pharmacist",
   });
   res.status(200).json(newUser);
 };
