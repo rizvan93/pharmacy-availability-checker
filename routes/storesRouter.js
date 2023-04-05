@@ -11,8 +11,9 @@ router.get(
   isAuth(["Pharmacist"]),
   storesController.showCheckedInStore
 ); //change id to pharmacistId
+router.get("/availability", storesController.queryAvailability);
 router.get("/:id", storesController.show);
-router.get("/", storesController.index);
+router.get("/", isAuth(["Admin"]), storesController.index);
 router.delete("/:id", isAuth(["Admin"]), storesController.delete);
 router.put("/:id", isAuth(["Admin"]), storesController.update);
 

@@ -45,7 +45,12 @@ const UserCreateForm = () => {
 
   useEffect(() => {
     const fetchStores = async () => {
-      const response = await fetch("/api/stores");
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/stores", {
+        headers: {
+          Authorization: ["bearer", token],
+        },
+      });
       const data = await response.json();
       setStores(data);
     };

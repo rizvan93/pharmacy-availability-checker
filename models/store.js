@@ -3,21 +3,31 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const stockSchema = new Schema({
-  medicine: { type: mongoose.Types.ObjectId, ref: "Medicine", required: true },
-  quantity: { type: Number, min: 0, required: true },
-});
+const stockSchema = new Schema(
+  {
+    medicine: {
+      type: mongoose.Types.ObjectId,
+      ref: "Medicine",
+      required: true,
+    },
+    quantity: { type: Number, min: 0, required: true },
+  },
+  { timestamps: true }
+);
 
-const storeSchema = new Schema({
-  name: { type: String, required: true },
-  streetAddress: { type: String, required: true },
-  unitNumber: { type: String },
-  postalCode: { type: String, required: true, match: /\d{6}/ },
-  lat: { type: Number, min: -90, max: 90 },
-  lon: { type: Number, min: -180, max: 180 },
-  pharmacists: [{ type: mongoose.Types.ObjectId, ref: "Pharmacist" }],
-  stocks: [stockSchema],
-});
+const storeSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    streetAddress: { type: String, required: true },
+    unitNumber: { type: String },
+    postalCode: { type: String, required: true, match: /\d{6}/ },
+    lat: { type: Number, min: -90, max: 90 },
+    lon: { type: Number, min: -180, max: 180 },
+    pharmacists: [{ type: mongoose.Types.ObjectId, ref: "Pharmacist" }],
+    stocks: [stockSchema],
+  },
+  { timestamps: true }
+);
 
 storeSchema.pre("save", async function (next) {
   if (!this.isModified("postalCode")) return next();

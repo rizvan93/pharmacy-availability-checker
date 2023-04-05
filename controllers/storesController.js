@@ -42,28 +42,65 @@ const show = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const user = req.headers.authorization;
-
-  if (user.accountType === "Admin") {
-    try {
-      const stores = await Store.find({});
-      return res.status(200).json(stores);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+  try {
+    const stores = await Store.find({});
+    return res.status(200).json(stores);
+  } catch (error) {
+    return res.status(500).json({ error });
   }
+};
 
+const queryAvailability = async (req, res) => {
   const { field, fieldId } = req.query;
   try {
     if (field === "medicines") {
-      const stores = await Store.find({});
+      const storesProjection = {
+        name: 1,
+        streetAddress: 1,
+        unitNumber: 1,
+        postalCode: 1,
+        lat: 1,
+        lon: 1,
+        "stocks.$": 1,
+      };
+
+      const stores = await Store.find(
+        {
+          "stocks.medicine": fieldId,
+          "stocks.quantity": { $gt: 0 },
+        },
+        storesProjection
+      );
       if (!stores) {
         return res.status(404).json({ message: "invalid query" });
       }
+
+      // stores.forEach((store, index)=> {
+      //   if store.
+      //   stores[index].stockLevel =
+      // })
+
+      return res.status(200).json(stores);
     } else if (field === "pharmacists") {
-      const stores = await Store.find({
-        pharmacists: { $exists: true, $not: { $size: 0 } },
-      });
+      const storesProjection = {
+        stocks: 0,
+        createdAt: 0,
+        updatedAt: 0,
+        __v: 0,
+      };
+      const pharmacistsProjection = {
+        defaultStore: 0,
+        createdAt: 0,
+        updatedAt: 0,
+        __v: 0,
+      };
+
+      const stores = await Store.find(
+        {
+          pharmacists: { $exists: true, $not: { $size: 0 } },
+        },
+        storesProjection
+      ).populate("pharmacists", pharmacistsProjection);
 
       return res.status(200).json(stores);
     } else {
@@ -157,6 +194,7 @@ module.exports = {
   index,
   delete: deleteStore,
   update,
+  queryAvailability,
   seed,
 
   checkIn, // Pharmacist to checkin to selected store

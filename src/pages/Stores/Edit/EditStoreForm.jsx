@@ -23,11 +23,12 @@ const EditStoreForm = ({ store, setStore }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const updateStore = async () => {
-      console.log(store);
+      const token = localStorage.getItem("token");
       const response = await fetch(`/api/stores/${store._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: ["bearer", token],
         },
         body: JSON.stringify(store),
       });
