@@ -6,26 +6,9 @@ const BOOKMARKS = {
   pharmacists: "bookmarkedPharmacists",
 };
 
-const show = async (req, res) => {
-  const { id } = req.params;
-  const { field } = req.query;
-
-  if (!BOOKMARKS[field]) {
-    return res.status(404).json({ message: "Invalid field" });
-  }
-
-  try {
-    const consumer = await Consumer.findById(id);
-    if (!consumer) {
-      return res.status(404).json({ message: "Invalid consumer" });
-    }
-
-    const bookmarks = consumer[BOOKMARKS[field]];
-    res.status(200).json(bookmarks);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
+// const show = (req, res) => {
+//   res.status(200).json({ message: "show consumer" });
+// };
 
 const seed = async (req, res) => {
   try {
@@ -77,17 +60,22 @@ const update = async (req, res) => {
   try {
     const consumer = await Consumer.findById(id);
     const bookmarks = consumer[BOOKMARKS[field]];
-
+    console.log(bookmarks);
     if (bookmarks.includes(bookmarkId)) {
-      const filteredBookmarks = bookmarks.filter(
-        (b) => b.toString() !== bookmarkId
-      );
-      consumer[BOOKMARKS[field]] = filteredBookmarks;
+      console.log(`remove ${bookmarkId}`);
+      // if the medicineId exists, remove it from the array
+      bookmarks.forEach((bookmark) => {
+        console.log(bookmark.toString());
+      });
+      const newBookmarks = bookmarks.filter((b) => b.toString() !== bookmarkId);
+      consumer[BOOKMARKS[field]] = newBookmarks;
     } else {
+      console.log(`add ${bookmarkId}`);
+      // if the medicineId does not exist, add it to the array
       bookmarks.push(bookmarkId);
     }
     const updatedConsumer = await consumer.save();
-    res.status(200).json(updatedConsumer[BOOKMARKS[field]]);
+    res.status(200).json(updatedConsumer);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }

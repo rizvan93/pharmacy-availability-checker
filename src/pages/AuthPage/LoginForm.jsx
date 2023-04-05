@@ -13,18 +13,15 @@ const HOME_PAGES = {
     const token = localStorage.getItem("token");
     const decoded = jwt_decode(token);
     const id = decoded.accountId;
-
     return `/pharmacists/${id}`;
   },
 };
-
 const LoginForm = ({ setUser }) => {
   const [loginAttempt, setLoginAttempt] = useState({
     userId: "",
     password: "",
   });
   const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -46,14 +43,12 @@ const LoginForm = ({ setUser }) => {
       console.log(error);
     }
   };
-
   const handleChange = (event) => {
     setLoginAttempt({
       ...loginAttempt,
       [event.target.name]: event.target.value,
     });
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -76,5 +71,4 @@ const LoginForm = ({ setUser }) => {
     </form>
   );
 };
-
 export default LoginForm;

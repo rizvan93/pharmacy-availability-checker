@@ -22,7 +22,7 @@ const StoreForm = () => {
           "Content-Type": "application/json",
           Authorization: ["bearer", token],
         },
-        body: JSON.stringify(form),
+      body: JSON.stringify(form),
       });
       if (response.ok) {
         navigate("/stores");
