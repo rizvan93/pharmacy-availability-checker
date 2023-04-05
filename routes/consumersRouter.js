@@ -7,8 +7,8 @@ const { isAuth, isUser } = require("../controllers/auth");
 // const isUser = authController.isUser;
 
 // router.get("/seed", consumersController.seed);
-// router.get("/", consumersController.show);
 
+router.get("/:id", isAuth(["Consumer"]), isUser, consumersController.show);
 router.post("/", consumersController.create);
 router.put("/:id", isAuth(["Consumer"]), isUser, consumersController.update);
 

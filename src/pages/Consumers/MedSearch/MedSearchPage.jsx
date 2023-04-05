@@ -1,11 +1,13 @@
+import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
-import MedCard from "./MedCard";
-import MedNameForm from "./MedNameForm";
-import MedSelectForm from "./MedSelectForm";
+import MedCard from "./components/MedCard";
+import MedNameForm from "./components/MedNameForm";
+import MedSelectForm from "./components/MedSelectForm";
+import PostalCodeForm from "./components/PostalCodeForm";
 
 const DISPLAY_LIMIT = 20;
 
-const MedSearchPage = ({ setHome }) => {
+const MedSearchPage = ({ setHome, user }) => {
   useEffect(() => {
     setHome(false);
   }, []);
@@ -50,8 +52,15 @@ const MedSearchPage = ({ setHome }) => {
         toTitleCase={toTitleCase}
       />
       {medicinesFilteredQuantity?.map((m) => (
-        <MedCard medicine={m} toTitleCase={toTitleCase} key={m._id} />
+        <MedCard
+          medicine={m}
+          toTitleCase={toTitleCase}
+          key={m._id}
+          user={user}
+        />
       ))}
+      <hr />
+      <PostalCodeForm />
     </>
   );
 };

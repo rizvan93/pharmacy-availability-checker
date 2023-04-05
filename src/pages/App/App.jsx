@@ -12,6 +12,10 @@ import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
 const AUTHENTICATE = false;
+const ACCOUNT = {
+  accountType: "Consumer",
+  accountId: "642b8cb5f100db08d0114496",
+};
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,7 +26,7 @@ function App() {
       setUser(decoded);
     }
     if (!AUTHENTICATE) {
-      setUser({ accountType: "Admin" });
+      setUser({ accountType: "Consumer" });
     }
   }, []);
 
@@ -31,7 +35,7 @@ function App() {
       <div>
         {user &&
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
-          <NavBar user={user} setUser={setUser}/>
+          <NavBar user={user} setUser={setUser} />
         ) : null}
         <br />
         <Routes>
