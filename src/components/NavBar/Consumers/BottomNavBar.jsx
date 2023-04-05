@@ -26,7 +26,7 @@ export default function BotttomNavBar() {
           to="/consumers/bookmark"
           className="px-3 py-2 hover:border-t-2 hover:border-wAqua hover:text-wAqua"
         >
-          Bookmark
+          Bookmarks
         </Link>
       </div>
     </div>
