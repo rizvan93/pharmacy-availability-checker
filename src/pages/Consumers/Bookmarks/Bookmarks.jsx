@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
+import MedicineCard from "./MedicineCard";
+import PharmacistCard from "./PharmacistCard";
 
 export default function Bookmarks() {
   const [consumer, setConsumer] = useState(null);
   const [bookmarkedMedicines, setBookmarkedMedicines] = useState([]);
   const [bookmarkedPharmacists, setBookmarkedPharmacists] = useState([]);
+  const [showMedicines, setShowMedicines] = useState(false);
+  const [showPharmacists, setShowPharmacists] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -52,9 +56,52 @@ export default function Bookmarks() {
     }
   }, [consumer]);
 
+  const handleMedicinesClick = () => {
+    setShowMedicines(true);
+    setShowPharmacists(false);
+  };
+
+  const handlePharmacistsClick = () => {
+    setShowMedicines(false);
+    setShowPharmacists(true);
+  };
+
   return (
     <div>
-      <h2 className="mt-20">Consumer Details</h2>
+      <div className="container mx-0 flex min-w-full items-center justify-around">
+        <button onClick={handleMedicinesClick} className="mt-10">
+          Medicines
+        </button>
+        <button onClick={handlePharmacistsClick} className="mt-10">
+          Pharmacists
+        </button>
+      </div>
+
+      {showMedicines && (
+        <div className="ml-2 divide-y divide-solid">
+          {/* <h2>Bookmarked Medicines</h2> */}
+          {bookmarkedMedicines.map((medicine) => (
+            <div className="my-4" key={medicine._id}>
+              <h3 className="font-bold">{medicine.name}</h3>
+              <MedicineCard medicine={medicine} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {showPharmacists && (
+        <div>
+          <h2>Bookmarked Pharmacists</h2>
+          {bookmarkedPharmacists.map((pharmacist) => (
+            <div key={pharmacist._id}>
+              <h3>Pharmacist ID: {pharmacist._id}</h3>
+              <PharmacistCard pharmacist={pharmacist} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* <h2 className="mt-2">Consumer Details</h2>
       {consumer ? (
         <>
           <p>Email: {consumer.email}</p>
@@ -75,7 +122,7 @@ export default function Bookmarks() {
         </>
       ) : (
         <p>No consumer data found.</p>
-      )}
+      )} */}
     </div>
   );
 }
