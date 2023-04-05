@@ -10,7 +10,11 @@ const isAuth = (authorized) => (req, res, next) => {
   console.log("token: ", token);
 
   const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
-  if (authorized.includes(verifiedUser.accountType)) {
+  if (
+    authorized.includes(verifiedUser.accountType) ||
+    authorized.includes("*")
+  ) {
+    req.headers.authorization = { user: verifiedUser };
     next();
   } else {
     res.send(404).json({ message: "unauthorized" });
@@ -20,10 +24,7 @@ const isAuth = (authorized) => (req, res, next) => {
 const isUser = (req, res, next) => {
   if (!AUTHENTICATE) return next();
 
-  const authorization = req.headers.authorization;
-  const token = authorization.split(",")[1];
-  const user = jwt.verify(token, process.env.JWT_SECRET);
-
+  const { user } = req.headers.authorization;
   const { id } = req.params;
 
   if (id === user.accountId || !AUTHENTICATE) {
