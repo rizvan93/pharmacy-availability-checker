@@ -31,7 +31,7 @@ function App() {
       <div>
         {user &&
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
-          <NavBar user={user} />
+          <NavBar user={user} setUser={setUser}/>
         ) : null}
         <br />
         <Routes>

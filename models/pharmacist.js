@@ -11,11 +11,6 @@ const pharmacistSchema = new Schema(
       ref: "Store",
       required: true,
     },
-    checkedInStore: {
-      type: mongoose.Types.ObjectId,
-      ref: "Store",
-      default: null,
-    },
   },
   { timestamps: true }
 );

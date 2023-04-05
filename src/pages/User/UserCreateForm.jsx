@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const accountTypes = ["Pharmacist", "Admin"];
@@ -9,7 +9,9 @@ const UserCreateForm = () => {
     userId: "",
     password: "",
     accountType: "",
+    defaultStore: "",
   });
+  const [stores, setStores] = useState([]);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -27,6 +29,7 @@ const UserCreateForm = () => {
         body: JSON.stringify(user),
       });
       if (response.ok) {
+        await response.json;
         navigate("/users");
       } else {
         console.log("unable to create");
@@ -38,7 +41,20 @@ const UserCreateForm = () => {
 
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
+    console.log("updated user: ", user);
   };
+
+  useEffect(() => {
+    const fetchStores = async () => {
+      const response = await fetch("/api/stores");
+      const data = await response.json();
+      setStores(data);
+    };
+
+    if (user.accountType === "Pharmacist") {
+      fetchStores();
+    }
+  }, [user.accountType]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -101,8 +117,31 @@ const UserCreateForm = () => {
           </select>
         </label>
         <br />
+        {/* store dropdown list */}
+
+        {user.accountType === "Pharmacist" && (
+          <label>
+            {" "}
+            Store:
+            <br />
+            <select
+              name="defaultStore"
+              value={user.defaultStore.name}
+              onChange={handleChange}
+              className="mb-4 bg-gray-200 p-2"
+            >
+              <option value="">Select an Option</option>
+              {stores.map((defaultStore) => (
+                <option value={defaultStore._id} key={defaultStore._id}>
+                  {defaultStore.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+
         <br />
-        <button className="bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4">
+        <button className="bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
           Add New User
         </button>
       </fieldset>

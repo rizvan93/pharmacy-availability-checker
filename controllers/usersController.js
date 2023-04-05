@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Pharmacist = require("../models/Pharmacist");
 
 const EXPIRIES = {
   Admin: "6h",
@@ -20,13 +21,50 @@ const seed = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const newUser = new User(req.body);
-    await newUser.save();
-    res.status(201).json(newUser);
+    // console.log("body content: ", request.body);
+    const { name, userId, password, accountType, defaultStore } = req.body;
+
+    if (accountType === "Pharmacist") {
+      const newPharmacist = new Pharmacist({
+        name,
+        defaultStore: defaultStore,
+      });
+      newPharmacist.save();
+
+      const newUser = new User({
+        name,
+        userId,
+        password,
+        accountType,
+        accountId: newPharmacist._id,
+      });
+      newUser.save();
+      res.status(201).json({ message: "User created successfully", newUser });
+    } else if (accountType === "Admin") {
+      const newUser = new User({
+        name,
+        userId,
+        password,
+        accountType,
+      });
+      newUser.save();
+      res.status(201).json({ message: "User created successfully", newUser });
+    } else {
+      res.status(400).json({ message: "Invalid form details" });
+    }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ message: "Server error", error });
   }
 };
+
+//   try {
+//     const newUser = new User(req.body);
+//     await newUser.save();
+//     res.status(201).json(newUser);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
 
 const login = async (req, res) => {
   const { userId, password } = req.body;
