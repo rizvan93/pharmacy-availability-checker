@@ -20,17 +20,21 @@ const seed = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  console.log(JSON.stringify(req));
   if (!req.body.name)
-    res.status(400).json({ error: "New store must have a name" });
-  if (!req.body.location)
-    res.status(400).json({ error: "New store must have a location" });
+    return res.status(400).json({ error: "New store must have a name" });
+  if (!req.body.streetAddress)
+    return res
+      .status(400)
+      .json({ error: "New store must have a street address" });
 
+  if (!req.body.postalCode)
+    return res.status(400).json({ error: "New store must have a postal code" });
   try {
     const newStore = await Store.create(req.body);
+
     res.status(200).json(newStore);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 };
 

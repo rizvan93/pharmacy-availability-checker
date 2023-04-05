@@ -16,8 +16,6 @@ const StoreForm = () => {
 
     const createStore = async () => {
       const token = localStorage.getItem("token");
-      console.log(token)
-      console.log(form)
       const response = await fetch("/api/stores", {
         method: "POST",
         headers: {
@@ -26,7 +24,6 @@ const StoreForm = () => {
         },
       body: JSON.stringify(form),
       });
-      console.log("response", response)
       if (response.ok) {
         navigate("/stores");
       } else {
