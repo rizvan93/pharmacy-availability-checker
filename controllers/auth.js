@@ -14,7 +14,7 @@ const isAuth = (authorized) => (req, res, next) => {
     authorized.includes(verifiedUser.accountType) ||
     authorized.includes("*")
   ) {
-    req.headers.authorization = { user: verifiedUser };
+    req.headers.authorization = verifiedUser;
     next();
   } else {
     res.send(404).json({ message: "unauthorized" });
@@ -24,7 +24,7 @@ const isAuth = (authorized) => (req, res, next) => {
 const isUser = (req, res, next) => {
   if (!AUTHENTICATE) return next();
 
-  const { user } = req.headers.authorization;
+  const user = req.headers.authorization;
   const { id } = req.params;
 
   if (id === user.accountId || !AUTHENTICATE) {

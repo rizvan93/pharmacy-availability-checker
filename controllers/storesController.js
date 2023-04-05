@@ -1,5 +1,4 @@
 const Store = require("../models/Store");
-const Pharmacist = require("../models/Pharmacist");
 
 const seed = async (req, res) => {
   try {
@@ -43,11 +42,35 @@ const show = async (req, res) => {
 };
 
 const index = async (req, res) => {
+  const user = req.headers.authorization;
+
+  if (user.accountType === "Admin") {
+    try {
+      const stores = await Store.find({});
+      return res.status(200).json(stores);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  }
+
+  const { field, fieldId } = req.query;
   try {
-    const stores = await Store.find({});
-    res.status(200).json(stores);
+    if (field === "medicines") {
+      const stores = await Store.find({});
+      if (!stores) {
+        return res.status(404).json({ message: "invalid query" });
+      }
+    } else if (field === "pharmacists") {
+      const stores = await Store.find({
+        pharmacists: { $exists: true, $not: { $size: 0 } },
+      });
+
+      return res.status(200).json(stores);
+    } else {
+      return res.status(404).json({ message: "invalid query" });
+    }
   } catch (error) {
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 };
 
@@ -67,7 +90,8 @@ const update = async (req, res) => {
   console.log(updatedStore);
 
   try {
-    if (!updatedStore) return res.status(400).json({ error: "error updating" });
+    if (!updatedStore)
+      return res.status(400).json({ message: "error updating" });
     const store = await Store.findByIdAndUpdate(id, updatedStore, {
       new: true,
     });
@@ -81,7 +105,7 @@ const update = async (req, res) => {
 //-------------------------------------------Pharmacist
 const checkIn = async (req, res) => {
   try {
-    const pharmacist = req.params.id; //token.user
+    const pharmacist = req.params.id;
     const store = await Store.findById(req.body.storeId);
 
     if (!store) {
@@ -94,7 +118,7 @@ const checkIn = async (req, res) => {
     res.status(200).json({ message: "Check-in successful" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server Error", error });
+    res.status(500).json(error);
   }
 };
 
