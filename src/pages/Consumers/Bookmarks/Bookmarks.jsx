@@ -54,7 +54,7 @@ export default function Bookmarks() {
 
   return (
     <div>
-      <h2>Consumer Details</h2>
+      <h2 className="mt-20">Consumer Details</h2>
       {consumer ? (
         <>
           <p>Email: {consumer.email}</p>
