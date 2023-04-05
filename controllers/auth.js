@@ -5,7 +5,9 @@ const isAuth = (authorized) => (req, res, next) => {
   if (!AUTHENTICATE) return next();
 
   const authorization = req.headers.authorization;
+  console.log("authorization", authorization);
   const token = authorization.split(",")[1];
+  console.log("token: ", token);
 
   const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
   if (authorized.includes(verifiedUser.accountType)) {
