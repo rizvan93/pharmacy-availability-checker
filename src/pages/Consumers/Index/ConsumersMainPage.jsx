@@ -1,19 +1,30 @@
-import BotttomNavBar from "../../../components/ConsumerNavBar/BottomNavBar";
-import TopNavBar from "../../../components/ConsumerNavBar/TopNavBar";
 import WatsonMedi from "../../../../src/assets/WatsonMedi.png";
 import WatsonPharm from "../../../../src/assets/WatsonPharm.png";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function ConsumersMainPage() {
+export default function ConsumersMainPage({ user, setUser, setHome }) {
+  useEffect(() => {
+    setHome(true);
+  }, []);
+
   return (
-    <div className="bg-wAqua-10 min-h-screen">
-      <TopNavBar backButton={false} />
+    <div className="min-h-screen bg-wAqua-10">
       <br />
 
-      <div className="container mx-auto p-4 flex flex-col justify-center items-center">
-      <div className="bg-white rounded-lg shadow-md p-4 mb-4"><img src={WatsonMedi} width="800"/></div>
-      <div className="bg-white rounded-lg shadow-md p-4"><img src={WatsonPharm} width="800"/></div>
+      <div className="container mx-auto flex flex-col items-center justify-center p-4">
+        <div className="m-4 rounded-tl-2xl bg-white p-4 shadow-md">
+          <Link to="/consumers/pharmacists">
+            <img src={WatsonMedi} width="800" />
+          </Link>
+        </div>
+
+        <div className="rounded-tl-2xl bg-white p-4 shadow-md">
+          <Link to="/consumers/medicines">
+            <img src={WatsonPharm} width="800" />
+          </Link>
+        </div>
       </div>
-      <BotttomNavBar />
     </div>
   );
 }

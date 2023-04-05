@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import LoggedInOptions from "./LoggedInOptions";
 
-export default function NavBar({ user }) {
+export default function NavBar({ user, setUser }) {
+  const [dropdown, setDropdown] = useState(false)
+
+  const handleDropdown = () => {
+    setDropdown(!dropdown);
+  };
+
   return (
     <div className="bg-wAqua text-wAqua-5 py-6 text-center">
       <div className="container mx-auto">
@@ -20,10 +28,15 @@ export default function NavBar({ user }) {
             Medicine
           </Link>
         </nav>
-        <span className="inline-block float-right mr-3">
+        <span className="inline-block float-right mr-3" onClick={handleDropdown}>
           Welcome, {user?.name}!
         </span>
+        {dropdown ? (
+          <ul className="absolute right-0 top-12 text-wAqua-5 rounded-md shadow-md py-1" >
+            <LoggedInOptions setUser={setUser} />
+          </ul>
+        ):null}
       </div>
-    </div>
+    </div>  
   );
 }

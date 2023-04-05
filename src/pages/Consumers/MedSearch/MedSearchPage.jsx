@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import BotttomNavBar from "../../../components/ConsumerNavBar/BottomNavBar";
-import TopNavBar from "../../../components/ConsumerNavBar/TopNavBar";
 import MedCard from "./MedCard";
 import MedNameForm from "./MedNameForm";
 import MedSelectForm from "./MedSelectForm";
 
 const DISPLAY_LIMIT = 20;
 
-const MedAvailability = () => {
-  const [medicines, setMedicines] = useState(null);
+const MedSearchPage = ({ setHome }) => {
+  useEffect(() => {
+    setHome(false);
+  }, []);
 
+  const [medicines, setMedicines] = useState(null);
   const [medicinesFilteredForm, setMedicinesFilteredForm] = useState(null);
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const MedAvailability = () => {
 
   return (
     <>
-      <TopNavBar backButton={true} />
       <h1>Medicine availability</h1>;
       <MedNameForm setMedicines={setMedicines} />
       <MedSelectForm
@@ -52,9 +52,8 @@ const MedAvailability = () => {
       {medicinesFilteredQuantity?.map((m) => (
         <MedCard medicine={m} toTitleCase={toTitleCase} key={m._id} />
       ))}
-      <BotttomNavBar />
     </>
   );
 };
 
-export default MedAvailability;
+export default MedSearchPage;
