@@ -24,7 +24,9 @@ function App() {
   return (
     <div className="App">
       <div>
+      {user && (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
         <NavBar user={user} />
+      ) : null}
         <br />
         <Routes>
           <Route path="/login" element={<AuthPage setUser={setUser} />} />

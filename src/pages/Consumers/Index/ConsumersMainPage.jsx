@@ -11,20 +11,22 @@ export default function ConsumersMainPage() {
       <br />
 
       <div className="container mx-auto p-4 flex flex-col justify-center items-center">
-      <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+      <div className="bg-white rounded-tl-2xl shadow-md p-4 m-4">
         <Link to="/consumers/pharmacists">
           <img src={WatsonMedi} width="800"/>
         </Link>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="bg-white rounded-tl-2xl shadow-md p-4">
         <Link to="/consumers/medicines">
           <img src={WatsonPharm} width="800"/>
         </Link>
       </div>
       
       </div>
+      <div className="pb-16">
       <BotttomNavBar />
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useState } from "react"
 import userLogo from "../../../src/assets/user.png";
 import infoLogo from "../../../src/assets/info.png";
 import WatsonLogo from "../../../src/assets/WatsonLogo.png";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 export default function TopNavBar({ user, backButton }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function TopNavBar({ user, backButton }) {
   };
 
   return (
-    <div className="bg-white py-3 fixed inset-x-0 top-0">
+    <div className="bg-white py-3 fixed inset-x-0 top-0 px-4">
 
       <div className="container mx-auto flex justify-between items-center">
         {backButton ? (
@@ -28,16 +29,21 @@ export default function TopNavBar({ user, backButton }) {
 
         <img src={WatsonLogo} className="inline-block" width="80"/>
 
-       <div >
+       <div className="relative">
         <img src={userLogo} width="40" onClick={handleDropdown}/>
         {dropdown ? (
-          <ul className="absolute right-0 bg-white border border-gray-200 mt-5">
+          <ul className="absolute bg-white border border-gray-200 mt-5 ">
+          { user ? (
+            <li><LogoutButton /></li>
+              ) : (
+                <>
           <li><Link to="/login" className="block px-4 py-2 text-wAqua hover:bg-gray-100">Log In</Link></li>
-          <li><Link to="/signup" className="block px-4 py-2 text-wAqua hover:bg-gray-100">Sign Up</Link></li>
+          <li><Link to="/" className="block px-4 py-2 text-wAqua hover:bg-gray-100">Sign Up</Link></li>
+          </>
+          )}
           </ul>
         ) : null }
         </div>
-       
         </div>
       </div>
   
