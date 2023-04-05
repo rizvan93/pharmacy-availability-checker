@@ -3,7 +3,7 @@ import WatsonPharm from "../../../../src/assets/WatsonPharm.png";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function ConsumersMainPage({ setHome }) {
+export default function ConsumersMainPage({ user, setUser, setHome }) {
   useEffect(() => {
     setHome(true);
   }, []);
