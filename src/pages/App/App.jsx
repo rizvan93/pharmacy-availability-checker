@@ -12,6 +12,7 @@ import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
 const AUTHENTICATE = true;
+
 const ACCOUNT = {
   accountType: "Consumer",
   accountId: "642b8cb5f100db08d0114496",
@@ -44,7 +45,7 @@ function App() {
           <Route path="/stores/*" element={<StoresRouter user={user} />} />
           <Route
             path="/consumers/*"
-            element={<ConsumersRouter user={user} />}
+            element={<ConsumersRouter user={user} setUser={setUser} />}
           />
           <Route
             path="/medicines/*"

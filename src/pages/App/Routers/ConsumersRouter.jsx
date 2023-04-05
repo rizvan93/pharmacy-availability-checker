@@ -8,12 +8,12 @@ import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailability
 import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
 
-const ConsumersRouter = ({ user }) => {
+const ConsumersRouter = ({ user, setUser }) => {
   const [home, setHome] = useState(true);
 
   return (
     <>
-      <TopNavBar backButton={!home} user={user} />
+      <TopNavBar backButton={!home} user={user} setUser={setUser} />
       <Routes>
         <Route path="/new" element={<ConsumerSignUpPage setHome={setHome} />} />
         <Route
