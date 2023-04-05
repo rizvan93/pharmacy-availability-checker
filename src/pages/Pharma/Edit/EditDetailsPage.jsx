@@ -12,8 +12,13 @@ export default function EditDetailsPage() {
 
   useEffect(() => {
     const getPharmacist = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const res = await fetch(`/api/pharmacists/${id}`);
+        const res = await fetch(`/api/pharmacists/${id}`, {
+          headers: {
+            Authorization: ["bearer", token],
+          },
+        });
         const data = await res.json();
         setPharmacist(data);
         console.log("pharmacist: ", pharmacist);
@@ -53,11 +58,13 @@ export default function EditDetailsPage() {
     console.log("handle submit");
 
     const putPharmacist = async () => {
+      const token = localStorage.getItem("token");
       try {
         const res = await fetch(`/api/pharmacists/${id}`, {
           method: "PUT",
           body: JSON.stringify(pharmacist),
           headers: {
+            Authorization: ["bearer", token],
             "Content-Type": "application/json",
           },
         });
@@ -92,6 +99,7 @@ export default function EditDetailsPage() {
           {stores.map((store) => (
             <option
               value={store.name}
+              key={store._id}
               selected={store.name === pharmacist.defaultStore.name}
             >
               {store.name}

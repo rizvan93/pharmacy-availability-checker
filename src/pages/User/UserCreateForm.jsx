@@ -29,7 +29,6 @@ const UserCreateForm = () => {
         body: JSON.stringify(user),
       });
       if (response.ok) {
-        await response.json;
         navigate("/users");
       } else {
         console.log("unable to create");
