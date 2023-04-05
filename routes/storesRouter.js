@@ -3,8 +3,7 @@ const router = express.Router();
 const storesController = require("../controllers/storesController");
 const { isAuth } = require("../controllers/auth");
 
-
-// router.get("/seed", storesController.seed);
+router.get("/seed", storesController.seed);
 
 router.post("/", isAuth(["Admin"]), storesController.create);
 router.get(
