@@ -7,6 +7,7 @@ import ConsumerSignUpPage from "../../Consumers/Create/ConsumerSignUpPage";
 import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailabilityPage";
 import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
+import Bookmarks from "../../Consumers/Bookmarks/Bookmarks";
 
 const ConsumersRouter = ({ user, setUser }) => {
   const [home, setHome] = useState(true);
@@ -38,6 +39,7 @@ const ConsumersRouter = ({ user, setUser }) => {
             />
           }
         />
+        <Route path="/bookmarks" element={<Bookmarks />} />
       </Routes>
       <BottomNavBar />
     </>

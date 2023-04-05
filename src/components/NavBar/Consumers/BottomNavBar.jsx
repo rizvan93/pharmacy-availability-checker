@@ -23,7 +23,7 @@ export default function BotttomNavBar() {
           MEDICINE AVAILABILITY
         </Link>
         <Link
-          to="/consumers/bookmark"
+          to="/consumers/bookmarks"
           className="px-3 py-2 hover:border-t-2 hover:border-wAqua hover:text-wAqua"
         >
           Bookmarks

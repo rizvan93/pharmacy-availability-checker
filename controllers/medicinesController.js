@@ -95,10 +95,24 @@ const update = async (req, res) => {
   }
 };
 
+const show = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const medicine = await Medicine.findById(id);
+    if (medicine) {
+      return res.status(200).json(medicine);
+    }
+    return res.status(404).json({ error: "Consumer not found" });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   create,
   seed,
   index,
   delete: deleteMedicine,
   update,
+  show,
 };

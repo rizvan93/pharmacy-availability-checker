@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const AUTHENTICATE = true;
+const AUTHENTICATE = false;
 
 const isAuth = (authorized) => (req, res, next) => {
   if (!AUTHENTICATE) return next();

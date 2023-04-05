@@ -81,8 +81,22 @@ const update = async (req, res) => {
   }
 };
 
+const show = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const store = await Consumer.findById(id);
+    if (store) {
+      return res.status(200).json(store);
+    }
+    return res.status(404).json({ error: "Consumer not found" });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   create,
   update,
   seed,
+  show,
 };
