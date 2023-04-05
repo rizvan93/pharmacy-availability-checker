@@ -13,7 +13,7 @@ const ConsumersRouter = ({ user, setUser }) => {
 
   return (
     <>
-      <TopNavBar backButton={!home} user={user} />
+      <TopNavBar backButton={!home} user={user} setUser={setUser} />
       <Routes>
         <Route path="/new" element={<ConsumerSignUpPage setHome={setHome} />} />
         <Route
