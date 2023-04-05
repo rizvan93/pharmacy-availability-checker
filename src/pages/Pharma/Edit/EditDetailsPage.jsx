@@ -64,9 +64,9 @@ export default function EditDetailsPage() {
           method: "PUT",
           body: JSON.stringify(pharmacist),
           headers: {
+            Authorization: ["bearer", token],
             "Content-Type": "application/json",
           },
-          Authorization: ["bearer", token],
         });
         const data = await res.json();
         console.log("updatedpharmacist: ", data);
