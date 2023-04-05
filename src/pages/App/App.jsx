@@ -11,7 +11,7 @@ import ConsumersRouter from "./Routers/ConsumersRouter";
 import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
-const AUTHENTICATE = true;
+const AUTHENTICATE = false;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,7 +22,7 @@ function App() {
       setUser(decoded);
     }
     if (!AUTHENTICATE) {
-      setUser({ accountType: "Consumer" });
+      setUser({ accountType: "Admin" });
     }
   }, []);
 

@@ -1,48 +1,58 @@
 const Pharmacist = require("../models/Pharmacist");
 const Store = require("../models/Store");
-const User = require("../models/User");
 
 const seed = async (req, res) => {
   try {
-    // const newStore = await Store.create({
-    //   name: "Orchard Ion",
-    //   location: "Orchard Road",
-    //   pharmacists: [newPharmacist._id],
-    // });
-    // const newPharmacist = await Pharmacist.create({
-    //   name: "Kelly Lee",
-    //   defaultStore: newStore._id,
-    //   checkedInStore: null,
-    // });
-    // const newUser = await User.create({
-    //   userId: "kellylee@gmail.com",
-    //   password: "1234",
-    //   accountType: "Pharmacist",
-    //   accountId: newPharmacist._id,
-    // });
-    const newStore = await Store.create({
-      name: "Paragon",
-      location: "Orchard Road",
-    });
     const newPharmacist = await Pharmacist.create({
-      name: "Mike Loh",
-      defaultStore: newStore._id,
-      checkedInStore: null,
+      _id: "64269b9f2cf242496159be2f",
+      name: "Sun",
+      defaultStore: "64269b592cf242496159be27",
     });
-    const newUser = await User.create({
-      userId: "mikeloh@gmail.com",
-      password: "1234",
-      accountType: "Pharmacist",
-      accountId: newPharmacist._id,
-    });
-    res.status(200).json(newUser);
+    res.status(200).json(newPharmacist);
   } catch (error) {
-    console.error(error);
-    console.log(error);
     res.status(500).json({ error });
   }
 };
 
-const edit = async (req, res) => {};
+const show = async (req, res) => {
+  try {
+    const pharmacist = await Pharmacist.findById(req.params.id).populate(
+      "defaultStore"
+    );
+    if (!pharmacist) {
+      res.status(404).json({ message: "Pharmacist not found" });
+    } else {
+      res.status(200).json(pharmacist);
+    }
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
 
-module.exports = { seed, edit };
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, defaultStore } = req.body;
+
+    const updatedPharmacist = await Pharmacist.findByIdAndUpdate(
+      id,
+      { name },
+      { new: true }
+    );
+
+    const store = await Store.findOne({ name: defaultStore });
+    updatedPharmacist.defaultStore = store._id;
+    await updatedPharmacist.save();
+
+    res.status(200).json({ updatedPharmacist });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
+};
+
+module.exports = {
+  seed,
+  show,
+  update,
+};

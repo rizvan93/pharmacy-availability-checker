@@ -15,19 +15,6 @@ const HOME_PAGES = {
     const id = decoded.accountId;
     return `/pharmacists/${id}`;
   },
-  Consumer: () => {
-    return "/";
-  },
-  Admin: () => {
-    return "/users";
-  },
-  Pharmacist: () => {
-    const token = localStorage.getItem("token");
-    const decoded = jwt_decode(token);
-    const id = decoded.accountId;
-
-    return `/pharmacists/${id}`;
-  },
 };
 const LoginForm = ({ setUser }) => {
   const [loginAttempt, setLoginAttempt] = useState({

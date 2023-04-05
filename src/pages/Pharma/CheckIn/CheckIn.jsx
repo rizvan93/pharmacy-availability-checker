@@ -1,66 +1,60 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-
 export default function CheckIn() {
-  const { id } = useParams();
+  const { id } = useParams(); // get the id parameter from the URL
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState("");
   const [pharmacist, setPharmacist] = useState(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const decodedToken = jwt_decode(token);
-    const pharmacistId = decodedToken.user._id;
-
-    fetch(`/api/pharmacists/${pharmacistId}`, {
+    fetch(`/api/pharmacists/${id}`, {
       headers: {
         Authorization: ["bearer", token],
       },
-    })
+    }) // use the id parameter in the fetch URL
       .then((response) => response.json())
       .then((data) => setPharmacist(data))
       .catch((error) => console.error(error));
-
     fetch("/api/stores")
       .then((response) => response.json())
       .then((data) => setStores(data))
       .catch((error) => console.error(error));
-  }, [id]);
-
+  }, [id]); // add id as a dependency of the useEffect hook
   const handleSelectStore = (event) => {
     setSelectedStore(event.target.value);
   };
-
-  const handleCheckIn = () => {
-    const token = localStorage.getItem("token");
-    fetch(`/api/stores/pharmacists/${selectedStore}/checkin`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: ["bearer", token],
-      },
-      body: JSON.stringify({ storeId: selectedStore }),
+const handleCheckIn = () => {
+  const token = localStorage.getItem("token");
+  fetch(`/api/stores/${selectedStore}/pharmacists/${id}/checkin`, {
+  // fetch(`/api/stores/pharmacists/${id}/checkin`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: ["bearer", token],
+    },
+    body: JSON.stringify({ pharmacistId: id }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Checked in successfully!");
+        navigate(`/pharmacists/${id}`);
+      } else {
+        alert("Failed to check in!");
+      }
     })
-      .then((response) => {
-        if (response.ok) {
-          alert("Checked in successfully!");
-        } else {
-          alert("Failed to check in!");
-        }
-      })
-      .catch((error) => console.error(error));
-  };
-
+    .catch((error) => console.error(error));
+};
   if (!pharmacist) {
     return <p>Loading...</p>;
   }
-
   return (
     <>
-      <h1>Check In Page</h1>
+      <Link to={`/pharmacists/${id}/edit`}>
+        <button>Edit Details</button>
+      </Link>
+      <h1>Check In</h1>
       <p>Pharmacist: {pharmacist.name}</p>
       <label>
         Select a store:
@@ -75,10 +69,6 @@ export default function CheckIn() {
       </label>
       <br />
       <button onClick={handleCheckIn}>Check In</button>
-      <br />
-            <Link to={`/pharmacists/${id}/edit`}>
-        <button>Edit Details</button>
-      </Link>
     </>
   );
 }

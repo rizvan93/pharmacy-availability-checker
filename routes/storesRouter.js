@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const storesController = require("../controllers/storesController");
-const isAuth = require("../controllers/auth");
+const { isAuth } = require("../controllers/auth");
+
 
 // router.get("/seed", storesController.seed);
 
@@ -16,10 +17,10 @@ router.get("/", storesController.index);
 router.delete("/:id", isAuth(["Admin"]), storesController.delete);
 router.put("/:id", isAuth(["Admin"]), storesController.update);
 
-// Check-in the pharmacist into selected store
+// Check-in the pharmacist into selected store------////
 router.put(
-  "/pharmacists/:id/checkin",
-  isAuth(["Pharmacist"]),
+  "/:storeId/pharmacists/:id/checkin",
+  // isAuth(["Pharmacist"]),
   storesController.checkIn
 );
 // Checkout the pharmacist from the store

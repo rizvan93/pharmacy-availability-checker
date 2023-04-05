@@ -80,7 +80,7 @@ const update = async (req, res) => {
 const checkIn = async (req, res) => {
   try {
     const pharmacist = req.params.id; //token.user
-    const store = await Store.findById(req.body.storeId);
+    const store = await Store.findById(req.params.storeId); //------------
 
     if (!store) {
       return res.status(404).json({ message: "Store not found" });
