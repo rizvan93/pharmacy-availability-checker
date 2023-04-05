@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthPage from "../AuthPage/AuthPage";
-import NavBar from "../../components/NavBar/NavBar";
+import NavBar from "../../components/NavBar/AdminNavBar";
 import jwt_decode from "jwt-decode";
 import "./App.css";
 
@@ -11,7 +11,7 @@ import ConsumersRouter from "./Routers/ConsumersRouter";
 import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
-const AUTHENTICATE = true
+const AUTHENTICATE = true;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -20,18 +20,19 @@ function App() {
     if (token) {
       const decoded = jwt_decode(token);
       setUser(decoded);
-    } 
+    }
     if (!AUTHENTICATE) {
-      setUser({accountType:"Consumer"})
+      setUser({ accountType: "Consumer" });
     }
   }, []);
 
   return (
     <div className="App">
       <div>
-      {user && (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
-        <NavBar user={user} />
-      ) : null}
+        {user &&
+        (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
+          <NavBar user={user} />
+        ) : null}
         <br />
         <Routes>
           <Route path="/login" element={<AuthPage setUser={setUser} />} />
@@ -49,10 +50,13 @@ function App() {
             path="/pharmacists/*"
             element={<PharmacistsRouter user={user} />}
           />
-          <Route path="/*" element={<ConsumersRouter user={user} setUser={setUser} />} />
+          <Route
+            path="/*"
+            element={<ConsumersRouter user={user} setUser={setUser} />}
+          />
         </Routes>
       </div>
-    </div>  
+    </div>
   );
 }
 
