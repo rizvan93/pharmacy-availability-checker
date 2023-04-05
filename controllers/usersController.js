@@ -69,9 +69,7 @@ const create = async (req, res) => {
 const login = async (req, res) => {
   const { userId, password } = req.body;
   const userAttempt = { userId, password };
-  console.log(userAttempt)
-  const users = await User.find({})
-  console.log(users)
+
   try {
     const user = await User.findOne({ userId: userAttempt.userId });
     if (!user) {

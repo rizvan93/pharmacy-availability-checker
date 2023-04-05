@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import userLogo from "../../../assets/user.png";
 import infoLogo from "../../../assets/info.png";
