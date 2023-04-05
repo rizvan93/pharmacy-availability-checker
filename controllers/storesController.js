@@ -4,7 +4,13 @@ const seed = async (req, res) => {
   try {
     const newStore = await Store.create({
       name: "Store 1",
-      location: "ttt",
+      streetAddress: "123 Main Street",
+      unitNumber: "01-23",
+      postalCode: "123456",
+      lat: 1.3521,
+      lon: 103.8198,
+      pharmacists: [],
+      stocks: [],
     });
     res.status(200).json(newStore);
   } catch (error) {
@@ -22,9 +28,10 @@ const create = async (req, res) => {
 
   try {
     const newStore = await Store.create(req.body);
+
     res.status(200).json(newStore);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 };
 
@@ -142,8 +149,8 @@ const update = async (req, res) => {
 //-------------------------------------------Pharmacist
 const checkIn = async (req, res) => {
   try {
-    const pharmacist = req.params.id;
-    const store = await Store.findById(req.body.storeId);
+    const pharmacist = req.params.id; //token.user
+    const store = await Store.findById(req.params.storeId); //------------
 
     if (!store) {
       return res.status(404).json({ message: "Store not found" });
