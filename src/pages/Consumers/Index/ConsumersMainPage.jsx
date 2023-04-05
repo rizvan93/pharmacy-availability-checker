@@ -4,10 +4,10 @@ import WatsonMedi from "../../../../src/assets/WatsonMedi.png";
 import WatsonPharm from "../../../../src/assets/WatsonPharm.png";
 import { Link } from "react-router-dom";
 
-export default function ConsumersMainPage() {
+export default function ConsumersMainPage({user, setUser}) {
   return (
     <div className="bg-wAqua-10 min-h-screen">
-      <TopNavBar backButton={false} />
+      <TopNavBar backButton={false} user={user} setUser={setUser}/>
       <br />
 
       <div className="container mx-auto p-4 flex flex-col justify-center items-center">

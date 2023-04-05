@@ -11,7 +11,7 @@ import ConsumersRouter from "./Routers/ConsumersRouter";
 import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
-const AUTHENTICATE = false
+const AUTHENTICATE = true
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,10 +49,10 @@ function App() {
             path="/pharmacists/*"
             element={<PharmacistsRouter user={user} />}
           />
-          <Route path="/*" element={<ConsumersRouter user={user} />} />
+          <Route path="/*" element={<ConsumersRouter user={user} setUser={setUser} />} />
         </Routes>
       </div>
-    </div>
+    </div>  
   );
 }
 

@@ -5,14 +5,14 @@ import PharmAvailabilityPage from "../../Consumers/PharmAvailability/PharmAvaila
 import ConsumerSignUpPage from "../../Consumers/Create/ConsumerSignUpPage";
 import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailabilityPage";
 
-const ConsumersRouter = () => {
+const ConsumersRouter = ({user, setUser}) => {
   return (
     <Routes>
       <Route path="/new" element={<ConsumerSignUpPage />} />
       <Route path="/pharmacists" element={<PharmAvailabilityPage />} />
       <Route path="/medicines" element={<MedSearchPage />} />
       <Route path="/medicines/:id" element={<MedAvailabilityPage />} />
-      <Route path="/*" element={<ConsumersMainPage />} />
+      <Route path="/*" element={<ConsumersMainPage user={user} setUser={setUser} />} />
     </Routes>
   );
 };

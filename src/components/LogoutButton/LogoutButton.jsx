@@ -1,26 +1,16 @@
-export default function LogoutButton() {
+import { useNavigate } from "react-router-dom";
+
+export default function LogoutButton({setUser}) {
+  const navigate = useNavigate();
 
     const handleLogout = async () => {
-      try {
-        const response = await fetch('/api/users/logout', {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem("token")}`,
-          }
-        });
-        if (response.ok) {
           localStorage.removeItem("token");
           setUser(null);
-          navigate("/login");
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
+          navigate("/");
+    }
     return (
       <button onClick={handleLogout}>Logout</button>
     );
   };
+
  

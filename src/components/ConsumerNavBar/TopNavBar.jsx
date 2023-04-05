@@ -5,7 +5,7 @@ import infoLogo from "../../../src/assets/info.png";
 import WatsonLogo from "../../../src/assets/WatsonLogo.png";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
-export default function TopNavBar({ user, backButton }) {
+export default function TopNavBar({ user, backButton, setUser }) {
   const navigate = useNavigate();
   const [dropdown, setDropdown] = useState(false);
 
@@ -34,7 +34,7 @@ export default function TopNavBar({ user, backButton }) {
         {dropdown ? (
           <ul className="absolute bg-white border border-gray-200 mt-5 ">
           { user ? (
-            <li><LogoutButton /></li>
+            <li><LogoutButton setUser={setUser}/></li>
               ) : (
                 <>
           <li><Link to="/login" className="block px-4 py-2 text-wAqua hover:bg-gray-100">Log In</Link></li>
