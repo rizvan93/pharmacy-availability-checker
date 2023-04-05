@@ -3,9 +3,17 @@ export default function MedicineCard({ medicine }) {
     <>
       <div className="">
         {/* <p>Name: {medicine.name}</p> */}
-        <p>Form: {medicine.form}</p>
-        <p>Quantity: {medicine.quantity}</p>
-        <p>strength: {medicine.strength}</p>
+        <p>
+          <span className="font-semibold">Form: </span> {medicine.form}
+        </p>
+        <p>
+          <span className="font-semibold">Quantity: </span>
+          {medicine.quantity}
+        </p>
+        <p>
+          <span className="font-semibold">strength: </span>
+          {medicine.strength}
+        </p>
       </div>
     </>
   );
