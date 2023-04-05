@@ -5,8 +5,9 @@ const MedSelectForm = ({ medicines, setMedicines, field, toTitleCase }) => {
   const options = Array.from(uniqueOptions);
 
   const handleChange = (event) => {
-    const option = event.target.value;
-    setMedicines(medicines.filter((m) => m[field] === option));
+    const option = event.target.value.toLowerCase();
+    const filtered = medicines.filter((m) => m[field] === option);
+    setMedicines(filtered);
   };
 
   return (

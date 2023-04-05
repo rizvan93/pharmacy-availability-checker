@@ -13,7 +13,7 @@ const seed = async (req, res) => {
     name: "Admin",
     userId: "admin",
     password: "password",
-    accountType: "admin",
+    accountType: "Admin",
   });
   res.status(200).json(newUser);
 };

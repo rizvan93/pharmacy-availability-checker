@@ -11,6 +11,8 @@ import ConsumersRouter from "./Routers/ConsumersRouter";
 import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
+const AUTHENTICATE = false
+
 function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -18,6 +20,9 @@ function App() {
     if (token) {
       const decoded = jwt_decode(token);
       setUser(decoded);
+    } 
+    if (!AUTHENTICATE) {
+      setUser({accountType:"Consumer"})
     }
   }, []);
 
