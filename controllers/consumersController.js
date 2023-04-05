@@ -1,8 +1,10 @@
 const Consumer = require("../models/Consumer");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 
-const SALT_ROUNDS = 10;
+const BOOKMARKS = {
+  medicines: "bookmarkedMedicines",
+  pharmacists: "bookmarkedPharmacists",
+};
 
 // const show = (req, res) => {
 //   res.status(200).json({ message: "show consumer" });
@@ -51,62 +53,29 @@ const create = async (req, res) => {
   }
 };
 
-const updateBookmarkedMedicines = async (req, res) => {
-  const { consumerId } = req.params;
-  const { medicineId } = req.body;
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { bookmarkId, field } = req.body;
 
   try {
-    const consumer = await Consumer.findById(consumerId);
-    const bookmarkedMedicines = consumer.bookmarkedMedicines;
-
-    // check if the medicineId already exists in the array
-    const index = bookmarkedMedicines.indexOf(medicineId);
-
-    if (index === -1) {
-      // if the medicineId does not exist, add it to the array
-      bookmarkedMedicines.push(medicineId);
-    } else {
+    const consumer = await Consumer.findById(id);
+    const bookmarks = consumer[BOOKMARKS[field]];
+    console.log(bookmarks);
+    if (bookmarks.includes(bookmarkId)) {
+      console.log(`remove ${bookmarkId}`);
       // if the medicineId exists, remove it from the array
-      const updatedBookmarkedMedicines = bookmarkedMedicines.filter(
-        (id) => id !== medicineId
-      );
-      consumer.bookmarkedMedicines = updatedBookmarkedMedicines;
-    }
-
-    const updatedConsumer = await consumer.save();
-    res.json(updatedConsumer);
-  } catch (error) {
-    res.status(500).json({ message: "Server Error" });
-  }
-};
-
-//   res.status(200).json({ message: "updated Bookedmarked Medicines" });
-// };
-
-const updateBookmarkedPharmacists = async (req, res) => {
-  const { consumerId } = req.params;
-  const { medicineId } = req.body;
-
-  try {
-    const consumer = await Consumer.findById(consumerId);
-    const bookmarkedPharmacists = consumer.bookmarkedPharmacists;
-
-    // check if the medicineId already exists in the array
-    const index = bookmarkedPharmacists.indexOf(medicineId);
-
-    if (index === -1) {
-      // if the medicineId does not exist, add it to the array
-      bookmarkedPharmacists.push(medicineId);
+      bookmarks.forEach((bookmark) => {
+        console.log(bookmark.toString());
+      });
+      const newBookmarks = bookmarks.filter((b) => b.toString() !== bookmarkId);
+      consumer[BOOKMARKS[field]] = newBookmarks;
     } else {
-      // if the medicineId exists, remove it from the array
-      const updatedBookmarkedPharmacists = bookmarkedPharmacists.filter(
-        (id) => id !== medicineId
-      );
-      consumer.bookmarkedPharmacists = updatedBookmarkedPharmacists;
+      console.log(`add ${bookmarkId}`);
+      // if the medicineId does not exist, add it to the array
+      bookmarks.push(bookmarkId);
     }
-
     const updatedConsumer = await consumer.save();
-    res.json(updatedConsumer);
+    res.status(200).json(updatedConsumer);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }
@@ -114,7 +83,6 @@ const updateBookmarkedPharmacists = async (req, res) => {
 
 module.exports = {
   create,
-  updateBookmarkedMedicines,
-  updateBookmarkedPharmacists,
+  update,
   seed,
 };

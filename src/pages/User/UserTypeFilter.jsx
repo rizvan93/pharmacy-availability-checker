@@ -14,6 +14,7 @@ export default function UserTypeFilter({ handleFilter }) {
     <option value="">All Roles</option>
     <option value="Pharmacist">Pharmacist</option>
     <option value="Admin">Admin</option>
+    <option value="Consumer">Consumer</option>
     </select>
     </div>
 

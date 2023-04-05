@@ -36,6 +36,7 @@ const LoginForm = ({ setUser }) => {
         body: JSON.stringify(loginAttempt),
       });
       const data = await response.json();
+      console.log(data)
       localStorage.setItem("token", data);
       const decodedUser = jwt_decode(data);
       setUser(decodedUser);

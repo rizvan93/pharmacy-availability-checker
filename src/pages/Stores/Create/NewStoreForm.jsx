@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import StoreParticularsFieldset from "../components/StoreParticularsFieldset";
 
 const StoreForm = () => {
   const [form, setForm] = useState({
     name: "",
-    location: "",
+    streetAddress: "",
+    unitNumber: "",
+    postalCode: "",
   });
   const navigate = useNavigate();
 
@@ -31,31 +34,10 @@ const StoreForm = () => {
     createStore();
   };
 
-  const handleChange = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>
-        <label>
-          Name:{" "}
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Location:{" "}
-          <input
-            name="location"
-            value={form.location}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <StoreParticularsFieldset form={form} setForm={setForm} />
         <button>Add Store</button>
       </fieldset>
     </form>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import StoreParticularsFieldset from "../components/StoreParticularsFieldset";
 import MedicineStockForm from "./MedicineStockForm";
 
 const EditStoreForm = ({ store, setStore }) => {
@@ -39,28 +40,11 @@ const EditStoreForm = ({ store, setStore }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <formfield>
+        <fieldset>
           <legend>Store Particulars</legend>
-          <label>
-            Name:{" "}
-            <input
-              name="name"
-              value={store?.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Location:{" "}
-            <input
-              name="location"
-              value={store?.location}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </formfield>
-        <formfield>
+          <StoreParticularsFieldset form={store} setForm={setStore} />
+        </fieldset>
+        <fieldset>
           <legend>Stocks</legend>
           {medicines?.map((medicine) => (
             <MedicineStockForm
@@ -70,7 +54,7 @@ const EditStoreForm = ({ store, setStore }) => {
               setStore={setStore}
             />
           ))}
-        </formfield>
+        </fieldset>
         <button>UPDATE STORE</button>
       </form>
     </>

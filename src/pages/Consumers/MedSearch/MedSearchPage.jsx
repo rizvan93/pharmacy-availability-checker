@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
-import BotttomNavBar from "../../../components/ConsumerNavBar/BottomNavBar";
-import TopNavBar from "../../../components/ConsumerNavBar/TopNavBar";
 import MedCard from "./MedCard";
 import MedNameForm from "./MedNameForm";
 import MedSelectForm from "./MedSelectForm";
 
-const MedAvailability = () => {
-  const [medicines, setMedicines] = useState(null);
+const DISPLAY_LIMIT = 20;
 
-  const [medicinesFilteredForm, setMedicinesFilteredForm] = useState(null);
+const MedSearchPage = ({ setHome }) => {
   useEffect(() => {
-    setMedicinesFilteredForm(medicines);
+    setHome(false);
+  }, []);
+
+  const [medicines, setMedicines] = useState(null);
+  const [medicinesFilteredForm, setMedicinesFilteredForm] = useState(null);
+
+  useEffect(() => {
+    if (medicines?.length < DISPLAY_LIMIT) {
+      setMedicinesFilteredForm(medicines);
+    }
   }, [medicines]);
 
   const [medicinesFilteredQuantity, setMedicinesFilteredQuantity] =
     useState(null);
+
   useEffect(() => {
-    setMedicinesFilteredQuantity(medicinesFilteredForm);
+    if (medicinesFilteredForm?.length < DISPLAY_LIMIT)
+      setMedicinesFilteredQuantity(medicinesFilteredForm);
   }, [medicinesFilteredForm]);
 
   const toTitleCase = (str) => {
@@ -27,7 +35,6 @@ const MedAvailability = () => {
 
   return (
     <>
-      <TopNavBar backButton={true} />
       <h1>Medicine availability</h1>;
       <MedNameForm setMedicines={setMedicines} />
       <MedSelectForm
@@ -45,9 +52,8 @@ const MedAvailability = () => {
       {medicinesFilteredQuantity?.map((m) => (
         <MedCard medicine={m} toTitleCase={toTitleCase} key={m._id} />
       ))}
-      <BotttomNavBar />
     </>
   );
 };
 
-export default MedAvailability;
+export default MedSearchPage;
