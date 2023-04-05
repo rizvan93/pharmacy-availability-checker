@@ -13,7 +13,7 @@ const MedNameForm = ({ setMedicines }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Name/Brand:
+        Name/Brand:{" "}
         <input
           name="name"
           value={name}
@@ -21,7 +21,7 @@ const MedNameForm = ({ setMedicines }) => {
           onChange={(e) => setName(e.target.value)}
         />
       </label>
-      <button>Search</button>
+      <button>Search Medicines</button>
     </form>
   );
 };

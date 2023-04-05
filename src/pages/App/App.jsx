@@ -11,7 +11,7 @@ import ConsumersRouter from "./Routers/ConsumersRouter";
 import MedicinesRouter from "./Routers/MedicinesRouter";
 import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
-const AUTHENTICATE = true;
+const AUTHENTICATE = false;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,7 +31,7 @@ function App() {
       <div>
         {user &&
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
-          <NavBar user={user} setUser={setUser}/>
+          <NavBar user={user} setUser={setUser} />
         ) : null}
         <br />
         <Routes>

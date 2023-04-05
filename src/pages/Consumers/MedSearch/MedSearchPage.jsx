@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MedCard from "./MedCard";
 import MedNameForm from "./MedNameForm";
 import MedSelectForm from "./MedSelectForm";
+import PostalCodeForm from "./PostalCodeForm";
 
 const DISPLAY_LIMIT = 20;
 
@@ -52,6 +53,7 @@ const MedSearchPage = ({ setHome }) => {
       {medicinesFilteredQuantity?.map((m) => (
         <MedCard medicine={m} toTitleCase={toTitleCase} key={m._id} />
       ))}
+      <PostalCodeForm />
     </>
   );
 };
