@@ -8,7 +8,7 @@ import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailability
 import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
 
-const ConsumersRouter = ({ user, setUser }) => {
+const ConsumersRouter = ({ user }) => {
   const [home, setHome] = useState(true);
 
   return (
@@ -22,22 +22,13 @@ const ConsumersRouter = ({ user, setUser }) => {
         />
         <Route
           path="/medicines"
-          element={<MedSearchPage setHome={setHome} />}
+          element={<MedSearchPage setHome={setHome} user={user} />}
         />
         <Route
           path="/medicines/:id"
           element={<MedAvailabilityPage setHome={setHome} />}
         />
-        <Route
-          path="/*"
-          element={
-            <ConsumersMainPage
-              user={user}
-              setUser={setUser}
-              setHome={setHome}
-            />
-          }
-        />
+        <Route path="/*" element={<ConsumersMainPage setHome={setHome} />} />
       </Routes>
       <BottomNavBar />
     </>
