@@ -28,12 +28,6 @@ const MedSearchPage = ({ setHome, user }) => {
       setMedicinesFilteredQuantity(medicinesFilteredForm);
   }, [medicinesFilteredForm]);
 
-  const toTitleCase = (str) => {
-    return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  }; //taken from https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
-
   return (
     <>
       <h1>Medicine availability</h1>;
@@ -42,21 +36,14 @@ const MedSearchPage = ({ setHome, user }) => {
         medicines={medicines}
         field="form"
         setMedicines={setMedicinesFilteredForm}
-        toTitleCase={toTitleCase}
       />
       <MedSelectForm
         medicines={medicinesFilteredForm}
         field="quantity"
         setMedicines={setMedicinesFilteredQuantity}
-        toTitleCase={toTitleCase}
       />
       {medicinesFilteredQuantity?.map((m) => (
-        <MedCard
-          medicine={m}
-          toTitleCase={toTitleCase}
-          key={m._id}
-          id={user?.accountId}
-        />
+        <MedCard medicine={m} key={m._id} id={user?.accountId} />
       ))}
       <hr />
       <PostalCodeForm />

@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import BookmarkButton from "./BookmarkButton";
+import { toTitleCase } from "../../../../utilities/utilities";
 
-const MedCard = ({ medicine, toTitleCase, id }) => {
+const MedCard = ({ medicine, id }) => {
   return (
-    <Link to={`/consumers/availability/medicines/${medicine._id}`}>
-      <>
-        <hr />
+    <>
+      <hr />
+      <Link to={`/consumers/availability/medicines/${medicine._id}`}>
         <h4>{toTitleCase(medicine.name)}</h4>
         <p>{toTitleCase(medicine.manufacturer)}</p>
         <p>{toTitleCase(medicine.quantity)}</p>
-        {id ? (
-          <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
-        ) : null}
-      </>
-    </Link>
+      </Link>
+      {id ? (
+        <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
+      ) : null}
+    </>
   );
 };
 

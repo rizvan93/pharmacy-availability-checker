@@ -102,7 +102,7 @@ const show = async (req, res) => {
     if (medicine) {
       return res.status(200).json(medicine);
     }
-    return res.status(404).json({ error: "Consumer not found" });
+    return res.status(404).json({ error: "Medicine not found" });
   } catch (error) {
     res.status(500).json({ error });
   }
