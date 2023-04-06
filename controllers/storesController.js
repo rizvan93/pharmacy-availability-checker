@@ -71,6 +71,9 @@ const index = async (req, res) => {
 
 const queryAvailability = async (req, res) => {
   const { field, fieldId } = req.query;
+  console.log(field, ": ", fieldId);
+
+  const stores = [];
   try {
     if (field === "medicines") {
       const storesProjection = {
@@ -80,26 +83,22 @@ const queryAvailability = async (req, res) => {
         postalCode: 1,
         lat: 1,
         lon: 1,
+        pharmacists: 1,
         "stocks.$": 1,
       };
 
-      const stores = await Store.find(
+      const storesWithMedicine = await Store.find(
         {
           "stocks.medicine": fieldId,
           "stocks.quantity": { $gt: 0 },
         },
         storesProjection
       );
-      if (!stores) {
-        return res.status(404).json({ message: "invalid query" });
+
+      if (!storesWithMedicine) {
+        return res.status(404).json({ message: "No available medicines" });
       }
-
-      // stores.forEach((store, index)=> {
-      //   if store.
-      //   stores[index].stockLevel =
-      // })
-
-      return res.status(200).json(stores);
+      stores.push(...storesWithMedicine);
     } else if (field === "pharmacists") {
       const storesProjection = {
         stocks: 0,
@@ -114,18 +113,24 @@ const queryAvailability = async (req, res) => {
         __v: 0,
       };
 
-      const stores = await Store.find(
+      const storesWithPharmacist = await Store.find(
         {
           pharmacists: { $exists: true, $not: { $size: 0 } },
         },
         storesProjection
       ).populate("pharmacists", pharmacistsProjection);
 
-      return res.status(200).json(stores);
+      if (!storesWithPharmacist) {
+        return res.status(404).json({ message: "No available pharmacists" });
+      }
+      stores.push(...storesWithPharmacist);
     } else {
       return res.status(404).json({ message: "invalid query" });
     }
+    console.log(stores);
+    return res.status(200).json(stores);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error });
   }
 };
@@ -161,50 +166,33 @@ const update = async (req, res) => {
 //-------------------------------------------Pharmacist
 const checkIn = async (req, res) => {
   try {
-    const pharmacist = req.params.id; //token.user
-    const store = await Store.findById(req.params.storeId); //------------
-
+    const pharmacistId = req.params.id; //token.user
+    const store = await Store.findById(req.params.storeId);
     if (!store) {
       return res.status(404).json({ message: "Store not found" });
     }
-
-    store.pharmacists.addToSet(pharmacist);
+    // Find the store where the pharmacist is currently checked in
+    const currentStore = await Store.findOne({ pharmacists: pharmacistId });
+    if (currentStore) {
+      // If the pharmacist is already checked into a store, remove them from that store
+      currentStore.pharmacists.pull(pharmacistId);
+      await currentStore.save();
+    }
+    // Check the pharmacist into the new store
+    store.pharmacists.addToSet(pharmacistId);
     await store.save();
-
     res.status(200).json({ message: "Check-in successful" });
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 };
-
 const showCheckedInStore = async (req, res) => {
   const pharmacistId = req.params.id;
-
   const store = await Store.findOne({
     pharmacists: pharmacistId,
   });
-
   res.status(200).json(store);
-};
-
-const checkoutPharmacist = async (req, res) => {
-  try {
-    const pharmacist = req.params.id;
-    const store = await Store.findById(req.body.storeId);
-
-    if (!store) {
-      return res.status(404).json({ message: "Store not found" });
-    }
-
-    store.pharmacists.pull(pharmacist);
-    await store.save();
-
-    res.status(200).json({ message: "Check-out successful" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server Error", error });
-  }
 };
 
 module.exports = {
@@ -216,7 +204,7 @@ module.exports = {
   queryAvailability,
   seed,
 
-  checkIn, // Pharmacist to checkin to selected store
-  showCheckedInStore, // CheckOut page of currently check-ed in store
-  checkoutPharmacist, // Checkout button
+  checkIn, 
+  showCheckedInStore, 
+
 };
