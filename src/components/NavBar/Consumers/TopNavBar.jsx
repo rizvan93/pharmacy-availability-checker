@@ -32,7 +32,7 @@ export default function TopNavBar({ user, backButton, setUser }) {
         <div className="relative">
           <img src={userLogo} width="40" onClick={handleDropdown} />
           {dropdown ? (
-            <ul className="absolute mt-5 border border-gray-200 bg-white ">
+            <ul className="absolute bg-white whitespace-nowrap">
               {user ? (
                 <LoggedInOptions setUser={setUser} />
               ) : (
