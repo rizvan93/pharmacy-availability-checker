@@ -17,16 +17,19 @@ const StoreMarker = ({ store }) => {
 
   useEffect(() => {
     if (store.pharmacists) {
-      if (store.stock >= LOW_STOCK_LEVEL && store.pharmacists > 0) {
+      if (store.stock >= LOW_STOCK_LEVEL && store.pharmacists.length > 0) {
         setIcon(medPharmIcon);
         setPopUp(["Medicine Available", "Pharmacist Available"]);
       } else if (store.stock > 0 && store.pharmacists > 0) {
         setIcon(lowMedPharmIcon);
         setPopUp(["Low Stock", "Pharmacist Available"]);
-      } else if (store.stock >= LOW_STOCK_LEVEL && store.pharmacists === 0) {
+      } else if (
+        store.stock >= LOW_STOCK_LEVEL &&
+        store.pharmacists.length === 0
+      ) {
         setIcon(medNoPharmIcon);
         setPopUp("Medicine Available", "Pharmacist Not Available");
-      } else if (store.stock > 0 && store.pharmacists === 0) {
+      } else if (store.stock > 0 && store.pharmacists.length === 0) {
         setIcon(lowMedNoPharmIcon);
         setPopUp(["Low Stock", "Pharmacist Not Available"]);
       }

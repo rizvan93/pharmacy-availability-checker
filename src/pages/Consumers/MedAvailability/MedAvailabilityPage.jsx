@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import StoreMap from "../components/StoreMap";
+import StoreCard from "./StoreCard";
+import { toTitleCase } from "../../../utilities/utilities";
 
 const MedAvailabilityPage = ({ setHome }) => {
   useEffect(() => {
@@ -9,6 +11,7 @@ const MedAvailabilityPage = ({ setHome }) => {
 
   const { field, id } = useParams();
   const [stores, setStores] = useState();
+  const [display, setDisplay] = useState("");
 
   useEffect(() => {
     const getStores = async () => {
@@ -19,25 +22,36 @@ const MedAvailabilityPage = ({ setHome }) => {
       if (!data.error) {
         setStores(
           data.map((s) => {
-            const store = { name: s.name, lat: s.lat, lon: s.lon, _id: s._id };
-            if (field === "medicines") {
-              store.stock = s.stocks[0].quantity;
-              store.pharmacists = s.pharmacists.length;
-            }
+            const store = {
+              ...s,
+              stocks: s?.stocks[0].quantity,
+            };
             return store;
           })
         );
       }
     };
     getStores();
-  }, [id]);
 
-  console.log(stores);
+    if (field === "medicines") {
+      setDisplay("medicine name");
+      const getMedicine = async () => {
+        console.log("before fetch");
+        const response = await fetch(`/api/medicines/${id}`);
+        const data = await response.json();
+        setDisplay(toTitleCase(data.name));
+      };
+      getMedicine();
+    }
+  }, [field, id]);
 
   return (
     <>
-      <h1>Display Availability in Stores</h1>
+      {display ? <h1>{display}</h1> : null}
       <StoreMap stores={stores} />
+      {stores?.map((s) => (
+        <StoreCard store={s} key={s._id} />
+      ))}
     </>
   );
 };
