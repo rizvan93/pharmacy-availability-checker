@@ -59,6 +59,9 @@ const index = async (req, res) => {
 
 const queryAvailability = async (req, res) => {
   const { field, fieldId } = req.query;
+  console.log(field, ": ", fieldId);
+
+  const stores = [];
   try {
     if (field === "medicines") {
       const storesProjection = {
@@ -68,26 +71,22 @@ const queryAvailability = async (req, res) => {
         postalCode: 1,
         lat: 1,
         lon: 1,
+        pharmacists: 1,
         "stocks.$": 1,
       };
 
-      const stores = await Store.find(
+      const storesWithMedicine = await Store.find(
         {
           "stocks.medicine": fieldId,
           "stocks.quantity": { $gt: 0 },
         },
         storesProjection
       );
-      if (!stores) {
-        return res.status(404).json({ message: "invalid query" });
+
+      if (!storesWithMedicine) {
+        return res.status(404).json({ message: "No available medicines" });
       }
-
-      // stores.forEach((store, index)=> {
-      //   if store.
-      //   stores[index].stockLevel =
-      // })
-
-      return res.status(200).json(stores);
+      stores.push(...storesWithMedicine);
     } else if (field === "pharmacists") {
       const storesProjection = {
         stocks: 0,
@@ -102,18 +101,24 @@ const queryAvailability = async (req, res) => {
         __v: 0,
       };
 
-      const stores = await Store.find(
+      const storesWithPharmacist = await Store.find(
         {
           pharmacists: { $exists: true, $not: { $size: 0 } },
         },
         storesProjection
       ).populate("pharmacists", pharmacistsProjection);
 
-      return res.status(200).json(stores);
+      if (!storesWithPharmacist) {
+        return res.status(404).json({ message: "No available pharmacists" });
+      }
+      stores.push(...storesWithPharmacist);
     } else {
       return res.status(404).json({ message: "invalid query" });
     }
+    console.log(stores);
+    return res.status(200).json(stores);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error });
   }
 };

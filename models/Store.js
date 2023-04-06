@@ -36,7 +36,6 @@ storeSchema.pre("save", async function (next) {
   );
   const data = await response.json();
   const geocode = data.find((d) => d.type === "postcode");
-  console.log(geocode);
   this.lat = geocode.lat;
   this.lon = geocode.lon;
   return next();
