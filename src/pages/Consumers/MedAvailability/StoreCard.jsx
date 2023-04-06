@@ -11,7 +11,7 @@ const StoreCard = ({ store }) => {
         <ul>
           Pharmacists Available:
           {store?.pharmacists.map((p) => (
-            <li>{p.name}</li>
+            <li key={p._id}>{p.name}</li>
           ))}
         </ul>
       ) : (

@@ -16,28 +16,32 @@ const StoreMarker = ({ store }) => {
   const [popUp, setPopUp] = useState([]);
 
   useEffect(() => {
-    if (store.pharmacists) {
-      if (store.stock >= LOW_STOCK_LEVEL && store.pharmacists.length > 0) {
+    if (store.stocks > 0) {
+      if (store.stocks >= LOW_STOCK_LEVEL && store.pharmacists.length > 0) {
         setIcon(medPharmIcon);
         setPopUp(["Medicine Available", "Pharmacist Available"]);
-      } else if (store.stock > 0 && store.pharmacists > 0) {
+      } else if (store.stocks > 0 && store.pharmacists.length > 0) {
         setIcon(lowMedPharmIcon);
         setPopUp(["Low Stock", "Pharmacist Available"]);
       } else if (
-        store.stock >= LOW_STOCK_LEVEL &&
+        store.stocks >= LOW_STOCK_LEVEL &&
         store.pharmacists.length === 0
       ) {
         setIcon(medNoPharmIcon);
         setPopUp("Medicine Available", "Pharmacist Not Available");
-      } else if (store.stock > 0 && store.pharmacists.length === 0) {
+      } else if (store.stocks > 0 && store.pharmacists.length === 0) {
         setIcon(lowMedNoPharmIcon);
         setPopUp(["Low Stock", "Pharmacist Not Available"]);
       }
-    } else {
+    } else if (store.pharmacists.length > 0) {
       setIcon(pharmIcon);
       setPopUp(["Pharmacist Available", ""]);
     }
   }, [store]);
+
+  const handleClick = () => {
+    //to sort array of stores and bubble current one up to top
+  };
 
   return (
     <Marker position={[store.lat, store.lon]} icon={icon}>
@@ -46,10 +50,9 @@ const StoreMarker = ({ store }) => {
         {/* <p>{store.streetAddress}</p>
         <p>{store?.unitNumber}</p>
         <p>{store.postalCode}</p> */}
-        <ul>
-          <li>{popUp[0]}</li>
-          <li>{popUp[1]}</li>
-        </ul>
+        {popUp[0]}
+        <br />
+        {popUp[1]}
       </Popup>
     </Marker>
   );
