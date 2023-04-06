@@ -13,9 +13,9 @@ const MedSelectForm = ({ medicines, setMedicines, field, toTitleCase }) => {
   return (
     <form>
       <label>
-        {field}:
+        {toTitleCase(field)}:{" "}
         <select onChange={handleChange}>
-          <option value="">Select {field}</option>
+          {options.length > 1 ? <option value="">Select {field}</option> : null}
           {options?.map((o, index) => (
             <MedSelectOption option={toTitleCase(o)} key={index} />
           ))}

@@ -1,11 +1,16 @@
 const Store = require("../models/Store");
-const Pharmacist = require("../models/Pharmacist");
 
 const seed = async (req, res) => {
   try {
     const newStore = await Store.create({
       name: "Store 1",
-      location: "ttt",
+      streetAddress: "123 Main Street",
+      unitNumber: "01-23",
+      postalCode: "123456",
+      lat: 1.3521,
+      lon: 103.8198,
+      pharmacists: [],
+      stocks: [],
     });
     res.status(200).json(newStore);
   } catch (error) {
@@ -23,9 +28,10 @@ const create = async (req, res) => {
 
   try {
     const newStore = await Store.create(req.body);
+
     res.status(200).json(newStore);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 };
 
@@ -45,9 +51,70 @@ const show = async (req, res) => {
 const index = async (req, res) => {
   try {
     const stores = await Store.find({});
-    res.status(200).json(stores);
+    return res.status(200).json(stores);
   } catch (error) {
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
+  }
+};
+
+const queryAvailability = async (req, res) => {
+  const { field, fieldId } = req.query;
+  try {
+    if (field === "medicines") {
+      const storesProjection = {
+        name: 1,
+        streetAddress: 1,
+        unitNumber: 1,
+        postalCode: 1,
+        lat: 1,
+        lon: 1,
+        "stocks.$": 1,
+      };
+
+      const stores = await Store.find(
+        {
+          "stocks.medicine": fieldId,
+          "stocks.quantity": { $gt: 0 },
+        },
+        storesProjection
+      );
+      if (!stores) {
+        return res.status(404).json({ message: "invalid query" });
+      }
+
+      // stores.forEach((store, index)=> {
+      //   if store.
+      //   stores[index].stockLevel =
+      // })
+
+      return res.status(200).json(stores);
+    } else if (field === "pharmacists") {
+      const storesProjection = {
+        stocks: 0,
+        createdAt: 0,
+        updatedAt: 0,
+        __v: 0,
+      };
+      const pharmacistsProjection = {
+        defaultStore: 0,
+        createdAt: 0,
+        updatedAt: 0,
+        __v: 0,
+      };
+
+      const stores = await Store.find(
+        {
+          pharmacists: { $exists: true, $not: { $size: 0 } },
+        },
+        storesProjection
+      ).populate("pharmacists", pharmacistsProjection);
+
+      return res.status(200).json(stores);
+    } else {
+      return res.status(404).json({ message: "invalid query" });
+    }
+  } catch (error) {
+    return res.status(500).json({ error });
   }
 };
 
@@ -67,7 +134,8 @@ const update = async (req, res) => {
   console.log(updatedStore);
 
   try {
-    if (!updatedStore) return res.status(400).json({ error: "error updating" });
+    if (!updatedStore)
+      return res.status(400).json({ message: "error updating" });
     const store = await Store.findByIdAndUpdate(id, updatedStore, {
       new: true,
     });
@@ -82,7 +150,7 @@ const update = async (req, res) => {
 const checkIn = async (req, res) => {
   try {
     const pharmacist = req.params.id; //token.user
-    const store = await Store.findById(req.body.storeId);
+    const store = await Store.findById(req.params.storeId); //------------
 
     if (!store) {
       return res.status(404).json({ message: "Store not found" });
@@ -94,7 +162,7 @@ const checkIn = async (req, res) => {
     res.status(200).json({ message: "Check-in successful" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server Error", error });
+    res.status(500).json(error);
   }
 };
 
@@ -133,6 +201,7 @@ module.exports = {
   index,
   delete: deleteStore,
   update,
+  queryAvailability,
   seed,
 
   checkIn, // Pharmacist to checkin to selected store

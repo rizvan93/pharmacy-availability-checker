@@ -13,6 +13,11 @@ import PharmacistsRouter from "./Routers/PharmacistsRouter";
 
 const AUTHENTICATE = true;
 
+const ACCOUNT = {
+  accountType: "Consumer",
+  accountId: "642b8cb5f100db08d0114496",
+};
+
 function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -22,7 +27,7 @@ function App() {
       setUser(decoded);
     }
     if (!AUTHENTICATE) {
-      setUser({ accountType: "Consumer" });
+      setUser(ACCOUNT);
     }
   }, []);
 
@@ -31,7 +36,7 @@ function App() {
       <div>
         {user &&
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
-          <NavBar user={user} setUser={setUser}/>
+          <NavBar user={user} setUser={setUser} />
         ) : null}
         <br />
         <Routes>
@@ -40,7 +45,7 @@ function App() {
           <Route path="/stores/*" element={<StoresRouter user={user} />} />
           <Route
             path="/consumers/*"
-            element={<ConsumersRouter user={user} />}
+            element={<ConsumersRouter user={user} setUser={setUser} />}
           />
           <Route
             path="/medicines/*"
