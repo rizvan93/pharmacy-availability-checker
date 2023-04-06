@@ -12,19 +12,13 @@ export default function EditDetailsPage() {
 
   useEffect(() => {
     const getPharmacist = async () => {
-      const token = localStorage.getItem("token");
       try {
-        const res = await fetch(`/api/pharmacists/${id}`, {
-          headers: {
-            Authorization: ["bearer", token],
-          },
-        });
+        const res = await fetch(`/api/pharmacists/${id}`);
         const data = await res.json();
         setPharmacist(data);
         console.log("pharmacist: ", pharmacist);
       } catch (error) {
         console.error(error);
-        res.status(500).json({ error });
       }
     };
     getPharmacist();
@@ -58,13 +52,11 @@ export default function EditDetailsPage() {
     console.log("handle submit");
 
     const putPharmacist = async () => {
-      const token = localStorage.getItem("token");
       try {
         const res = await fetch(`/api/pharmacists/${id}`, {
           method: "PUT",
           body: JSON.stringify(pharmacist),
           headers: {
-            Authorization: ["bearer", token],
             "Content-Type": "application/json",
           },
         });
@@ -73,44 +65,55 @@ export default function EditDetailsPage() {
         setUpdateStatus("Pharmacist details updated successfully.");
       } catch (error) {
         console.error(error);
-        res.status(500).json({ error });
       }
     };
     putPharmacist();
   };
 
   return (
-    <>
-      <Link to={`/pharmacists/${id}`}>
-        <button>Back</button>
-      </Link>
-      <br />
-      <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={pharmacist.name}
-          onChange={handleInputChange}
-        />
-        <br />
-        <label>Default Store:</label>
-        <select name="defaultStore" onChange={handleInputChange}>
-          {stores.map((store) => (
-            <option
-              value={store.name}
-              key={store._id}
-              selected={store.name === pharmacist.defaultStore.name}
+    <div className="bg-gray-100 min-h-screen">
+      <div className="max-w-md mx-auto py-8 px-4">
+        <Link to={`/pharmacists/${id}`}>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded mb-4">Back</button>
+        </Link>
+        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">Name:</label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              name="name"
+              value={pharmacist.name}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="defaultStore">Default Store:</label>
+            <select
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="defaultStore"
+              value={pharmacist.defaultStore.name}
+              onChange={handleInputChange}
             >
-              {store.name}
-            </option>
-          ))}
-        </select>
-        <br />
-        <button type="submit">Update</button>
-        <br />
-        {updateStatus && <p>{updateStatus}</p>}
-      </form>
-    </>
+              {stores.map((store) => (
+                <option key={store._id} value={store.name}>
+                  {store.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Update
+            </button>
+            {updateStatus && <p className="text-green-500 text-xs italic">{updateStatus}</p>}
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }

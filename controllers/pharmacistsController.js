@@ -51,8 +51,25 @@ const update = async (req, res) => {
   }
 };
 
+const checkoutPharmacist = async (req, res) => {
+  try {
+    const pharmacist = req.params.id;
+    const store = await Store.findById(req.body.storeId);
+    if (!store) {
+      return res.status(404).json({ message: "Store not found" });
+    }
+    store.pharmacists.pull(pharmacist);
+    await store.save();
+    res.status(200).json({ message: "Check-out successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error", error });
+  }
+};
+
 module.exports = {
   seed,
   show,
   update,
+  checkoutPharmacist, 
 };
