@@ -1,3 +1,5 @@
+import BookmarkButton from "../MedSearch/components/BookmarkButton";
+
 export default function MedicineCard({ medicine }) {
   return (
     <>
@@ -15,6 +17,7 @@ export default function MedicineCard({ medicine }) {
           {medicine.strength}
         </p>
       </div>
+      <BookmarkButton />
     </>
   );
 }

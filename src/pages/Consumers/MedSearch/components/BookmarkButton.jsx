@@ -36,9 +36,17 @@ const BookmarkButton = ({ id, fieldId, field }) => {
   };
 
   if (isBookmarked) {
-    return <button onClick={toggleBookmark}>REMOVE BOOKMARK</button>;
+    return (
+      <button onClick={toggleBookmark} className="bg-teal-200 p-1">
+        REMOVE BOOKMARK
+      </button>
+    );
   } else {
-    return <button onClick={toggleBookmark}>BOOKMARK</button>;
+    return (
+      <button onClick={toggleBookmark} className="bg-teal-200 p-1">
+        BOOKMARK
+      </button>
+    );
   }
 };
 

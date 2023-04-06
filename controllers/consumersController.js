@@ -15,7 +15,10 @@ const show = async (req, res) => {
   }
 
   try {
-    const consumer = await Consumer.findById(id);
+    const consumer = await Consumer.findById(id).populate([
+      "bookmarkedMedicines",
+      "bookmarkedPharmacists",
+    ]);
     if (!consumer) {
       return res.status(404).json({ message: "Invalid consumer" });
     }
