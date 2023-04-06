@@ -55,7 +55,7 @@ const MedSearchPage = ({ setHome, user }) => {
           medicine={m}
           toTitleCase={toTitleCase}
           key={m._id}
-          id={user.accountId}
+          id={user?.accountId}
         />
       ))}
       <hr />

@@ -9,7 +9,9 @@ const MedCard = ({ medicine, toTitleCase, id }) => {
         <h4>{toTitleCase(medicine.name)}</h4>
         <p>{toTitleCase(medicine.manufacturer)}</p>
         <p>{toTitleCase(medicine.quantity)}</p>
-        <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
+        {id ? (
+          <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
+        ) : null}
       </>
     </Link>
   );
