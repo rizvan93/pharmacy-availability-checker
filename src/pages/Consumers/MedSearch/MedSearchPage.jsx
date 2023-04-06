@@ -6,7 +6,7 @@ import PostalCodeForm from "./components/PostalCodeForm";
 
 const DISPLAY_LIMIT = 20;
 
-const MedSearchPage = ({ setHome }) => {
+const MedSearchPage = ({ setHome, user }) => {
   useEffect(() => {
     setHome(false);
   }, []);
@@ -51,7 +51,12 @@ const MedSearchPage = ({ setHome }) => {
         toTitleCase={toTitleCase}
       />
       {medicinesFilteredQuantity?.map((m) => (
-        <MedCard medicine={m} toTitleCase={toTitleCase} key={m._id} />
+        <MedCard
+          medicine={m}
+          toTitleCase={toTitleCase}
+          key={m._id}
+          id={user.accountId}
+        />
       ))}
       <hr />
       <PostalCodeForm />
