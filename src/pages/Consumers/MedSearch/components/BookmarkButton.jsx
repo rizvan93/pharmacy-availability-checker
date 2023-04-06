@@ -11,8 +11,11 @@ const BookmarkButton = ({ id, fieldId, field }) => {
           Authorization: ["bearer", token],
         },
       });
-      const bookmarks = await response.json();
-      console.log(bookmarks);
+      const data = await response.json();
+      const bookmarks = data.map((d) => d._id);
+      console.log("bookmarks: ", bookmarks);
+      console.log("bookmarks.includes(fieldId): ", bookmarks.includes(fieldId));
+      console.log("fieldId: ", fieldId);
       if (bookmarks.includes(fieldId)) {
         setIsBookmarked(true);
       }

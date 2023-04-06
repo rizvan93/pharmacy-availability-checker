@@ -17,35 +17,40 @@ export default function Bookmarks({ user }) {
     // if (token) {
     //   const decodedToken = jwt_decode(token);
     //   console.log("decodedToken: ", decodedToken);
-    async function fetchConsumerBookmarks() {
-      const medicinesResponse = await fetch(
-        `/api/consumers/${user.accountId}/?field=medicines`,
-        {
-          headers: {
-            Authorization: ["bearer", token],
-          },
-        }
-      );
+    const fetchConsumerBookmarks = async () => {
+      try {
+        const medicinesResponse = await fetch(
+          `/api/consumers/${user?.accountId}/?field=medicines`,
+          {
+            headers: {
+              Authorization: ["bearer", token],
+            },
+          }
+        );
 
-      const medicinesData = await medicinesResponse.json();
-      setBookmarkedMedicines(medicinesData);
-      const pharmacistsResponse = await fetch(
-        `/api/consumers/${user.accountId}/?field=pharmacists`,
-        {
-          headers: {
-            Authorization: ["bearer", token],
-          },
-        }
-      );
-      const pharmacistsData = await pharmacistsResponse.json();
-      setBookmarkedPharmacists(pharmacistsData);
+        const medicinesData = await medicinesResponse.json();
+        setBookmarkedMedicines(medicinesData);
+        const pharmacistsResponse = await fetch(
+          `/api/consumers/${user.accountId}/?field=pharmacists`,
+          {
+            headers: {
+              Authorization: ["bearer", token],
+            },
+          }
+        );
+        const pharmacistsData = await pharmacistsResponse.json();
+        setBookmarkedPharmacists(pharmacistsData);
+      } catch (error) {
+        console.error(error);
+      }
+
       // console.log("Response: ", response);
       // const data = await response.json();
       // console.log("Consumer: ", data);
       // setConsumer(data);
-    }
+    };
     fetchConsumerBookmarks();
-  }, []);
+  }, [user]);
 
   // useEffect(() => {
   //   if (consumer) {
@@ -101,7 +106,7 @@ export default function Bookmarks({ user }) {
           {bookmarkedMedicines.map((medicine) => (
             <div className="my-4" key={medicine._id}>
               <h3 className="font-bold">{medicine.name}</h3>
-              <MedicineCard medicine={medicine} />
+              <MedicineCard medicine={medicine} id={user.accountId} />
             </div>
           ))}
         </div>
