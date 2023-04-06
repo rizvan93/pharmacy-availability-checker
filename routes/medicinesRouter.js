@@ -3,7 +3,7 @@ const router = express.Router();
 const medicinesController = require("../controllers/medicinesController");
 const { isAuth } = require("../controllers/auth");
 
-router.get("/seed", medicinesController.seed);
+// router.get("/seed", medicinesController.seed);
 
 router.get("/", medicinesController.index);
 router.get("/:id", medicinesController.show);
