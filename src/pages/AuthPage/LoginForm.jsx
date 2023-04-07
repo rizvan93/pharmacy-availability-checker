@@ -51,23 +51,27 @@ const LoginForm = ({ setUser }) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Enter your email or user Id:
-        <input
+    <div>    
+    <input
           name="userId"
+          placeholder="Email or User ID"
           value={loginAttempt.userId}
           onChange={handleChange}
+          className="border border-wPurple-50 rounded py-1 px-14 mt-3 text-center"
         />
-      </label>
-      <label>
-        Password:
+    </div>
+    <div>
         <input
           name="password"
+          placeholder="Password"
           value={loginAttempt.password}
           onChange={handleChange}
+          className="border border-wPurple-50 rounded py-1 px-14 my-5 text-center" 
         />
-      </label>
-      <button>Login</button>
+     </div>
+     <div>
+      <button className="bg-wAqua text-white rounded-md px-5 py-2 w-full">Login</button>
+      </div>
     </form>
   );
 };
