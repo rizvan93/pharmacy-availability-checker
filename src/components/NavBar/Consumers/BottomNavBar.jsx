@@ -22,12 +22,14 @@ export default function BotttomNavBar({ user }) {
         >
           MEDICINE AVAILABILITY
         </Link>
-        <Link
-          to="/consumers/bookmarks"
-          className="px-3 py-2 hover:border-t-2 hover:border-wAqua hover:text-wAqua"
-        >
-          Bookmarks
-        </Link>
+        {user ? (
+          <Link
+            to="/consumers/bookmarks"
+            className="px-3 py-2 hover:border-t-2 hover:border-wAqua hover:text-wAqua"
+          >
+            Bookmarks
+          </Link>
+        ) : null}
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ const ConsumersRouter = ({ user, setUser }) => {
         />
         <Route path="/bookmarks" element={<Bookmarks />} />
       </Routes>
-      <BottomNavBar />
+      <BottomNavBar user={user} />
     </>
   );
 };
