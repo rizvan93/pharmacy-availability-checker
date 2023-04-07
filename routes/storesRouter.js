@@ -12,7 +12,7 @@ router.get(
 );
 router.get("/availability", storesController.queryAvailability);
 router.get("/:id", storesController.show);
-router.get("/", isAuth(["Admin"]), storesController.index);
+router.get("/", isAuth(["Admin", "Pharmacist"]), storesController.index);
 router.delete("/:id", isAuth(["Admin"]), storesController.delete);
 router.put("/:id", isAuth(["Admin"]), storesController.update);
 router.put(

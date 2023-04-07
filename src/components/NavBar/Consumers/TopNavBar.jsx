@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import userLogo from "../../../assets/user.png";
-import infoLogo from "../../../assets/info.png";
-import WatsonLogo from "../../../assets/WatsonLogo.png";
-import backIcon from "../../../assets/buttonIcons/back.png";
+import { userLogo, infoLogo, watsonsLogo, backIcon } from "./navBarIcons";
 import LoggedOutOptions from "../LoggedOutOptions";
 import LoggedInOptions from "../LoggedInOptions";
 
@@ -36,7 +33,7 @@ export default function TopNavBar({ user, backButton, setUser }) {
           )}
         </div>
 
-        <img src={WatsonLogo} className="inline-block max-h-10" />
+        <img src={watsonsLogo} className="inline-block max-h-10" />
 
         <div className="relative">
           <img src={userLogo} onClick={handleDropdown} className="max-h-10" />
