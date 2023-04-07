@@ -4,9 +4,16 @@ import watsonsLogo from "../../../assets/WatsonLogo.png";
 import backIcon from "../../../assets/buttonIcons/back.png";
 
 import homeIcon from "../../../assets/navBarIcons/Home.png";
+import homeSelectedIcon from "../../../assets/navBarIcons/HomeSelected.png";
+
 import medicineIcon from "../../../assets/navBarIcons/Medicine.png";
+import medicineSelectedIcon from "../../../assets/navBarIcons/MedicineSelected.png";
+
 import pharmacistIcon from "../../../assets/navBarIcons/Pharmacist.png";
+import pharmacistSelectedIcon from "../../../assets/navBarIcons/PharmacistSelected.png";
+
 import bookmarkIcon from "../../../assets/navBarIcons/Bookmark.png";
+import bookmarkSelectedIcon from "../../../assets/navBarIcons/BookmarkSelected.png";
 
 export {
   userLogo,
@@ -14,7 +21,11 @@ export {
   watsonsLogo,
   backIcon,
   homeIcon,
+  homeSelectedIcon,
   medicineIcon,
+  medicineSelectedIcon,
   pharmacistIcon,
+  pharmacistSelectedIcon,
   bookmarkIcon,
+  bookmarkSelectedIcon,
 };
