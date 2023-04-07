@@ -3,6 +3,7 @@ import { useState } from "react";
 import userLogo from "../../../assets/user.png";
 import infoLogo from "../../../assets/info.png";
 import WatsonLogo from "../../../assets/WatsonLogo.png";
+import backIcon from "../../../assets/buttonIcons/back.png";
 import LoggedOutOptions from "../LoggedOutOptions";
 import LoggedInOptions from "../LoggedInOptions";
 
@@ -18,21 +19,29 @@ export default function TopNavBar({ user, backButton, setUser }) {
     setDropdown(!dropdown);
   };
 
-  return (
-    <div className="fixed inset-x-0 top-0 bg-white px-4 py-3">
-      <div className="container mx-auto flex items-center justify-between">
-        {backButton ? (
-          <button onClick={handleBack}>BACK</button>
-        ) : (
-          <img src={infoLogo} width="40" />
-        )}
+  const background = backButton ? "bg-wAqua-5" : "bg-white";
 
-        <img src={WatsonLogo} className="inline-block" width="80" />
+  return (
+    <nav
+      className={`${background} fixed left-0 top-0 z-20 block w-full px-4 py-3`}
+    >
+      <div className="container mx-auto flex h-10 items-center justify-between">
+        <div className="w-10">
+          {backButton ? (
+            <button onClick={handleBack}>
+              <img className="h-10" src={backIcon} />
+            </button>
+          ) : (
+            <img src={infoLogo} className="max-h-10" />
+          )}
+        </div>
+
+        <img src={WatsonLogo} className="inline-block max-h-10" />
 
         <div className="relative">
-          <img src={userLogo} width="40" onClick={handleDropdown} />
+          <img src={userLogo} onClick={handleDropdown} className="max-h-10" />
           {dropdown ? (
-            <ul className="absolute bg-white whitespace-nowrap">
+            <ul className="absolute whitespace-nowrap bg-white">
               {user ? (
                 <LoggedInOptions setUser={setUser} />
               ) : (
@@ -42,6 +51,6 @@ export default function TopNavBar({ user, backButton, setUser }) {
           ) : null}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

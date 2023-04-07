@@ -1,21 +1,27 @@
+import { toTitleCase } from "../../../utilities/utilities";
+
 const StoreCard = ({ store }) => {
   return (
     <>
       <hr />
-      <h1>{store.name}</h1>
-      <p>{store.streetAddress}</p>
-      <p>{store?.unitNumber}</p>
-      <p>{store.postalCode}</p>
-      <p>Medicine Available</p>
+      <h1 className="text-lg font-bold">{store.name}</h1>
+      <div className="pl-3 leading-none text-gray-400">
+        <p>{toTitleCase(store.streetAddress)}</p>
+        <p>{store?.unitNumber}</p>
+        <p>{store.postalCode}</p>
+      </div>
+      <p className="text-wAqua">Medicine Available</p>
       {store.pharmacists.length > 0 ? (
-        <ul>
+        <ul className="text-wAqua">
           Pharmacists Available:
           {store?.pharmacists.map((p) => (
-            <li key={p._id}>{p.name}</li>
+            <li className="text-black" key={p._id}>
+              {toTitleCase(p.name)}
+            </li>
           ))}
         </ul>
       ) : (
-        <p>Pharmacist Not Available</p>
+        <p className="text-wRed">Pharmacist Not Available</p>
       )}
     </>
   );
