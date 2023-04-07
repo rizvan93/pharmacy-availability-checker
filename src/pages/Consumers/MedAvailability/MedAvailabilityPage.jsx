@@ -11,7 +11,7 @@ const MedAvailabilityPage = ({ setHome }) => {
 
   const { field, id } = useParams();
   const [stores, setStores] = useState();
-  const [display, setDisplay] = useState("");
+  const [display, setDisplay] = useState("Pharmacists");
 
   useEffect(() => {
     const getStores = async () => {
@@ -53,7 +53,7 @@ const MedAvailabilityPage = ({ setHome }) => {
       {display ? <h1>{display}</h1> : null}
       <StoreMap stores={stores} />
       {stores?.map((s) => (
-        <StoreCard store={s} key={s._id} />
+        <StoreCard store={s} key={s._id} field={field} />
       ))}
     </>
   );
