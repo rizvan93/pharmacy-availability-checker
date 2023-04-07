@@ -1,4 +1,5 @@
-const StoreCard = ({ store }) => {
+const StoreCard = ({ store, pharmacistName }) => {
+  
   return (
     <>
       <hr />
@@ -11,7 +12,7 @@ const StoreCard = ({ store }) => {
         <ul>
           Pharmacists Available:
           {store?.pharmacists.map((p) => (
-            <li key={p._id}>{p.name}</li>
+            <li key={p._id}>{pharmacistName ?`${pharmacistName}` : null}</li>
           ))}
         </ul>
       ) : (
