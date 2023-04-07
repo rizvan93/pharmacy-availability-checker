@@ -15,7 +15,7 @@ const Availability = ({ selected, field }) => {
   const selClass = "border-t-2 border-wAqua text-wAqua";
   const unselClass = "text-wAqua-50";
   return (
-    <button className={`justify-center ${selected ? selClass : unselClass}`}>
+    <button className={`${selected ? selClass : unselClass}`}>
       <div className="flex items-center space-x-0">
         <img src={selected ? icon.selected : icon.unselected} />
         <p className="text-left text-[10px]">
