@@ -5,8 +5,14 @@ export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log("token: ", token);
     const getStores = async () => {
-      const response = await fetch("/api/stores");
+      const response = await fetch("/api/stores", {
+        headers: {
+          Authorization: ["bearer", token],
+        },
+      });
       const data = await response.json();
       console.log("stores: ", data);
       setStores(data);
@@ -32,13 +38,14 @@ export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
                 } outlet.`
               : "Not available"}
           </div>
-          <button onClick={removePharmacist(pharmacist._id)}>
-            <BookmarkButton
-              id={id}
-              field="pharmacists"
-              fieldId={pharmacist._id}
-            />
-          </button>
+          {/* <button onClick={removePharmacist(pharmacist._id)}> */}
+          <BookmarkButton
+            id={id}
+            field="pharmacists"
+            fieldId={pharmacist._id}
+            removeItem={removePharmacist}
+          />
+          {/* </button> */}
         </div>
       </div>
     </>

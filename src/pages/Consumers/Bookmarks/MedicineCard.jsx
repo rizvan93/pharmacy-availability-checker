@@ -17,9 +17,14 @@ export default function MedicineCard({ medicine, id, removeMedicine }) {
           {medicine.strength}
         </p>
       </div>
-      <button onClick={removeMedicine(medicine._id)}>
-        <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
-      </button>
+      {/* <button onClick={removeMedicine(medicine._id)}> */}
+      <BookmarkButton
+        id={id}
+        field="medicines"
+        fieldId={medicine._id}
+        removeItem={removeMedicine}
+      />
+      {/* </button> */}
     </>
   );
 }

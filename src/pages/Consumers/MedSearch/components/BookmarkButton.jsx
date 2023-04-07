@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const BookmarkButton = ({ id, fieldId, field }) => {
+const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const BookmarkButton = ({ id, fieldId, field }) => {
     });
     if (response.ok) {
       setIsBookmarked(!isBookmarked);
+      removeItem(fieldId);
     }
   };
 
