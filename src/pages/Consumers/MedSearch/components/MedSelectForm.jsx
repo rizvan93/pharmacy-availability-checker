@@ -1,6 +1,7 @@
 import MedSelectOption from "./MedSelectOption";
+import { toTitleCase } from "../../../../utilities/utilities";
 
-const MedSelectForm = ({ medicines, setMedicines, field, toTitleCase }) => {
+const MedSelectForm = ({ medicines, setMedicines, field }) => {
   const uniqueOptions = new Set(medicines?.map((m) => m[field]));
   const options = Array.from(uniqueOptions);
 

@@ -41,7 +41,9 @@ export default function UserPage() {
     <div className="px-4 py-8">
       <div className="flex items-center justify-between">
         <UserTypeFilter handleFilter={handleFilter} />
-        <br />
+        <h1 className="font-sans text-3xl font-bold text-wPurple underline">
+          Users
+        </h1>
 
         <Link to="/users/new">
           <button className="inline-block rounded-full bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">

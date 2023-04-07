@@ -25,12 +25,17 @@ const StoresPage = () => {
 
   return (
     <>
-      <h1 className="font-sans text-3xl font-bold text-wPurple underline">
-        Stores
-      </h1>
-      <Link to="/stores/new">
-        <button>Add New</button>
-      </Link>
+      <div className="py- flex flex-row justify-between px-4 py-8">
+        <div className="w-20"></div>
+        <h1 className="font-sans text-3xl font-bold text-wPurple underline">
+          Stores
+        </h1>
+        <Link to="/stores/new">
+          <button className="inline-block rounded-full bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
+            Add New Store
+          </button>
+        </Link>
+      </div>
       <StoresTable stores={stores} removeFromStores={removeFromStores} />
     </>
   );

@@ -2,32 +2,56 @@ import { Route, Routes } from "react-router";
 import { useState } from "react";
 import ConsumersMainPage from "../../Consumers/Index/ConsumersMainPage";
 import MedSearchPage from "../../Consumers/MedSearch/MedSearchPage";
-import PharmAvailabilityPage from "../../Consumers/PharmAvailability/PharmAvailabilityPage";
 import ConsumerSignUpPage from "../../Consumers/Create/ConsumerSignUpPage";
-import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailabilityPage";
 import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
 import Bookmarks from "../../Consumers/Bookmarks/Bookmarks";
+import AvailabilityPage from "../../Consumers/AvailabilityPage/AvailaibilityPage";
 
 const ConsumersRouter = ({ user, setUser }) => {
   const [home, setHome] = useState(true);
+  const [page, setPage] = useState("home");
 
   return (
     <>
       <TopNavBar backButton={!home} user={user} setUser={setUser} />
       <Routes>
-        <Route path="/new" element={<ConsumerSignUpPage setHome={setHome} />} />
         <Route
-          path="/pharmacists"
-          element={<PharmAvailabilityPage setHome={setHome} />}
+          path="/new"
+          element={
+            <ConsumerSignUpPage
+              setHome={setHome}
+              setPage={() => {
+                setPage("");
+              }}
+            />
+          }
         />
         <Route
           path="/medicines"
-          element={<MedSearchPage setHome={setHome} user={user} />}
+          element={
+            <MedSearchPage
+              setHome={setHome}
+              user={user}
+              setPage={() => {
+                setPage("medicines");
+              }}
+            />
+          }
         />
         <Route
-          path="/medicines/:id"
-          element={<MedAvailabilityPage setHome={setHome} />}
+          path="/availability/:field/:id"
+          element={<AvailabilityPage setHome={setHome} setPage={setPage} />}
+        />
+        <Route
+          path="/bookmarks"
+          element={
+            <Bookmarks
+              setPage={() => {
+                setPage("bookmarks");
+              }}
+            />
+          }
         />
         <Route
           path="/*"
@@ -36,12 +60,14 @@ const ConsumersRouter = ({ user, setUser }) => {
               user={user}
               setUser={setUser}
               setHome={setHome}
+              setPage={() => {
+                setPage("home");
+              }}
             />
           }
         />
-        <Route path="/bookmarks" element={<Bookmarks />} />
       </Routes>
-      <BottomNavBar />
+      <BottomNavBar user={user} page={page} />
     </>
   );
 };

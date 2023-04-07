@@ -6,9 +6,10 @@ import PostalCodeForm from "./components/PostalCodeForm";
 
 const DISPLAY_LIMIT = 20;
 
-const MedSearchPage = ({ setHome, user }) => {
+const MedSearchPage = ({ setHome, user, setPage }) => {
   useEffect(() => {
     setHome(false);
+    setPage();
   }, []);
 
   const [medicines, setMedicines] = useState(null);
@@ -28,51 +29,26 @@ const MedSearchPage = ({ setHome, user }) => {
       setMedicinesFilteredQuantity(medicinesFilteredForm);
   }, [medicinesFilteredForm]);
 
-  const toTitleCase = (str) => {
-    return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  }; //taken from https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
-
   return (
-<div className="bg-wAqua-10 rounded-lg shadow-md border-gray-300 px-4 py-3 sm:p-8">
-  <h1 className="text-2xl font-bold mb-4">Medicine availability</h1>
-  <div className="mb-4">
-    <MedNameForm setMedicines={setMedicines} />
-  </div>
-
-  <div className="mb-4">
-    <MedSelectForm
-      medicines={medicines}
-      field="form"
-      setMedicines={setMedicinesFilteredForm}
-      toTitleCase={toTitleCase}
-    />
-  </div>
-
-  <div className="mb-4">
-    <MedSelectForm
-      medicines={medicinesFilteredForm}
-      field="quantity"
-      setMedicines={setMedicinesFilteredQuantity}
-      toTitleCase={toTitleCase}
-    />
-  </div>
-
-  {medicinesFilteredQuantity?.map((m) => (
-    <MedCard
-      medicine={m}
-      toTitleCase={toTitleCase}
-      key={m._id}
-      id={user.accountId}
-    />
-  ))}
-  <hr />
-
-  <div className="mb-4">
-    <PostalCodeForm />
-  </div>
-</div>
+    <>
+      <h1>Medicine availability</h1>;
+      <MedNameForm setMedicines={setMedicines} />
+      <MedSelectForm
+        medicines={medicines}
+        field="form"
+        setMedicines={setMedicinesFilteredForm}
+      />
+      <MedSelectForm
+        medicines={medicinesFilteredForm}
+        field="quantity"
+        setMedicines={setMedicinesFilteredQuantity}
+      />
+      {medicinesFilteredQuantity?.map((m) => (
+        <MedCard medicine={m} key={m._id} id={user?.accountId} />
+      ))}
+      <hr />
+      <PostalCodeForm />
+    </>
   );
 };
 

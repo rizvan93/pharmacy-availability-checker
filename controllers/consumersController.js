@@ -60,7 +60,6 @@ const create = async (req, res) => {
       accountType: "Consumer",
       accountId: newConsumer._id,
     };
-    console.log(user);
     const newUser = await User.create(user);
 
     res.status(200).json(newUser);
