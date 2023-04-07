@@ -35,32 +35,44 @@ const MedSearchPage = ({ setHome, user }) => {
   }; //taken from https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
 
   return (
-    <>
-      <h1>Medicine availability</h1>;
-      <MedNameForm setMedicines={setMedicines} />
-      <MedSelectForm
-        medicines={medicines}
-        field="form"
-        setMedicines={setMedicinesFilteredForm}
-        toTitleCase={toTitleCase}
-      />
-      <MedSelectForm
-        medicines={medicinesFilteredForm}
-        field="quantity"
-        setMedicines={setMedicinesFilteredQuantity}
-        toTitleCase={toTitleCase}
-      />
-      {medicinesFilteredQuantity?.map((m) => (
-        <MedCard
-          medicine={m}
-          toTitleCase={toTitleCase}
-          key={m._id}
-          id={user.accountId}
-        />
-      ))}
-      <hr />
-      <PostalCodeForm />
-    </>
+<div className="bg-wAqua-10 rounded-lg shadow-md border-gray-300 px-4 py-3 sm:p-8">
+  <h1 className="text-2xl font-bold mb-4">Medicine availability</h1>
+  <div className="mb-4">
+    <MedNameForm setMedicines={setMedicines} />
+  </div>
+
+  <div className="mb-4">
+    <MedSelectForm
+      medicines={medicines}
+      field="form"
+      setMedicines={setMedicinesFilteredForm}
+      toTitleCase={toTitleCase}
+    />
+  </div>
+
+  <div className="mb-4">
+    <MedSelectForm
+      medicines={medicinesFilteredForm}
+      field="quantity"
+      setMedicines={setMedicinesFilteredQuantity}
+      toTitleCase={toTitleCase}
+    />
+  </div>
+
+  {medicinesFilteredQuantity?.map((m) => (
+    <MedCard
+      medicine={m}
+      toTitleCase={toTitleCase}
+      key={m._id}
+      id={user.accountId}
+    />
+  ))}
+  <hr />
+
+  <div className="mb-4">
+    <PostalCodeForm />
+  </div>
+</div>
   );
 };
 

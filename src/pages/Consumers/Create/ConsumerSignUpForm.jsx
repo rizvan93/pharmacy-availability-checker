@@ -35,48 +35,36 @@ export default function ConsumerSignUpForm() {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
   return (
-    <form onSubmit={handleSubmit}
-    className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md">
-      <label>
-        Name:
-        <input name="name" 
-        value={newUser.name} 
-        onChange={handleChange} 
-        className=" border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2. dark:border-gray-600 dark:text-white"/>
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="userId"
-          value={newUser.userId}
-          onChange={handleChange}
-          className=" border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600"/>
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={newUser.password}
-          onChange={handleChange}
-          className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2. dark:border-gray-600 dark:text-white"
-        />
-      </label>
-      <label>
-        Confirm Password:
-        <input
-          type="password"
-          value={confirm}
-          className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2. dark:border-gray-600 dark:text-white"
-          onChange={(e) => {
-            setConfirm(e.target.value);
-          }}
-        />
-      </label>
-      <br />
-      <button type="submit" className="w-full text-white bg-wAqua font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register</button>
-    </form>
+<form onSubmit={handleSubmit} className="w-full bg-white rounded-lg shadow-md border-gray-300 md:mt-0 sm:max-w-md">
+  <div className="px-4 py-3 bg-wAqua-5 sm:p-6">
+    <div className="mb-4">
+      <label className="block text-gray-700 font-bold mb-2" htmlFor="name"></label>
+      <input name="name" value={newUser.name} onChange={handleChange} className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Enter your name" />
+    </div>
+
+    <div className="mb-3">
+      <label className="block text-gray-700 font-bold mb-2" htmlFor="userId"></label>
+      <input name="userId" type="email" value={newUser.userId} onChange={handleChange} className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userId" placeholder="Enter your email address" />
+    </div>
+
+    <div className="mb-3">
+      <label className="block text-gray-700 font-bold mb-2" htmlFor="password"></label>
+      <input name="password" type="password" value={newUser.password} onChange={handleChange} className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" placeholder="Enter a password" />
+    </div>
+
+    <div className="mb-3">
+      <label className="block text-gray-700 font-bold mb-2" htmlFor="confirm"></label>
+      <input type="password" value={confirm} onChange={(e) => { setConfirm(e.target.value); }} className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="confirm" placeholder="Confirm your password" />
+    </div>
+
+    <div className=" flex items-center justify-center">
+      <button type="submit" className="mt-1 inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-white bg-wAqua hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wAqua">
+        Register
+      </button>
+    </div>
+  </div>
+</form>
+
   );
 }
 

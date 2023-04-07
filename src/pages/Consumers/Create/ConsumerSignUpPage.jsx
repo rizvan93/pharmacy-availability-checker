@@ -6,12 +6,14 @@ export default function ConsumerSignUpPage({ setHome }) {
     setHome(true);
   }, []);
 
-  return (
-    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-    <div className="w-full bg-white grounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
-      <h2>New User Sign Up</h2>
-      <ConsumerSignUpForm />
-    </div>
-    </div>
-  );
+return (
+<div className="bg-wAqua-10 min-h-screen flex items-center justify-center px-4">
+  <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 mt-1">
+    <h1 className="text-3xl font-bold text-center mb-5">New User Sign Up</h1>
+    <ConsumerSignUpForm />
+  </div>
+</div>
+
+);
+
 }
