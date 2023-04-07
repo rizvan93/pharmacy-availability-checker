@@ -1,6 +1,6 @@
 import { toTitleCase } from "../../../utilities/utilities";
 
-const StoreCard = ({ store }) => {
+const StoreCard = ({ store, pharmacistName }) => {
   return (
     <>
       <hr />
@@ -16,7 +16,8 @@ const StoreCard = ({ store }) => {
           Pharmacists Available:
           {store?.pharmacists.map((p) => (
             <li className="text-black" key={p._id}>
-              {toTitleCase(p.name)}
+              {/*{toTitleCase(p.name)}*/}
+              {`${pharmacistName}`}
             </li>
           ))}
         </ul>

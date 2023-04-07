@@ -10,44 +10,30 @@ export default function PharmAvailability({ setHome }) {
 
   const { id } = useParams();
   const [stores, setStores] = useState();
-  const [display, setDisplay] = useState("");
 
   useEffect(() => {
     const getStores = async () => {
       const response = await fetch("/api/stores");
       const data = await response.json();
       if (!data.error) {
-        setStores(
-          data.map((s) => {
-            const store = {
-              ...s,
-              stocks: s?.stocks[0],
-            };
-            return store;
-          })
-        );
+        const storesWithPharmacists = data.map((s) => ({
+          ...s,
+          pharmacists: s?.pharmacists,
+        }));
+        setStores(storesWithPharmacists);
       }
     };
     getStores();
-
-   
-      const getPharmacists= async () => {
-        const response = await fetch(`/api/pharmacists/${id}`);
-        const data = await response.json();
-        setDisplay(data.name);
-      };
-      getPharmacists();
-    }, [id]);
-
+  }, [id]);
 
   return (
-    <>
-   
-      {display ? <h1>{display}</h1> : null}
+    <div className="py-20">
       <StoreMap stores={stores} />
+      <div className="ml-5">
       {stores?.map((s) => (
-        <StoreCard store={s} key={s._id} pharmacistName={s.pharmacists} />
+        <StoreCard store={s} key={s._id} pharmacistName={s.pharmacists}/>
       ))}
-    </>
+      </div>
+    </div>
   )
 }
