@@ -4,7 +4,7 @@ import StoreMap from "../components/StoreMap";
 import StoreCard from "./StoreCard";
 import { toTitleCase } from "../../../utilities/utilities";
 
-const MedAvailabilityPage = ({ setHome }) => {
+const AvailabilityPage = ({ setHome }) => {
   useEffect(() => {
     setHome(false);
   }, []);
@@ -58,4 +58,4 @@ const MedAvailabilityPage = ({ setHome }) => {
   );
 };
 
-export default MedAvailabilityPage;
+export default AvailabilityPage;

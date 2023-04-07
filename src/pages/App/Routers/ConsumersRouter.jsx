@@ -4,10 +4,10 @@ import ConsumersMainPage from "../../Consumers/Index/ConsumersMainPage";
 import MedSearchPage from "../../Consumers/MedSearch/MedSearchPage";
 import PharmAvailabilityPage from "../../Consumers/PharmAvailability/PharmAvailabilityPage";
 import ConsumerSignUpPage from "../../Consumers/Create/ConsumerSignUpPage";
-import MedAvailabilityPage from "../../Consumers/MedAvailability/MedAvailabilityPage";
 import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
 import Bookmarks from "../../Consumers/Bookmarks/Bookmarks";
+import AvailabilityPage from "../../Consumers/AvailabilityPage/AvailaibilityPage";
 
 const ConsumersRouter = ({ user, setUser }) => {
   const [home, setHome] = useState(true);
@@ -27,7 +27,7 @@ const ConsumersRouter = ({ user, setUser }) => {
         />
         <Route
           path="/availability/:field/:id"
-          element={<MedAvailabilityPage setHome={setHome} />}
+          element={<AvailabilityPage setHome={setHome} />}
         />
         <Route
           path="/*"
