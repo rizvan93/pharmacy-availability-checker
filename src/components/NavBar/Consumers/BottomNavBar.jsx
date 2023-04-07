@@ -11,7 +11,7 @@ export default function BotttomNavBar() {
           Home
         </Link>
         <Link
-          to="/consumers/pharmacists"
+          to="/consumers/availability/pharmacists/null"
           className="px-3 py-2 hover:border-t-2 hover:border-wAqua hover:text-wAqua"
         >
           PHARMACIST AVAILABILITY

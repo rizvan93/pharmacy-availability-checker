@@ -20,7 +20,6 @@ const MedAvailabilityPage = ({ setHome }) => {
       );
       const data = await response.json();
       if (!data.error) {
-        console.log(data);
         setStores(
           data.map((s) => {
             const store = {
