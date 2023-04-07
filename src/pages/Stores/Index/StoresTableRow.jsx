@@ -24,8 +24,19 @@ const StoresTableRow = ({ store, removeFromStores }) => {
 
   return (
     <tr>
-      <td>{store.name}</td>
-      <td>
+      <td className="border-b border-gray-300 py-3 text-center">
+        {store.name}
+      </td>
+      <td className="border-b border-gray-300 py-3 text-center">
+        {store.streetAddress}
+      </td>
+      <td className="border-b border-gray-300 py-3 text-center">
+        {store.unitNumber}
+      </td>
+      <td className="border-b border-gray-300 py-3 text-center">
+        {store.postalCode}
+      </td>
+      <td className="border-b border-gray-300 py-3 text-center">
         <Link to={`/stores/${store._id}/edit`}>
           <button>✏️</button>
         </Link>
