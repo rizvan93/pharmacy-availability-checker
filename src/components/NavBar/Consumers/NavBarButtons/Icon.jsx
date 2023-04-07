@@ -11,8 +11,11 @@ const Icon = ({ selected, field }) => {
     icon.selected = bookmarksSelectedIcon;
     icon.unselected = bookmarksIcon;
   }
+
+  const selClass = "border-t-2 border-wAqua";
+
   return (
-    <button>
+    <button className={selected ? selClass : ""}>
       <img src={selected ? icon.selected : icon.unselected} />
     </button>
   );

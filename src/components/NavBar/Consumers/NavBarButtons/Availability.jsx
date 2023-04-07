@@ -15,10 +15,14 @@ const Availability = ({ selected, field }) => {
   const selClass = "border-t-2 border-wAqua text-wAqua";
   const unselClass = "text-wAqua-50";
   return (
-    <button className={`object-cover ${selected ? selClass : unselClass}`}>
+    <button
+      className={`content-evenly object-cover ${
+        selected ? selClass : unselClass
+      }`}
+    >
       <div className="flex items-center space-x-0">
         <img src={selected ? icon.selected : icon.unselected} />
-        <p className="text-left text-xs">
+        <p className="text-left text-[10px]">
           {field.toUpperCase()} <br /> AVAILABILITY
         </p>
       </div>

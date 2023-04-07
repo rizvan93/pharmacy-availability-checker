@@ -4,14 +4,17 @@ import StoreMap from "../components/StoreMap";
 import StoreCard from "./StoreCard";
 import { toTitleCase } from "../../../utilities/utilities";
 
-const AvailabilityPage = ({ setHome }) => {
-  useEffect(() => {
-    setHome(false);
-  }, []);
-
+const AvailabilityPage = ({ setHome, setPage }) => {
   const { field, id } = useParams();
   const [stores, setStores] = useState();
   const [display, setDisplay] = useState("Pharmacists");
+
+  useEffect(() => {
+    setHome(false);
+    if (field === "pharmacists") {
+      setPage("pharmacists");
+    }
+  }, []);
 
   useEffect(() => {
     const getStores = async () => {
