@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function BotttomNavBar() {
+export default function BotttomNavBar({ user }) {
   return (
     <div className="fixed inset-x-0 bottom-0 bg-wAqua-5 px-4 py-4 text-wAqua-50">
       <div className="container mx-auto flex items-center justify-between">
