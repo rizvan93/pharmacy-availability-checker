@@ -7,10 +7,11 @@ export default function Bookmarks({ user }) {
   // const [consumer, setConsumer] = useState(null);
   const [bookmarkedMedicines, setBookmarkedMedicines] = useState([]);
   const [bookmarkedPharmacists, setBookmarkedPharmacists] = useState([]);
-  const [showMedicines, setShowMedicines] = useState(false);
+  const [showMedicines, setShowMedicines] = useState(true);
   const [showPharmacists, setShowPharmacists] = useState(false);
 
   useEffect(() => {
+    if (!user) return;
     console.log("user: ", user);
     const token = localStorage.getItem("token");
     // console.log("token", token);
@@ -31,7 +32,7 @@ export default function Bookmarks({ user }) {
         const medicinesData = await medicinesResponse.json();
         setBookmarkedMedicines(medicinesData);
         const pharmacistsResponse = await fetch(
-          `/api/consumers/${user.accountId}/?field=pharmacists`,
+          `/api/consumers/${user?.accountId}/?field=pharmacists`,
           {
             headers: {
               Authorization: ["bearer", token],
@@ -51,6 +52,18 @@ export default function Bookmarks({ user }) {
     };
     fetchConsumerBookmarks();
   }, [user]);
+
+  const removePharmacist = (pharmacistId) => () => {
+    setBookmarkedPharmacists(
+      bookmarkedPharmacists.filter((p) => p._id !== pharmacistId)
+    );
+  };
+
+  const removeMedicine = (medicineId) => () => {
+    setBookmarkedMedicines(
+      bookmarkedMedicines.filter((m) => m._id !== medicineId)
+    );
+  };
 
   // useEffect(() => {
   //   if (consumer) {
@@ -103,10 +116,14 @@ export default function Bookmarks({ user }) {
       {showMedicines && (
         <div className="ml-2 divide-y divide-solid">
           {/* <h2>Bookmarked Medicines</h2> */}
-          {bookmarkedMedicines.map((medicine) => (
+          {bookmarkedMedicines?.map((medicine) => (
             <div className="my-4" key={medicine._id}>
               <h3 className="font-bold">{medicine.name}</h3>
-              <MedicineCard medicine={medicine} id={user.accountId} />
+              <MedicineCard
+                medicine={medicine}
+                id={user.accountId}
+                removeMedicine={removeMedicine}
+              />
             </div>
           ))}
         </div>
@@ -115,10 +132,14 @@ export default function Bookmarks({ user }) {
       {showPharmacists && (
         <div className="ml-2 divide-y divide-solid">
           {/* <h2>Bookmarked Pharmacists</h2> */}
-          {bookmarkedPharmacists.map((pharmacist) => (
+          {bookmarkedPharmacists?.map((pharmacist) => (
             <div key={pharmacist._id} className="mb-5">
               {/* <h3>Pharmacist ID: {pharmacist._id}</h3> */}
-              <PharmacistCard pharmacist={pharmacist} />
+              <PharmacistCard
+                pharmacist={pharmacist}
+                id={user.accountId}
+                removePharmacist={removePharmacist}
+              />
             </div>
           ))}
         </div>

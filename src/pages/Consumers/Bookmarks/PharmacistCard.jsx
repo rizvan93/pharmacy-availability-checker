@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BookmarkButton from "../MedSearch/components/BookmarkButton";
 
-export default function PharmacistCard({ pharmacist }) {
+export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
@@ -32,7 +32,13 @@ export default function PharmacistCard({ pharmacist }) {
                 } outlet.`
               : "Not available"}
           </div>
-          <BookmarkButton />
+          <button onClick={removePharmacist(pharmacist._id)}>
+            <BookmarkButton
+              id={id}
+              field="pharmacists"
+              fieldId={pharmacist._id}
+            />
+          </button>
         </div>
       </div>
     </>

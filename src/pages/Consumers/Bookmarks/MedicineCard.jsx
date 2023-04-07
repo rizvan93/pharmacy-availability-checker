@@ -1,6 +1,6 @@
 import BookmarkButton from "../MedSearch/components/BookmarkButton";
 
-export default function MedicineCard({ medicine, id }) {
+export default function MedicineCard({ medicine, id, removeMedicine }) {
   return (
     <>
       <div className="">
@@ -17,7 +17,9 @@ export default function MedicineCard({ medicine, id }) {
           {medicine.strength}
         </p>
       </div>
-      <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
+      <button onClick={removeMedicine(medicine._id)}>
+        <BookmarkButton id={id} field="medicines" fieldId={medicine._id} />
+      </button>
     </>
   );
 }
