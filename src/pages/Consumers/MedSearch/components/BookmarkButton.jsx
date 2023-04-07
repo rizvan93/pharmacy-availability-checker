@@ -35,7 +35,7 @@ const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
     });
     if (response.ok) {
       setIsBookmarked(!isBookmarked);
-      removeItem(fieldId);
+      removeItem();
     }
   };
 

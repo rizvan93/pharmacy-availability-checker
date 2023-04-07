@@ -22,7 +22,7 @@ export default function MedicineCard({ medicine, id, removeMedicine }) {
         id={id}
         field="medicines"
         fieldId={medicine._id}
-        removeItem={removeMedicine}
+        removeItem={removeMedicine(medicine._id)}
       />
       {/* </button> */}
     </>

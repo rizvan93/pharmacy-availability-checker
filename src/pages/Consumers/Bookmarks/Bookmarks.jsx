@@ -54,12 +54,14 @@ export default function Bookmarks({ user }) {
   }, [user]);
 
   const removePharmacist = (pharmacistId) => () => {
+    console.log("removePharmacist fired");
     setBookmarkedPharmacists(
       bookmarkedPharmacists.filter((p) => p._id !== pharmacistId)
     );
   };
 
   const removeMedicine = (medicineId) => () => {
+    console.log("removeMedicine fired");
     setBookmarkedMedicines(
       bookmarkedMedicines.filter((m) => m._id !== medicineId)
     );

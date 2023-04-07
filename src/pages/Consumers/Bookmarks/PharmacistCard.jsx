@@ -43,7 +43,7 @@ export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
             id={id}
             field="pharmacists"
             fieldId={pharmacist._id}
-            removeItem={removePharmacist}
+            removeItem={removePharmacist(pharmacist._id)}
           />
           {/* </button> */}
         </div>
