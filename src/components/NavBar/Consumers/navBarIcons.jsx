@@ -12,8 +12,8 @@ import medicineSelectedIcon from "../../../assets/navBarIcons/MedicineSelected.p
 import pharmacistIcon from "../../../assets/navBarIcons/Pharmacist.png";
 import pharmacistSelectedIcon from "../../../assets/navBarIcons/PharmacistSelected.png";
 
-import bookmarkIcon from "../../../assets/navBarIcons/Bookmark.png";
-import bookmarkSelectedIcon from "../../../assets/navBarIcons/BookmarkSelected.png";
+import bookmarksIcon from "../../../assets/navBarIcons/Bookmark.png";
+import bookmarksSelectedIcon from "../../../assets/navBarIcons/BookmarkSelected.png";
 
 export {
   userLogo,
@@ -26,6 +26,6 @@ export {
   medicineSelectedIcon,
   pharmacistIcon,
   pharmacistSelectedIcon,
-  bookmarkIcon,
-  bookmarkSelectedIcon,
+  bookmarksIcon,
+  bookmarksSelectedIcon,
 };
