@@ -15,7 +15,7 @@ const Icon = ({ selected, field }) => {
   const selClass = "border-t-2 border-wAqua";
 
   return (
-    <button className={selected ? selClass : ""}>
+    <button className={`mx-auto ${selected ? selClass : ""}`}>
       <img src={selected ? icon.selected : icon.unselected} />
     </button>
   );

@@ -5,17 +5,17 @@ import Icon from "./NavBarButtons/Icon";
 export default function BotttomNavBar({ user, page }) {
   return (
     <div className="fixed inset-x-0 bottom-0 bg-wAqua-5 px-2 py-2">
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="container mx-auto flex items-center justify-between justify-items-center">
         <Link to="/" className="basis-1/12">
           <Icon field="home" selected={page === "home"} />
         </Link>
         <Link
           to="/consumers/availability/pharmacists/null"
-          className="basis-1/3"
+          className="grow basis-1/3"
         >
           <Availability field="pharmacist" selected={page === "pharmacists"} />
         </Link>
-        <Link to="/consumers/medicines" className="basis-1/3">
+        <Link to="/consumers/medicines" className="grow basis-1/3">
           <Availability field="medicine" selected={page === "medicines"} />
         </Link>
         {user ? (
