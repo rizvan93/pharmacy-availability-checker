@@ -6,9 +6,10 @@ import PostalCodeForm from "./components/PostalCodeForm";
 
 const DISPLAY_LIMIT = 20;
 
-const MedSearchPage = ({ setHome, user }) => {
+const MedSearchPage = ({ setHome, user, setPage }) => {
   useEffect(() => {
     setHome(false);
+    setPage();
   }, []);
 
   const [medicines, setMedicines] = useState(null);

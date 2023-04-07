@@ -4,14 +4,17 @@ import StoreMap from "../components/StoreMap";
 import StoreCard from "./StoreCard";
 import { toTitleCase } from "../../../utilities/utilities";
 
-const MedAvailabilityPage = ({ setHome }) => {
-  useEffect(() => {
-    setHome(false);
-  }, []);
-
+const AvailabilityPage = ({ setHome, setPage }) => {
   const { field, id } = useParams();
   const [stores, setStores] = useState();
-  const [display, setDisplay] = useState("");
+  const [display, setDisplay] = useState("Pharmacists");
+
+  useEffect(() => {
+    setHome(false);
+    if (field === "pharmacists") {
+      setPage("pharmacists");
+    }
+  }, []);
 
   useEffect(() => {
     const getStores = async () => {
@@ -24,8 +27,10 @@ const MedAvailabilityPage = ({ setHome }) => {
           data.map((s) => {
             const store = {
               ...s,
-              stocks: s?.stocks[0].quantity,
             };
+            if (s.stocks) {
+              store.stocks = s?.stocks[0].quantity;
+            }
             return store;
           })
         );
@@ -50,10 +55,10 @@ const MedAvailabilityPage = ({ setHome }) => {
       {display ? <h1>{display}</h1> : null}
       <StoreMap stores={stores} />
       {stores?.map((s) => (
-        <StoreCard store={s} key={s._id} />
+        <StoreCard store={s} key={s._id} field={field} />
       ))}
     </>
   );
 };
 
-export default MedAvailabilityPage;
+export default AvailabilityPage;

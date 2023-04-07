@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import bookmarkIcon from "../../../../assets/buttonIcons/bookmark.png";
+import unbookmarkIcon from "../../../../assets/buttonIcons/removeBookmark.png";
 
 const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -39,19 +41,24 @@ const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
     }
   };
 
-  if (isBookmarked) {
-    return (
-      <button onClick={toggleBookmark} className="bg-teal-200 p-1">
-        REMOVE BOOKMARK
-      </button>
-    );
-  } else {
-    return (
-      <button onClick={toggleBookmark} className="bg-teal-200 p-1">
-        BOOKMARK
-      </button>
-    );
-  }
+  // if (isBookmarked) {
+  //   return (
+  //     <button onClick={toggleBookmark} className="bg-teal-200 p-1">
+  //       REMOVE BOOKMARK
+  //     </button>
+  //   );
+  // } else {
+  //   return (
+  //     <button onClick={toggleBookmark} className="bg-teal-200 p-1">
+  //       BOOKMARK
+  //     </button>
+  //   );
+  // }
+  return (
+    <button onClick={toggleBookmark}>
+      <img src={isBookmarked ? unbookmarkIcon : bookmarkIcon} />
+    </button>
+  );
 };
 
 export default BookmarkButton;

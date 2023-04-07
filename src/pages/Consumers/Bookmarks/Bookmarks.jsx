@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 import MedicineCard from "./MedicineCard";
 import PharmacistCard from "./PharmacistCard";
 
-export default function Bookmarks({ user }) {
+export default function Bookmarks({ setPage, user }) {
   // const [consumer, setConsumer] = useState(null);
   const [bookmarkedMedicines, setBookmarkedMedicines] = useState([]);
   const [bookmarkedPharmacists, setBookmarkedPharmacists] = useState([]);
@@ -13,6 +13,8 @@ export default function Bookmarks({ user }) {
   useEffect(() => {
     if (!user) return;
     console.log("user: ", user);
+    setPage();
+
     const token = localStorage.getItem("token");
     // console.log("token", token);
     // if (token) {

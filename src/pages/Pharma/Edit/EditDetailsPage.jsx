@@ -9,11 +9,16 @@ export default function EditDetailsPage() {
   const [stores, setStores] = useState([]);
   const [pharmacist, setPharmacist] = useState({ name: "", defaultStore: "" });
   const [updateStatus, setUpdateStatus] = useState("");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const getPharmacist = async () => {
       try {
-        const res = await fetch(`/api/pharmacists/${id}`);
+        const res = await fetch(`/api/pharmacists/${id}`, {
+          headers: {
+            Authorization: ["bearer", token],
+          },
+        });
         const data = await res.json();
         setPharmacist(data);
         console.log("pharmacist: ", pharmacist);
@@ -28,7 +33,11 @@ export default function EditDetailsPage() {
     console.log("getStores");
     const getStores = async () => {
       try {
-        const res = await fetch("/api/stores");
+        const res = await fetch("/api/stores", {
+          headers: {
+            Authorization: ["bearer", token],
+          },
+        });
         const data = await res.json();
         console.log("stores: ", data);
         setStores(data);
@@ -71,16 +80,26 @@ export default function EditDetailsPage() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="max-w-md mx-auto py-8 px-4">
+    <div className="min-h-screen bg-gray-100">
+      <div className="mx-auto max-w-md px-4 py-8">
         <Link to={`/pharmacists/${id}`}>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded mb-4">Back</button>
+          <button className="mb-4 rounded bg-blue-500 px-4 py-2 text-white">
+            Back
+          </button>
         </Link>
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form
+          onSubmit={handleSubmit}
+          className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
+        >
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">Name:</label>
+            <label
+              className="mb-2 block font-bold text-gray-700"
+              htmlFor="name"
+            >
+              Name:
+            </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
               id="name"
               type="text"
               name="name"
@@ -89,9 +108,14 @@ export default function EditDetailsPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="defaultStore">Default Store:</label>
+            <label
+              className="mb-2 block font-bold text-gray-700"
+              htmlFor="defaultStore"
+            >
+              Default Store:
+            </label>
             <select
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
               name="defaultStore"
               value={pharmacist.defaultStore.name}
               onChange={handleInputChange}
@@ -105,12 +129,14 @@ export default function EditDetailsPage() {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
               type="submit"
             >
               Update
             </button>
-            {updateStatus && <p className="text-green-500 text-xs italic">{updateStatus}</p>}
+            {updateStatus && (
+              <p className="text-xs italic text-green-500">{updateStatus}</p>
+            )}
           </div>
         </form>
       </div>
