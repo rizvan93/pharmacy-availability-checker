@@ -3,60 +3,98 @@ import jwt_decode from "jwt-decode";
 import MedicineCard from "./MedicineCard";
 import PharmacistCard from "./PharmacistCard";
 
-export default function Bookmarks({ setPage }) {
-  const [consumer, setConsumer] = useState(null);
+export default function Bookmarks({ setPage, user }) {
+  // const [consumer, setConsumer] = useState(null);
   const [bookmarkedMedicines, setBookmarkedMedicines] = useState([]);
   const [bookmarkedPharmacists, setBookmarkedPharmacists] = useState([]);
-  const [showMedicines, setShowMedicines] = useState(false);
+  const [showMedicines, setShowMedicines] = useState(true);
   const [showPharmacists, setShowPharmacists] = useState(false);
 
   useEffect(() => {
+    if (!user) return;
+    console.log("user: ", user);
     setPage();
 
     const token = localStorage.getItem("token");
-    console.log("token", token);
-    if (token) {
-      const decodedToken = jwt_decode(token);
-      console.log("decodedToken: ", decodedToken);
-      async function fetchConsumerData() {
-        const response = await fetch(
-          `/api/consumers/${decodedToken.accountId}`
+    // console.log("token", token);
+    // if (token) {
+    //   const decodedToken = jwt_decode(token);
+    //   console.log("decodedToken: ", decodedToken);
+    const fetchConsumerBookmarks = async () => {
+      try {
+        const medicinesResponse = await fetch(
+          `/api/consumers/${user?.accountId}/?field=medicines`,
+          {
+            headers: {
+              Authorization: ["bearer", token],
+            },
+          }
         );
-        console.log("Response: ", response);
-        const data = await response.json();
-        console.log("Consumer: ", data);
-        setConsumer(data);
-      }
-      fetchConsumerData();
-    }
-  }, []);
 
-  useEffect(() => {
-    if (consumer) {
-      async function fetchData() {
-        // Fetch the data for the bookmarked medicines
-        const medicineResponses = await Promise.all(
-          consumer.bookmarkedMedicines.map(async (medicineId) => {
-            const response = await fetch(`/api/medicines/${medicineId}`);
-            const data = await response.json();
-            return data;
-          })
+        const medicinesData = await medicinesResponse.json();
+        setBookmarkedMedicines(medicinesData);
+        const pharmacistsResponse = await fetch(
+          `/api/consumers/${user?.accountId}/?field=pharmacists`,
+          {
+            headers: {
+              Authorization: ["bearer", token],
+            },
+          }
         );
-        setBookmarkedMedicines(medicineResponses);
-
-        // Fetch the data for the bookmarked pharmacists
-        const pharmacistResponses = await Promise.all(
-          consumer.bookmarkedPharmacists.map(async (pharmacistId) => {
-            const response = await fetch(`/api/pharmacists/${pharmacistId}`);
-            const data = await response.json();
-            return data;
-          })
-        );
-        setBookmarkedPharmacists(pharmacistResponses);
+        const pharmacistsData = await pharmacistsResponse.json();
+        setBookmarkedPharmacists(pharmacistsData);
+      } catch (error) {
+        console.error(error);
       }
-      fetchData();
-    }
-  }, [consumer]);
+
+      // console.log("Response: ", response);
+      // const data = await response.json();
+      // console.log("Consumer: ", data);
+      // setConsumer(data);
+    };
+    fetchConsumerBookmarks();
+  }, [user]);
+
+  const removePharmacist = (pharmacistId) => () => {
+    console.log("removePharmacist fired");
+    setBookmarkedPharmacists(
+      bookmarkedPharmacists.filter((p) => p._id !== pharmacistId)
+    );
+  };
+
+  const removeMedicine = (medicineId) => () => {
+    console.log("removeMedicine fired");
+    setBookmarkedMedicines(
+      bookmarkedMedicines.filter((m) => m._id !== medicineId)
+    );
+  };
+
+  // useEffect(() => {
+  //   if (consumer) {
+  //     async function fetchData() {
+  //       // Fetch the data for the bookmarked medicines
+  //       const medicineResponses = await Promise.all(
+  //         consumer.bookmarkedMedicines.map(async (medicineId) => {
+  //           const response = await fetch(`/api/medicines/${medicineId}`);
+  //           const data = await response.json();
+  //           return data;
+  //         })
+  //       );
+  //       setBookmarkedMedicines(medicineResponses);
+
+  //       // Fetch the data for the bookmarked pharmacists
+  //       const pharmacistResponses = await Promise.all(
+  //         consumer.bookmarkedPharmacists.map(async (pharmacistId) => {
+  //           const response = await fetch(`/api/pharmacists/${pharmacistId}`);
+  //           const data = await response.json();
+  //           return data;
+  //         })
+  //       );
+  //       setBookmarkedPharmacists(pharmacistResponses);
+  //     }
+  //     fetchData();
+  //   }
+  // }, [consumer]);
 
   const handleMedicinesClick = () => {
     setShowMedicines(true);
@@ -70,11 +108,11 @@ export default function Bookmarks({ setPage }) {
 
   return (
     <div>
-      <div className="container mx-0 flex min-w-full items-center justify-around">
-        <button onClick={handleMedicinesClick} className="mt-10">
+      <div className="container mx-0 mt-10 flex min-w-full items-center justify-around">
+        <button onClick={handleMedicinesClick} className="">
           Medicines
         </button>
-        <button onClick={handlePharmacistsClick} className="mt-10">
+        <button onClick={handlePharmacistsClick} className="">
           Pharmacists
         </button>
       </div>
@@ -82,22 +120,30 @@ export default function Bookmarks({ setPage }) {
       {showMedicines && (
         <div className="ml-2 divide-y divide-solid">
           {/* <h2>Bookmarked Medicines</h2> */}
-          {bookmarkedMedicines.map((medicine) => (
+          {bookmarkedMedicines?.map((medicine) => (
             <div className="my-4" key={medicine._id}>
               <h3 className="font-bold">{medicine.name}</h3>
-              <MedicineCard medicine={medicine} />
+              <MedicineCard
+                medicine={medicine}
+                id={user.accountId}
+                removeMedicine={removeMedicine}
+              />
             </div>
           ))}
         </div>
       )}
 
       {showPharmacists && (
-        <div>
-          <h2>Bookmarked Pharmacists</h2>
-          {bookmarkedPharmacists.map((pharmacist) => (
-            <div key={pharmacist._id}>
-              <h3>Pharmacist ID: {pharmacist._id}</h3>
-              <PharmacistCard pharmacist={pharmacist} />
+        <div className="ml-2 divide-y divide-solid">
+          {/* <h2>Bookmarked Pharmacists</h2> */}
+          {bookmarkedPharmacists?.map((pharmacist) => (
+            <div key={pharmacist._id} className="mb-5">
+              {/* <h3>Pharmacist ID: {pharmacist._id}</h3> */}
+              <PharmacistCard
+                pharmacist={pharmacist}
+                id={user.accountId}
+                removePharmacist={removePharmacist}
+              />
             </div>
           ))}
         </div>

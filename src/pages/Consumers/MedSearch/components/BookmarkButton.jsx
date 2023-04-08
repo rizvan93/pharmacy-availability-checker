@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import bookmarkIcon from "../../../../assets/buttonIcons/bookmark.png";
 import unbookmarkIcon from "../../../../assets/buttonIcons/removeBookmark.png";
 
-const BookmarkButton = ({ id, fieldId, field }) => {
+const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
+  if (!id) return null;
+
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -13,8 +15,8 @@ const BookmarkButton = ({ id, fieldId, field }) => {
           Authorization: ["bearer", token],
         },
       });
-      const bookmarks = await response.json();
-      console.log(bookmarks);
+      const data = await response.json();
+      const bookmarks = data.map((d) => d._id);
       if (bookmarks.includes(fieldId)) {
         setIsBookmarked(true);
       }
@@ -34,6 +36,9 @@ const BookmarkButton = ({ id, fieldId, field }) => {
     });
     if (response.ok) {
       setIsBookmarked(!isBookmarked);
+      if (removeItem) {
+        removeItem();
+      }
     }
   };
 
