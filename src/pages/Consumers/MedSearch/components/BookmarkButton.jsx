@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import bookmarkIcon from "../../../../assets/buttonIcons/bookmark.png";
 import unbookmarkIcon from "../../../../assets/buttonIcons/removeBookmark.png";
 
-const BookmarkButton = ({ id, fieldId, field }) => {
+const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -13,8 +13,11 @@ const BookmarkButton = ({ id, fieldId, field }) => {
           Authorization: ["bearer", token],
         },
       });
-      const bookmarks = await response.json();
-      console.log(bookmarks);
+      const data = await response.json();
+      const bookmarks = data.map((d) => d._id);
+      console.log("bookmarks: ", bookmarks);
+      console.log("bookmarks.includes(fieldId): ", bookmarks.includes(fieldId));
+      console.log("fieldId: ", fieldId);
       if (bookmarks.includes(fieldId)) {
         setIsBookmarked(true);
       }
@@ -34,9 +37,23 @@ const BookmarkButton = ({ id, fieldId, field }) => {
     });
     if (response.ok) {
       setIsBookmarked(!isBookmarked);
+      removeItem();
     }
   };
 
+  // if (isBookmarked) {
+  //   return (
+  //     <button onClick={toggleBookmark} className="bg-teal-200 p-1">
+  //       REMOVE BOOKMARK
+  //     </button>
+  //   );
+  // } else {
+  //   return (
+  //     <button onClick={toggleBookmark} className="bg-teal-200 p-1">
+  //       BOOKMARK
+  //     </button>
+  //   );
+  // }
   return (
     <button onClick={toggleBookmark}>
       <img src={isBookmarked ? unbookmarkIcon : bookmarkIcon} />

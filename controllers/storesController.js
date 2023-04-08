@@ -27,16 +27,28 @@ const STORES_PROJECTION_MEDICINES_QUERY = {
 
 const seed = async (req, res) => {
   try {
-    const newStore = await Store.create({
-      name: "Store 1",
-      streetAddress: "123 Main Street",
-      unitNumber: "01-23",
-      postalCode: "123456",
-      lat: 1.3521,
-      lon: 103.8198,
-      pharmacists: [],
-      stocks: [],
-    });
+    const newStore = await Store.create(
+      {
+        name: "JEM",
+        streetAddress: "123 Jurong East Street",
+        unitNumber: "01-23",
+        postalCode: "608550",
+        lat: 1.33316425,
+        lon: 103.74359864534739,
+        pharmacists: [],
+        stocks: [],
+      },
+      {
+        name: "Waterway Point",
+        streetAddress: "123 Punggol Street",
+        unitNumber: "01-23",
+        postalCode: "828761",
+        lat: 1.4065858,
+        lon: 103.9021620888889,
+        pharmacists: [],
+        stocks: [],
+      }
+    );
     res.status(200).json(newStore);
   } catch (error) {
     res.status(500).json({ error });

@@ -47,6 +47,7 @@ const ConsumersRouter = ({ user, setUser }) => {
           path="/bookmarks"
           element={
             <Bookmarks
+              user={user}
               setPage={() => {
                 setPage("bookmarks");
               }}
@@ -66,6 +67,7 @@ const ConsumersRouter = ({ user, setUser }) => {
             />
           }
         />
+        {/* <Route path="/bookmarks" element={<Bookmarks user={user} />} /> */}
       </Routes>
       <BottomNavBar user={user} page={page} />
     </>
