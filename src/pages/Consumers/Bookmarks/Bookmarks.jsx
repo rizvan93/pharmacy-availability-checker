@@ -108,11 +108,11 @@ export default function Bookmarks({ setPage, user }) {
 
   return (
     <div className="relative">
-      <div className="container fixed top-10 mx-0 mt-2 flex min-w-full items-center justify-around border-b-2 border-green-500 bg-white pb-2 pt-8">
+      <div className="container fixed top-10 mx-0 mt-2 flex min-w-full items-center justify-around border-b-2 border-wAqua bg-white pb-2 pt-8">
         <button
           onClick={handleMedicinesClick}
           className={`${
-            showMedicines ? "border-b-4 border-green-500 " : ""
+            showMedicines ? "border-b-4 border-wAqua px-2.5" : "px-2.5"
           } focus:outline-none`}
         >
           Medicines
@@ -120,7 +120,7 @@ export default function Bookmarks({ setPage, user }) {
         <button
           onClick={handlePharmacistsClick}
           className={`${
-            showPharmacists ? "border-b-2 border-green-500" : ""
+            showPharmacists ? "border-b-4 border-wAqua px-2.5 " : "px-2.5"
           } focus:outline-none`}
         >
           Pharmacists
