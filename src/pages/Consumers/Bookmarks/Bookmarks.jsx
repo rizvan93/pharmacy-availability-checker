@@ -107,18 +107,29 @@ export default function Bookmarks({ setPage, user }) {
   };
 
   return (
-    <div>
-      <div className="container mx-0 mt-10 flex min-w-full items-center justify-around">
-        <button onClick={handleMedicinesClick} className="">
+    <div className="relative">
+      <div className="container fixed top-10 mx-0 mt-2 flex min-w-full items-center justify-around border-b-2 border-green-500 bg-white pb-2 pt-8">
+        <button
+          onClick={handleMedicinesClick}
+          className={`${
+            showMedicines ? "border-b-4 border-green-500 " : ""
+          } focus:outline-none`}
+        >
           Medicines
         </button>
-        <button onClick={handlePharmacistsClick} className="">
+        <button
+          onClick={handlePharmacistsClick}
+          className={`${
+            showPharmacists ? "border-b-2 border-green-500" : ""
+          } focus:outline-none`}
+        >
           Pharmacists
         </button>
       </div>
+      <div className=""></div>
 
       {showMedicines && (
-        <div className="ml-2 divide-y divide-solid">
+        <div className="static z-0 ml-2 mt-24 flex-col divide-y divide-solid overflow-y-auto">
           {/* <h2>Bookmarked Medicines</h2> */}
           {bookmarkedMedicines?.map((medicine) => (
             <div className="my-4" key={medicine._id}>
@@ -134,7 +145,7 @@ export default function Bookmarks({ setPage, user }) {
       )}
 
       {showPharmacists && (
-        <div className="ml-2 divide-y divide-solid">
+        <div className="ml-2 mt-24 divide-y divide-solid">
           {/* <h2>Bookmarked Pharmacists</h2> */}
           {bookmarkedPharmacists?.map((pharmacist) => (
             <div key={pharmacist._id} className="mb-5">
