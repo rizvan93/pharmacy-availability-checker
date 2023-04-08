@@ -3,8 +3,9 @@ import bookmarkIcon from "../../../../assets/buttonIcons/bookmark.png";
 import unbookmarkIcon from "../../../../assets/buttonIcons/removeBookmark.png";
 
 const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
   if (!id) return null;
+
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
     const getConsumer = async () => {
