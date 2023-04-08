@@ -3,7 +3,7 @@ import ConsumerSignUpForm from "./ConsumerSignUpForm";
 
 export default function ConsumerSignUpPage({ setHome }) {
   useEffect(() => {
-    setHome(true);
+    setHome(false);
   }, []);
 
   return (

@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import NoPharmacist__MedicineAvailable from "../../../assets/mapIcons/NoPharmacist__MedicineAvailable.png"
 import NoPharmacist__MedicineLow from "../../../assets/mapIcons/NoPharmacist__MedicineLow.png"
 import NoPharmacist_NoMedicine from "../../../assets/mapIcons/NoPharmacist_NoMedicine.png"
@@ -13,7 +15,12 @@ import none from "../../../assets/availabilityIcons/none.png"
 
 import bookmark from "../../../assets/buttonIcons/bookmark.png"
 
-export default function InfoPage() {
+export default function InfoPage({setHome}) {
+
+    useEffect(() => {
+    setHome(false);
+    }, []);
+
     return (
         <>
         <div className="justify-center p-4">
