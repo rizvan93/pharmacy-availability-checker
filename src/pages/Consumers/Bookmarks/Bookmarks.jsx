@@ -107,7 +107,7 @@ export default function Bookmarks({ setPage, user }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative overflow-y-auto">
       <div className="container fixed top-10 mx-0 mt-2 flex min-w-full items-center justify-around border-b-2 border-wAqua bg-white pb-2 pt-8">
         <button
           onClick={handleMedicinesClick}
