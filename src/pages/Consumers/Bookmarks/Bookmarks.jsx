@@ -112,16 +112,18 @@ export default function Bookmarks({ setPage, user }) {
         <button
           onClick={handleMedicinesClick}
           className={`${
-            showMedicines ? "border-b-4 border-wAqua px-2.5" : "px-2.5"
-          } focus:outline-none`}
+            showMedicines
+              ? "border-b-4 border-wAqua text-wAqua"
+              : "px-2.5 font-semibold"
+          } px-2.5 font-semibold`}
         >
           Medicines
         </button>
         <button
           onClick={handlePharmacistsClick}
           className={`${
-            showPharmacists ? "border-b-4 border-wAqua px-2.5 " : "px-2.5"
-          } focus:outline-none`}
+            showPharmacists ? "border-b-4 border-wAqua  text-wAqua" : ""
+          } px-2.5 font-semibold`}
         >
           Pharmacists
         </button>
