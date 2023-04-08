@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { userLogo, infoLogo, watsonsLogo, backIcon } from "./navBarIcons";
 import LoggedOutOptions from "../LoggedOutOptions";
@@ -29,7 +29,7 @@ export default function TopNavBar({ user, backButton, setUser }) {
               <img className="h-10" src={backIcon} />
             </button>
           ) : (
-            <img src={infoLogo} className="max-h-10" />
+            <Link to="/consumers/info"><img src={infoLogo} className="max-h-10" /></Link>
           )}
         </div>
 
