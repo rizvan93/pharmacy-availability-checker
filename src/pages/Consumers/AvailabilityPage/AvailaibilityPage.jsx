@@ -14,7 +14,7 @@ const AvailabilityPage = ({ setHome, setPage }) => {
     if (field === "pharmacists") {
       setPage("pharmacists");
     }
-  }, []);
+  }, [field]);
 
   useEffect(() => {
     const getStores = async () => {
