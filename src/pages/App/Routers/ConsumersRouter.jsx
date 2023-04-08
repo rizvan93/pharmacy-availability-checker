@@ -42,8 +42,9 @@ const ConsumersRouter = ({ user, setUser }) => {
         />
         <Route
           path="/pharmacists/:id"
-          element={PharmacistInfoPage}
-          setHome={setHome}
+          element={
+            <PharmacistInfoPage setHome={setHome} userId={user?.accountId} />
+          }
         />
         <Route
           path="/availability/:field/:id"

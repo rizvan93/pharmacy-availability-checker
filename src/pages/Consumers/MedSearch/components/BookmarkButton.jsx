@@ -16,9 +16,6 @@ const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
       });
       const data = await response.json();
       const bookmarks = data.map((d) => d._id);
-      console.log("bookmarks: ", bookmarks);
-      console.log("bookmarks.includes(fieldId): ", bookmarks.includes(fieldId));
-      console.log("fieldId: ", fieldId);
       if (bookmarks.includes(fieldId)) {
         setIsBookmarked(true);
       }
@@ -38,7 +35,9 @@ const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
     });
     if (response.ok) {
       setIsBookmarked(!isBookmarked);
-      removeItem();
+      if (removeItem) {
+        removeItem();
+      }
     }
   };
 
