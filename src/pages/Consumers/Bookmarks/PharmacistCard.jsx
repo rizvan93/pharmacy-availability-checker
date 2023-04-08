@@ -26,27 +26,36 @@ export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
 
   return (
     <>
-      <div>
-        <div className="pharmacist-info">
-          <div className="pharmacist-name font-bold">{pharmacist.name}</div>
-          <div className="pharmacist-availability">
-            {isAvailable
-              ? `Currently available at ${
-                  stores.find((store) =>
-                    store.pharmacists.includes(pharmacist._id)
-                  ).name
-                } outlet.`
-              : "Not available"}
-          </div>
-          {/* <button onClick={removePharmacist(pharmacist._id)}> */}
+      <div className="pharmacist-info mt-2">
+        <div className=" flex">
+          <h3 className="pharmacist-name w-10/12 font-bold">
+            {pharmacist.name}
+          </h3>
           <BookmarkButton
             id={id}
             field="pharmacists"
             fieldId={pharmacist._id}
             removeItem={removePharmacist(pharmacist._id)}
           />
-          {/* </button> */}
         </div>
+
+        <div className="pharmacist-availability mt-2">
+          {isAvailable
+            ? `Currently available at ${
+                stores.find((store) =>
+                  store.pharmacists.includes(pharmacist._id)
+                ).name
+              } outlet.`
+            : "Not available"}
+        </div>
+        {/* <button onClick={removePharmacist(pharmacist._id)}> */}
+        {/* <BookmarkButton
+            id={id}
+            field="pharmacists"
+            fieldId={pharmacist._id}
+            removeItem={removePharmacist(pharmacist._id)}
+          /> */}
+        {/* </button> */}
       </div>
     </>
   );
