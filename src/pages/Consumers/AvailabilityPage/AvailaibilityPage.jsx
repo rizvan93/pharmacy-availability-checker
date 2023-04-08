@@ -3,8 +3,9 @@ import { useParams } from "react-router";
 import StoreMap from "../components/StoreMap";
 import StoreCard from "./StoreCard";
 import { toTitleCase } from "../../../utilities/utilities";
+import BookmarkButton from "../MedSearch/components/BookmarkButton";
 
-const AvailabilityPage = ({ setHome, setPage }) => {
+const AvailabilityPage = ({ setHome, setPage, userId }) => {
   const { field, id } = useParams();
   const [stores, setStores] = useState();
   const [display, setDisplay] = useState("Pharmacists");
@@ -14,7 +15,7 @@ const AvailabilityPage = ({ setHome, setPage }) => {
     if (field === "pharmacists") {
       setPage("pharmacists");
     }
-  }, [field]);
+  }, [field, id]);
 
   useEffect(() => {
     const getStores = async () => {
@@ -52,7 +53,12 @@ const AvailabilityPage = ({ setHome, setPage }) => {
 
   return (
     <>
-      {display ? <h1>{display}</h1> : null}
+      {display ? (
+        <>
+          <h1>{display}</h1>{" "}
+          <BookmarkButton id={userId} field="medicines" fieldId={id} />
+        </>
+      ) : null}
       <StoreMap stores={stores} />
       {stores?.map((s) => (
         <StoreCard store={s} key={s._id} field={field} />

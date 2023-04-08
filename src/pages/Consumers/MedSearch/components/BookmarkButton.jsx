@@ -4,6 +4,7 @@ import unbookmarkIcon from "../../../../assets/buttonIcons/removeBookmark.png";
 
 const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
+  if (!id) return null;
 
   useEffect(() => {
     const getConsumer = async () => {
@@ -41,19 +42,6 @@ const BookmarkButton = ({ id, fieldId, field, removeItem }) => {
     }
   };
 
-  // if (isBookmarked) {
-  //   return (
-  //     <button onClick={toggleBookmark} className="bg-teal-200 p-1">
-  //       REMOVE BOOKMARK
-  //     </button>
-  //   );
-  // } else {
-  //   return (
-  //     <button onClick={toggleBookmark} className="bg-teal-200 p-1">
-  //       BOOKMARK
-  //     </button>
-  //   );
-  // }
   return (
     <button onClick={toggleBookmark}>
       <img src={isBookmarked ? unbookmarkIcon : bookmarkIcon} />

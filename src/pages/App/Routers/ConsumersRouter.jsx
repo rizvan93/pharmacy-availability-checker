@@ -7,6 +7,7 @@ import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
 import Bookmarks from "../../Consumers/Bookmarks/Bookmarks";
 import AvailabilityPage from "../../Consumers/AvailabilityPage/AvailaibilityPage";
+import PharmacistInfoPage from "../../Consumers/PharmacistInfo/PharmacistInfoPage";
 
 const ConsumersRouter = ({ user, setUser }) => {
   const [home, setHome] = useState(true);
@@ -40,8 +41,19 @@ const ConsumersRouter = ({ user, setUser }) => {
           }
         />
         <Route
+          path="/pharmacists/:id"
+          element={PharmacistInfoPage}
+          setHome={setHome}
+        />
+        <Route
           path="/availability/:field/:id"
-          element={<AvailabilityPage setHome={setHome} setPage={setPage} />}
+          element={
+            <AvailabilityPage
+              setHome={setHome}
+              setPage={setPage}
+              userId={user?.accountId}
+            />
+          }
         />
         <Route
           path="/bookmarks"
