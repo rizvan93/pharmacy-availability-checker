@@ -29,18 +29,28 @@ const MedNameForm = ({ setMedicines }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name/Brand:{" "}
-        <input
-          name="name"
-          value={name}
-          placeholder="Enter name of medicine"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <button>Search Medicines</button>
-    </form>
+<form onSubmit={handleSubmit} className="flex flex-col items-center">
+  <div className="mb-4 w-full max-w-sm">
+    <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+    </label>
+    <input
+      type="text"
+      name="name"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      placeholder="Enter name/brand of medicine"
+      className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    />
+  </div>
+  <button
+    type="submit"
+    className="bg-wAqua text-white rounded-md px-5 py-2 hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wAqua"
+  >
+    Search Medicines
+  </button>
+</form>
+
+
   );
 };
 
