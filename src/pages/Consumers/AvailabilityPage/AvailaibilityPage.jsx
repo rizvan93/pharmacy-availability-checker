@@ -9,12 +9,30 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
   const { field, id } = useParams();
   const [stores, setStores] = useState();
   const [display, setDisplay] = useState("Pharmacists");
+  const [currentPosition, setCurrentPosition] = useState(null);
 
   useEffect(() => {
     setHome(false);
     if (field === "pharmacists") {
       setPage("pharmacists");
     }
+
+    const geoOptions = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    function geoSuccess(pos) {
+      const crd = pos.coords;
+      setCurrentPosition(crd);
+    }
+
+    function geoError(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
   }, [field, id]);
 
   useEffect(() => {
@@ -59,7 +77,7 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
           <BookmarkButton id={userId} field="medicines" fieldId={id} />
         </>
       ) : null}
-      <StoreMap stores={stores} />
+      <StoreMap stores={stores} currentPosition={currentPosition} />
       {stores?.map((s) => (
         <StoreCard store={s} key={s._id} field={field} />
       ))}
