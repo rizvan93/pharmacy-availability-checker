@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ConsumerSignUpForm() {
   const [newUser, setNewUser] = useState({
@@ -7,6 +8,7 @@ export default function ConsumerSignUpForm() {
     password: "",
   });
   const [confirm, setConfirm] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +28,7 @@ export default function ConsumerSignUpForm() {
       });
       const data = await res.json();
       console.log(data);
+      navigate("/")
     } catch (error) {
       console.error(error);
     }
