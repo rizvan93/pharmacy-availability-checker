@@ -17,6 +17,7 @@ const ConsumersRouter = ({ user, setUser }) => {
   return (
     <>
       <TopNavBar backButton={!home} user={user} setUser={setUser} />
+      
       <Routes>
         <Route
         path="/info"

@@ -80,7 +80,7 @@ export default function EditDetailsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-wAqua-10">
       <div className="mx-auto max-w-md px-4 py-8">
         <Link to={`/pharmacists/${id}`}>
           <button className="mb-4 rounded bg-blue-500 px-4 py-2 text-white">
