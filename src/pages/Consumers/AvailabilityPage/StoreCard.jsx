@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { toTitleCase } from "../../../utilities/utilities";
 
 const StoreCard = ({ store, field }) => {
@@ -18,8 +19,9 @@ const StoreCard = ({ store, field }) => {
           Pharmacists Available:
           {store?.pharmacists.map((p) => (
             <li className="text-black" key={p._id}>
-              {/*{toTitleCase(p.name)}*/}
-              {`${p.name}`}
+              <Link to={`/consumers/pharmacists/${p._id}`}>
+                {toTitleCase(p.name)}
+              </Link>
             </li>
           ))}
         </ul>

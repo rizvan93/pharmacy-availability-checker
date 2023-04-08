@@ -89,7 +89,7 @@ export default function CheckIn() {
   }
   return (
     <>
-      <div className="min-h-screen bg-gray-100">
+      <div className="bg-wAqua-10 min-h-screen flex-col justify-center items-center">
         <div className="container mx-auto px-4 py-8">
           <Link to={`/pharmacists/${id}/edit`}>
             <button className="rounded bg-blue-500 px-4 py-2 text-white">
@@ -105,7 +105,7 @@ export default function CheckIn() {
               </p>
               <button
                 onClick={handleCheckOut}
-                className="rounded bg-red-500 px-4 py-2 text-white"
+                className="bg-red-500 text-white rounded-md px-5 py-2 w-full"
               >
                 Check Out
               </button>
@@ -131,8 +131,7 @@ export default function CheckIn() {
               <button
                 onClick={handleCheckIn}
                 disabled={!!checkedInStore}
-                className="mb-4 rounded bg-blue-500 px-4 py-2 text-white"
-              >
+                className="bg-wAqua text-white rounded-md px-5 py-2 w-full">
                 Check In
               </button>
             </>
