@@ -3,7 +3,16 @@ import BookmarkButton from "../MedSearch/components/BookmarkButton";
 export default function MedicineCard({ medicine, id, removeMedicine }) {
   return (
     <>
-      <div className="">
+      <div className="mt-2">
+        <div className=" flex">
+          <h3 className="w-10/12 font-bold">{medicine.name}</h3>
+          <BookmarkButton
+            id={id}
+            field="medicines"
+            fieldId={medicine._id}
+            removeItem={removeMedicine(medicine._id)}
+          />
+        </div>
         {/* <p>Name: {medicine.name}</p> */}
         <p>
           <span className="font-semibold">Form: </span> {medicine.form}
@@ -17,14 +26,6 @@ export default function MedicineCard({ medicine, id, removeMedicine }) {
           {medicine.strength}
         </p>
       </div>
-      {/* <button onClick={removeMedicine(medicine._id)}> */}
-      <BookmarkButton
-        id={id}
-        field="medicines"
-        fieldId={medicine._id}
-        removeItem={removeMedicine(medicine._id)}
-      />
-      {/* </button> */}
     </>
   );
 }

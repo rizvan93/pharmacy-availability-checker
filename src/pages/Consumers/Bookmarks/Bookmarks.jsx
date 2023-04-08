@@ -112,9 +112,7 @@ export default function Bookmarks({ setPage, user }) {
         <button
           onClick={handleMedicinesClick}
           className={`${
-            showMedicines
-              ? "border-b-4 border-wAqua text-wAqua"
-              : "px-2.5 font-semibold"
+            showMedicines ? "border-b-4 border-wAqua text-wAqua" : ""
           } px-2.5 font-semibold`}
         >
           Medicines
@@ -131,11 +129,11 @@ export default function Bookmarks({ setPage, user }) {
       <div className=""></div>
 
       {showMedicines && (
-        <div className="static z-0 ml-2 mt-24 flex-col divide-y divide-solid overflow-y-auto">
+        <div className="ml-2 mt-24 flex-col divide-y divide-solid overflow-y-auto pb-12">
           {/* <h2>Bookmarked Medicines</h2> */}
           {bookmarkedMedicines?.map((medicine) => (
-            <div className="my-4" key={medicine._id}>
-              <h3 className="font-bold">{medicine.name}</h3>
+            <div className="my-2" key={medicine._id}>
+              {/* <h3 className="font-bold">{medicine.name}</h3> */}
               <MedicineCard
                 medicine={medicine}
                 id={user.accountId}
@@ -147,10 +145,10 @@ export default function Bookmarks({ setPage, user }) {
       )}
 
       {showPharmacists && (
-        <div className="ml-2 mt-24 divide-y divide-solid">
+        <div className="ml-2 mt-24 divide-y divide-solid overflow-y-auto pb-12">
           {/* <h2>Bookmarked Pharmacists</h2> */}
           {bookmarkedPharmacists?.map((pharmacist) => (
-            <div key={pharmacist._id} className="mb-5">
+            <div key={pharmacist._id} className="my-2">
               {/* <h3>Pharmacist ID: {pharmacist._id}</h3> */}
               <PharmacistCard
                 pharmacist={pharmacist}
