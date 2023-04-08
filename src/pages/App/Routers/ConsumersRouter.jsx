@@ -7,6 +7,7 @@ import TopNavBar from "../../../components/NavBar/Consumers/TopNavBar";
 import BottomNavBar from "../../../components/NavBar/Consumers/BottomNavBar";
 import Bookmarks from "../../Consumers/Bookmarks/Bookmarks";
 import AvailabilityPage from "../../Consumers/AvailabilityPage/AvailaibilityPage";
+import InfoPage from "../../Consumers/Index/InfoPage";
 
 const ConsumersRouter = ({ user, setUser }) => {
   const [home, setHome] = useState(true);
@@ -16,6 +17,18 @@ const ConsumersRouter = ({ user, setUser }) => {
     <>
       <TopNavBar backButton={!home} user={user} setUser={setUser} />
       <Routes>
+        <Route
+        path="/info"
+        element={
+          <InfoPage
+            setHome={setHome}
+            user={user}
+            setPage={() => {
+              setPage("info");
+            }}
+          />
+        }
+      />
         <Route
           path="/new"
           element={
