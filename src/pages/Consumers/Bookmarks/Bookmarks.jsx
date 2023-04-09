@@ -106,12 +106,14 @@ export default function Bookmarks({ setPage, user }) {
   };
 
   return (
-    <div className="relative overflow-y-auto">
-      <div className="container fixed top-10 mx-0 mt-2 flex min-w-full items-center justify-around border-b-2 border-wAqua bg-white pb-2 pt-8">
+    <div className="flex h-full flex-col">
+      <div className="flex min-w-full items-center justify-around border-b-2 border-wAqua bg-wAqua-5 pb-2 pt-1">
         <button
           onClick={handleMedicinesClick}
           className={`${
-            showMedicines ? "border-b-4 border-wAqua text-wAqua" : ""
+            showMedicines
+              ? "border-b-4 border-wAqua text-wAqua"
+              : "text-wAqua-50"
           } px-2.5 font-semibold`}
         >
           Medicines
@@ -119,7 +121,9 @@ export default function Bookmarks({ setPage, user }) {
         <button
           onClick={handlePharmacistsClick}
           className={`${
-            showPharmacists ? "border-b-4 border-wAqua  text-wAqua" : ""
+            showPharmacists
+              ? "border-b-4 border-wAqua  text-wAqua"
+              : "text-wAqua-50"
           } px-2.5 font-semibold`}
         >
           Pharmacists
@@ -128,7 +132,7 @@ export default function Bookmarks({ setPage, user }) {
       <div className=""></div>
 
       {showMedicines && (
-        <div className="ml-2 mt-24 flex-col divide-y divide-solid overflow-y-auto pb-12">
+        <div className="ml-2 flex-col divide-y divide-solid overflow-y-auto">
           {/* <h2>Bookmarked Medicines</h2> */}
           {bookmarkedMedicines?.map((medicine) => (
             <div className="my-2" key={medicine._id}>
@@ -144,10 +148,10 @@ export default function Bookmarks({ setPage, user }) {
       )}
 
       {showPharmacists && (
-        <div className="ml-2 mt-24 divide-y divide-solid overflow-y-auto pb-12">
+        <div className="ml-2 divide-y divide-solid overflow-y-auto ">
           {/* <h2>Bookmarked Pharmacists</h2> */}
           {bookmarkedPharmacists?.map((pharmacist) => (
-            <div key={pharmacist._id} className="my-2">
+            <div key={pharmacist._id}>
               {/* <h3>Pharmacist ID: {pharmacist._id}</h3> */}
               <PharmacistCard
                 pharmacist={pharmacist}

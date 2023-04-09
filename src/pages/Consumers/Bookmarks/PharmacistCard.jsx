@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BookmarkButton from "../MedSearch/components/BookmarkButton";
 
 export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
@@ -28,9 +29,14 @@ export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
     <>
       <div className="pharmacist-info mt-2">
         <div className=" flex">
-          <h3 className="pharmacist-name w-10/12 font-bold">
-            {pharmacist.name}
-          </h3>
+          <Link
+            className="flex-1"
+            to="/consumers/availability/pharmacists/null"
+          >
+            <h3 className="pharmacist-name w-10/12 font-bold">
+              {pharmacist.name}
+            </h3>
+          </Link>
           <BookmarkButton
             id={id}
             field="pharmacists"
