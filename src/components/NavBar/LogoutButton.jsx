@@ -9,5 +9,12 @@ export default function LogoutButton({ setUser }) {
     navigate("/");
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <button
+      onClick={handleLogout}
+      className="block px-3 py-2 text-wAqua hover:bg-gray-100"
+    >
+      Logout
+    </button>
+  );
 }
