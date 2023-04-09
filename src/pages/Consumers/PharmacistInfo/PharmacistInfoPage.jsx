@@ -35,16 +35,21 @@ const PharmacistInfoPage = ({ setHome, userId }) => {
 
   return (
     <>
-    <div className="mt-10">
-    <div className="pt-12 flex h-full items-center justify-center flex-col">
-    <div className="bg-wAqua-50 rounded-lg shadow-lg p-5">
-      <p className="font-bold">{pharmacist?.name}</p>
-      <p>Currently at: {pharmacist?.store.name} 
-      <BookmarkButton id={userId} field="pharmacists" fieldId={id} /></p>
+      <div className="rounded-lg bg-wAqua-50 p-2 shadow-md">
+        <h1 className="font-bold text-wPurple">{pharmacist?.name}</h1>
+        <div className="flex flex-row">
+          <p className="flex-1">Currently at: {pharmacist?.store.name}</p>
+          <BookmarkButton id={userId} field="pharmacists" fieldId={id} />
+        </div>
       </div>
+      <div className="p-2">
+        <p>Further bio can be included here: </p>
+        <ul>
+          <li>Picture</li>
+          <li>Languagues</li>
+          <li>About</li>
+        </ul>
       </div>
-      </div>
-    
     </>
   );
 };
