@@ -56,6 +56,8 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
         setDisplay(toTitleCase(data.name));
       };
       getMedicine();
+    } else {
+      setDisplay("Pharmacists");
     }
   }, [field, id]);
 
@@ -70,10 +72,14 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
 
   return (
     <>
-      <h1>{display}</h1>{" "}
-      {display === "Pharmacists" ? null : (
-        <BookmarkButton id={userId} field="medicines" fieldId={id} />
-      )}
+      <div className="flex flex-row bg-wAqua-5">
+        <h1 className="ml-3 flex-1 self-center font-semibold text-wAqua">
+          {display}
+        </h1>{" "}
+        {display === "Pharmacists" ? null : (
+          <BookmarkButton id={userId} field="medicines" fieldId={id} />
+        )}
+      </div>
       <StoreMap stores={stores} currentPosition={currentPosition} />
       {/* insert circle marker for current position */}
       {stores?.map((s) => (

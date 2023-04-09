@@ -3,7 +3,7 @@ import { toTitleCase } from "../../../utilities/utilities";
 
 const StoreCard = ({ store, field }) => {
   return (
-    <>
+    <div className="mx-2">
       <hr />
       <h1 className="text-lg font-bold">{store.name}</h1>
       <div className="pl-3 leading-none text-gray-400">
@@ -28,7 +28,7 @@ const StoreCard = ({ store, field }) => {
       ) : (
         <p className="text-wRed">Pharmacist Not Available</p>
       )}
-    </>
+    </div>
   );
 };
 
