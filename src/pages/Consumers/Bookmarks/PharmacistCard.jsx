@@ -3,26 +3,26 @@ import BookmarkButton from "../MedSearch/components/BookmarkButton";
 
 export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
   const [stores, setStores] = useState([]);
+  const [availableAt, setAvailableAt] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log("token: ", token);
     const getStores = async () => {
-      const response = await fetch("/api/stores", {
-        headers: {
-          Authorization: ["bearer", token],
-        },
-      });
+      const response = await fetch(
+        "/api/stores/availability/?field=pharmacists&fieldId=null"
+      );
       const data = await response.json();
-      console.log("stores: ", data);
       setStores(data);
     };
     getStores();
   }, []);
 
-  const isAvailable = stores.some((store) =>
-    store.pharmacists.includes(pharmacist._id)
-  );
+  useEffect(() => {
+    setAvailableAt(
+      stores.find((store) =>
+        store.pharmacists.find((p) => p._id === pharmacist._id)
+      )
+    );
+  }, [stores]);
 
   return (
     <>
@@ -40,12 +40,8 @@ export default function PharmacistCard({ pharmacist, id, removePharmacist }) {
         </div>
 
         <div className="pharmacist-availability mt-2">
-          {isAvailable
-            ? `Currently available at ${
-                stores.find((store) =>
-                  store.pharmacists.includes(pharmacist._id)
-                ).name
-              } outlet.`
+          {availableAt
+            ? `Currently available at ${availableAt.name} outlet.`
             : "Not available"}
         </div>
         {/* <button onClick={removePharmacist(pharmacist._id)}> */}

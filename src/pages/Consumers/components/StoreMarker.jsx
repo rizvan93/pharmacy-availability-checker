@@ -7,7 +7,7 @@ import {
   lowMedNoPharmIcon,
   pharmIcon,
   noPharmIcon,
-} from "../../../assets/mapIcons/mapIcons";
+} from "./mapIcons";
 
 const LOW_STOCK_LEVEL = 10;
 

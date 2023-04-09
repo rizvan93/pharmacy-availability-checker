@@ -12,7 +12,6 @@ export default function Bookmarks({ setPage, user }) {
 
   useEffect(() => {
     if (!user) return;
-    console.log("user: ", user);
     setPage();
 
     const token = localStorage.getItem("token");
