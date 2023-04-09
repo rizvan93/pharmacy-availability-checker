@@ -37,11 +37,11 @@ export default function EditMedicineForm() {
 
   return (
     <>
-      <fieldset className="mt-20">
-        <legend className="font-bold">Medicine</legend>
+      <fieldset className="ml-2 mt-20">
+        <legend className="mb-2 font-bold">Medicine Edit</legend>
         <label className=" font-semibold">Name: </label>
         <input
-          className="w-8/12"
+          className="mb-2 w-8/12 pl-2"
           name="name"
           value={medicine.name}
           onChange={handleChange}
@@ -49,7 +49,7 @@ export default function EditMedicineForm() {
         <br />
         <label className=" font-semibold">Manufacturer: </label>
         <input
-          className=" w-8/12"
+          className=" mb-2 w-8/12 pl-2"
           name="manufacturer"
           value={medicine.manufacturer}
           onChange={handleChange}
@@ -57,7 +57,7 @@ export default function EditMedicineForm() {
         <br />
         <label className=" font-semibold">Form: </label>
         <input
-          className=" w-8/12"
+          className=" mb-2 w-8/12 pl-2"
           name="form"
           value={medicine.form}
           onChange={handleChange}
@@ -65,7 +65,7 @@ export default function EditMedicineForm() {
         <br />
         <label className=" font-semibold">Quantity: </label>
         <input
-          className=" w-8/12"
+          className=" mb-2 w-8/12 pl-2"
           name="quantity"
           value={medicine.quantity}
           onChange={handleChange}
@@ -73,13 +73,16 @@ export default function EditMedicineForm() {
         <br />
         <label className=" font-semibold">Strength: </label>
         <input
-          className=" w-8/12"
+          className=" mb-2 w-8/12 pl-2"
           name="strength"
           value={medicine.strength}
           onChange={handleChange}
         />
         <br />
-        <button className="mt-4" onClick={handleUpdate}>
+        <button
+          className="mt-4 bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50"
+          onClick={handleUpdate}
+        >
           Update Medicine
         </button>
       </fieldset>
