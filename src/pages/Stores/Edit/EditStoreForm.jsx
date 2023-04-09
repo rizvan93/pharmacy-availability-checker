@@ -40,13 +40,16 @@ const EditStoreForm = ({ store, setStore }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="ml-1 mt-14" onSubmit={handleSubmit}>
+        <button className="mb-2 inline-block rounded-xl bg-wAqua px-3 py-1.5 text-white hover:bg-wAqua-50">
+          Update Store
+        </button>
         <fieldset>
-          <legend>Store Particulars</legend>
+          <legend className=" font-bold underline">Store Particulars</legend>
           <StoreParticularsFieldset form={store} setForm={setStore} />
         </fieldset>
-        <fieldset>
-          <legend>Stocks</legend>
+        <fieldset className="mt-2">
+          <legend className=" font-bold underline">Stocks</legend>
           {medicines?.map((medicine) => (
             <MedicineStockForm
               medicine={medicine}
@@ -56,7 +59,6 @@ const EditStoreForm = ({ store, setStore }) => {
             />
           ))}
         </fieldset>
-        <button>UPDATE STORE</button>
       </form>
     </>
   );

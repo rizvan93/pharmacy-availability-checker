@@ -15,8 +15,8 @@ const MedicineStockForm = ({ medicine, store, setStore }) => {
   };
 
   return (
-    <label>
-      {medicine.name} :
+    <>
+      <label className="font-semibold">{medicine.name} :</label>
       <input
         name="quantity"
         type="number"
@@ -25,7 +25,8 @@ const MedicineStockForm = ({ medicine, store, setStore }) => {
         }
         onChange={handleChange}
       />
-    </label>
+      <br />
+    </>
   );
 };
 
