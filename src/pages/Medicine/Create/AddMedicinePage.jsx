@@ -3,8 +3,10 @@ import MedicineForm from "./NewMedicineForm";
 const AddMedicinePage = () => {
   return (
     <>
-      <h1>New Medicine</h1>
-      <MedicineForm />
+      <div className="mt-20">
+        <h1 className="mb-2 font-bold">New Medicine</h1>
+        <MedicineForm />
+      </div>
     </>
   );
 };

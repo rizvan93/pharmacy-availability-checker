@@ -35,10 +35,13 @@ const StoreForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="ml-1 mt-20" onSubmit={handleSubmit}>
       <fieldset>
         <StoreParticularsFieldset form={form} setForm={setForm} />
-        <button>Add Store</button>
+        <br />
+        <button className="mt-3 inline-block rounded-xl bg-wAqua px-4 py-1.5 text-white hover:bg-wAqua-50">
+          Add Store
+        </button>
       </fieldset>
     </form>
   );
