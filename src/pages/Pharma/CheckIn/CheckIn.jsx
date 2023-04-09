@@ -87,57 +87,63 @@ export default function CheckIn() {
   if (!pharmacist) {
     return <p>Loading...</p>;
   }
-  return (
-    <>
-      <div className="bg-wAqua-10 min-h-screen flex-col justify-center items-center">
-        <div className="container mx-auto px-4 py-8">
-          <Link to={`/pharmacists/${id}/edit`}>
-            <button className="rounded bg-blue-500 px-4 py-2 text-white">
-              Edit Pharmacist Details
+return (
+  <div className="min-h-screen bg-wAqua-10">
+    <div className="mx-auto max-w-md px-4 py-8">
+      <div className="rounded bg-white px-8 pb-8 pt-6 shadow-md">
+        <h1 className="mb-4 text-2xl font-bold text-center">
+          Check In Page
+        </h1>
+        <p className="mb-2 font-semibold text-center">
+          Pharmacist: {pharmacist.name}
+        </p>
+        {checkedInStore ? (
+          <>
+            <p className="mb-4 font-semibold text-center">
+              Currently checked in to: {checkedInStore.name}
+            </p>
+            <button
+              onClick={handleCheckOut}
+              className="bg-red-500 text-white rounded-md px-5 py-2 w-full"
+            >
+              Check Out
             </button>
-          </Link>
-          <h1 className="mb-4 text-2xl font-bold">Check In Page</h1>
-          <p className="mb-2 font-semibold">Pharmacist: {pharmacist.name}</p>
-          {checkedInStore ? (
-            <>
-              <p className="mb-4 font-semibold">
-                Currently checked in to: {checkedInStore.name}
-              </p>
-              <button
-                onClick={handleCheckOut}
-                className="bg-red-500 text-white rounded-md px-5 py-2 w-full"
-              >
-                Check Out
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="mb-4">
-                <label className="block font-semibold">Select a store:</label>
-                <select
-                  value={selectedStore}
-                  onChange={handleSelectStore}
-                  disabled={!!checkedInStore}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                >
-                  <option value="">-- Select a store --</option>
-                  {stores.map((store) => (
-                    <option key={store._id} value={store._id}>
-                      {store.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <button
-                onClick={handleCheckIn}
+          </>
+        ) : (
+          <>
+            <div className="mb-4">
+              <label className="block font-semibold">Select a store:</label>
+              <select
+                value={selectedStore}
+                onChange={handleSelectStore}
                 disabled={!!checkedInStore}
-                className="bg-wAqua text-white rounded-md px-5 py-2 w-full">
-                Check In
-              </button>
-            </>
-          )}
-        </div>
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+              >
+                <option value="">-- Select a store --</option>
+                {stores.map((store) => (
+                  <option key={store._id} value={store._id}>
+                    {store.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button
+              onClick={handleCheckIn}
+              disabled={!!checkedInStore}
+              className="bg-wAqua text-white rounded-md px-5 py-2 w-full"
+            >
+              Check In
+            </button>
+          </>
+        )}
       </div>
-    </>
-  );
+      <Link to={`/pharmacists/${id}/edit`}>
+        <button className="mt-4 rounded bg-blue-500 px-4 py-2 text-white w-full">
+          Edit Pharmacist Details
+        </button>
+      </Link>
+    </div>
+  </div>
+);
+
 }
