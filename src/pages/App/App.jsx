@@ -15,7 +15,7 @@ const AUTHENTICATE = true;
 
 const ACCOUNT = {
   accountType: "Consumer",
-  accountId: "642b8cb5f100db08d0114496",
+  accountId: "authenticate: false",
 };
 
 function App() {

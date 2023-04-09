@@ -50,7 +50,6 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
     getStores();
 
     if (field === "medicines") {
-      setDisplay("medicine name");
       const getMedicine = async () => {
         const response = await fetch(`/api/medicines/${id}`);
         const data = await response.json();
@@ -71,12 +70,10 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
 
   return (
     <>
-      {display ? (
-        <>
-          <h1>{display}</h1>{" "}
-          <BookmarkButton id={userId} field="medicines" fieldId={id} />
-        </>
-      ) : null}
+      <h1>{display}</h1>{" "}
+      {display === "Pharmacists" ? null : (
+        <BookmarkButton id={userId} field="medicines" fieldId={id} />
+      )}
       <StoreMap stores={stores} currentPosition={currentPosition} />
       {/* insert circle marker for current position */}
       {stores?.map((s) => (

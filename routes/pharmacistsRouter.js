@@ -4,7 +4,7 @@ const pharmacistsController = require("../controllers/pharmacistsController");
 const { isAuth } = require("../controllers/auth");
 // router.get("/seed", pharmacistController.seed);
 //Pharma check-in by ID
-router.get("/:id", isAuth(["Pharmacist"]), pharmacistsController.show);
+router.get("/:id", pharmacistsController.show);
 router.put("/:id", isAuth(["Pharmacist"]), pharmacistsController.update);
 router.put(
   "/:id/checkout",
