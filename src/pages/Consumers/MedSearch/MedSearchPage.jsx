@@ -30,28 +30,28 @@ const MedSearchPage = ({ setHome, user, setPage }) => {
   }, [medicinesFilteredForm]);
 
   return (
-<div className="bg-wAqua-10 min-h-screen flex flex-col justify-center items-center">
-  
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h1 className="text-3xl font-bold text-center mb-5 text-wAqua font-semibold">Medicine Availability</h1>
-    <MedNameForm setMedicines={setMedicines} />
-    <MedSelectForm
-      medicines={medicines}
-      field="form"
-      setMedicines={setMedicinesFilteredForm}
-    />
-    <MedSelectForm
-      medicines={medicinesFilteredForm}
-      field="quantity"
-      setMedicines={setMedicinesFilteredQuantity}
-    />
-    {medicinesFilteredQuantity?.map((m) => (
-      <MedCard medicine={m} key={m._id} id={user?.accountId} />
-    ))}
-  </div>
-  <PostalCodeForm />
-</div>
-
+    <div className="flex min-h-screen flex-col items-center justify-center bg-wAqua-10">
+      <div className="mb-8 w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <h1 className="mb-5 text-center text-3xl font-bold font-semibold text-wAqua">
+          Medicine Availability
+        </h1>
+        <MedNameForm setMedicines={setMedicines} />
+        <MedSelectForm
+          medicines={medicines}
+          field="form"
+          setMedicines={setMedicinesFilteredForm}
+        />
+        <MedSelectForm
+          medicines={medicinesFilteredForm}
+          field="quantity"
+          setMedicines={setMedicinesFilteredQuantity}
+        />
+        {medicinesFilteredQuantity?.map((m) => (
+          <MedCard medicine={m} key={m._id} id={user?.accountId} />
+        ))}
+      </div>
+      <PostalCodeForm />
+    </div>
   );
 };
 
