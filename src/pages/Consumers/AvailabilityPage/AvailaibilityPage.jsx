@@ -60,7 +60,6 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
     if (field === "medicines") {
       setDisplay("medicine name");
       const getMedicine = async () => {
-        console.log("before fetch");
         const response = await fetch(`/api/medicines/${id}`);
         const data = await response.json();
         setDisplay(toTitleCase(data.name));
@@ -78,6 +77,7 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
         </>
       ) : null}
       <StoreMap stores={stores} currentPosition={currentPosition} />
+      {/* insert circle marker for current position */}
       {stores?.map((s) => (
         <StoreCard store={s} key={s._id} field={field} />
       ))}
