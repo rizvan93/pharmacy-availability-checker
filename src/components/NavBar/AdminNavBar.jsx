@@ -45,6 +45,15 @@ export default function NavBar({ user, setUser }) {
         <div className=" mr-3" onClick={handleDropdown}>
           Welcome, {user?.name}!
         </div>
+        <>
+          {user && user.accountType === "Pharmacist" && (
+            <>
+              <span className=" float-right inline-block list-none px-3 py-2 font-semibold">
+                <LoggedInOptions setUser={setUser} />
+              </span>
+            </>
+          )}
+        </>
         {/* {dropdown ? (
           <ul className="absolute right-0 top-12 rounded-md py-1 text-wAqua-5 shadow-md">
             <LoggedInOptions setUser={setUser} />
