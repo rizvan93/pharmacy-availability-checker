@@ -37,42 +37,51 @@ export default function EditMedicineForm() {
 
   return (
     <>
-      <fieldset>
-        <legend>Medicine</legend>
-        <label>
-          Name:
-          <input name="name" value={medicine.name} onChange={handleChange} />
-        </label>
-        <label>
-          Manufacturer:
-          <input
-            name="manufacturer"
-            value={medicine.manufacturer}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Form:
-          <input name="form" value={medicine.form} onChange={handleChange} />
-        </label>
-        <label>
-          Quantity:
-          <input
-            name="quantity"
-            value={medicine.quantity}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Strength:
-          <input
-            name="strength"
-            value={medicine.strength}
-            onChange={handleChange}
-          />
-        </label>
+      <fieldset className="mt-20">
+        <legend className="font-bold">Medicine</legend>
+        <label className=" font-semibold">Name: </label>
+        <input
+          className="w-8/12"
+          name="name"
+          value={medicine.name}
+          onChange={handleChange}
+        />
         <br />
-        <button onClick={handleUpdate}>Update Medicine</button>
+        <label className=" font-semibold">Manufacturer: </label>
+        <input
+          className=" w-8/12"
+          name="manufacturer"
+          value={medicine.manufacturer}
+          onChange={handleChange}
+        />
+        <br />
+        <label className=" font-semibold">Form: </label>
+        <input
+          className=" w-8/12"
+          name="form"
+          value={medicine.form}
+          onChange={handleChange}
+        />
+        <br />
+        <label className=" font-semibold">Quantity: </label>
+        <input
+          className=" w-8/12"
+          name="quantity"
+          value={medicine.quantity}
+          onChange={handleChange}
+        />
+        <br />
+        <label className=" font-semibold">Strength: </label>
+        <input
+          className=" w-8/12"
+          name="strength"
+          value={medicine.strength}
+          onChange={handleChange}
+        />
+        <br />
+        <button className="mt-4" onClick={handleUpdate}>
+          Update Medicine
+        </button>
       </fieldset>
     </>
   );
