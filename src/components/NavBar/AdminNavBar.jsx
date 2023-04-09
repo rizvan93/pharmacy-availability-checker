@@ -10,8 +10,8 @@ export default function NavBar({ user, setUser }) {
   };
 
   return (
-    <div className="fixed bg-wAqua py-6 text-center text-wAqua-5">
-      <div className="container mx-auto">
+    <div className="fixed w-screen bg-wAqua py-3 text-center text-wAqua-5">
+      <div className="container mx-auto ">
         <nav className="inline-block">
           {user && user.accountType !== "Pharmacist" && (
             <>
@@ -36,20 +36,20 @@ export default function NavBar({ user, setUser }) {
                 Medicine
               </Link>
               &nbsp; | &nbsp;
+              <span className=" inline-block list-none px-3 py-2">
+                <LoggedInOptions setUser={setUser} />
+              </span>
             </>
           )}
         </nav>
-        <span
-          className="float-right mr-3 inline-block"
-          onClick={handleDropdown}
-        >
+        <div className=" mr-3" onClick={handleDropdown}>
           Welcome, {user?.name}!
-        </span>
-        {dropdown ? (
+        </div>
+        {/* {dropdown ? (
           <ul className="absolute right-0 top-12 rounded-md py-1 text-wAqua-5 shadow-md">
             <LoggedInOptions setUser={setUser} />
           </ul>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );

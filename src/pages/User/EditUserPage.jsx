@@ -16,9 +16,9 @@ export default function EditUserPage() {
   }, [id]);
 
   return (
-    <>
+    <div className="mt-14">
       <h1 className="px-10 font-bold">Edit Information</h1>
       <UserEditForm />
-    </>
+    </div>
   );
 }

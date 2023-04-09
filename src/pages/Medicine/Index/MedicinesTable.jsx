@@ -2,19 +2,20 @@ import MedicineRow from "./MedicineRow";
 
 const MedicinesTable = ({ medicines, removeMedicine }) => {
   return (
-<table className="min-w-full table-auto border-collapse">
+    <table className="min-w-full table-auto border-collapse">
       <thead>
-        <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-          <th className="py-3 px-6 text-left">Name</th>
-          <th className="py-3 px-6 text-left">Type</th>
-          <th className="py-3 px-6 text-left">Pack Count</th>
-          <th className="py-3 px-6 text-left">Dose</th>
-          <th className="py-3 px-6 text-left">UOM</th>
-          <th className="py-3 px-6 text-left">Edit</th>
-          <th className="py-3 px-6 text-left">Delete</th>
+        <tr className="bg-gray-200 text-sm uppercase leading-normal text-black">
+          <th className="px-6 py-3 text-left">Name</th>
+          {/* <th className="px-6 py-3 text-left">Type</th>
+          <th className="px-6 py-3 text-left">Pack Count</th>
+          <th className="px-6 py-3 text-left">Dose</th>
+          <th className="px-6 py-3 text-left">UOM</th>
+          <th className="px-6 py-3 text-left">Edit</th>
+          <th className="px-6 py-3 text-left">Delete</th> */}
+          <th></th>
         </tr>
       </thead>
-      <tbody className="text-gray-600 text-sm font-light">
+      <tbody className="text-sm font-light text-black">
         {medicines?.map((medicine) => (
           <MedicineRow
             medicine={medicine}

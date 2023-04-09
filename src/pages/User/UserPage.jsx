@@ -38,7 +38,7 @@ export default function UserPage() {
   };
 
   return (
-    <div className="mt-14 px-4 py-8">
+    <div className="mt-14 py-8">
       <div className="flex items-center justify-between">
         <UserTypeFilter handleFilter={handleFilter} />
         <h1 className="font-sans text-3xl font-bold text-wPurple underline">
@@ -54,7 +54,7 @@ export default function UserPage() {
 
       <br />
       <table className="w-full">
-        <thead className="bg-[#e2e8f0] text-black">
+        <thead className=" bg-[#e2e8f0] text-black">
           <tr>
             <th className="px-4 py-3">Name</th>
             <th className="px-4 py-3">Role</th>

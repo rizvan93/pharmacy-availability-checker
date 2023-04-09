@@ -29,7 +29,9 @@ export default function TopNavBar({ user, backButton, setUser }) {
               <img className="h-10" src={backIcon} />
             </button>
           ) : (
-            <Link to="/consumers/info"><img src={infoLogo} className="max-h-10" /></Link>
+            <Link to="/consumers/info">
+              <img src={infoLogo} className="max-h-10" />
+            </Link>
           )}
         </div>
 

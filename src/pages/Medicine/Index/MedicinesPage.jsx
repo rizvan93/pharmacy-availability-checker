@@ -2,7 +2,6 @@ import MedicinesTable from "./MedicinesTable";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-
 const MedicinesPage = () => {
   const [medicines, setMedicines] = useState(null);
 
@@ -21,15 +20,19 @@ const MedicinesPage = () => {
 
   return (
     <>
-      <br />
-      <h1 className="text-3xl font-bold underline font-sans text-wPurple">Medicines</h1>
-      <Link to="/medicines/new">
-        <button className="inline-block bg-wAqua hover:bg-wAqua-50 text-white py-2 px-4 rounded-full">Add New Medicine Here</button>
-      </Link>
-      <MedicinesTable medicines={medicines} removeMedicine={removeMedicine} />
+      <div className="mt-12 w-screen py-6">
+        <h1 className="font-sans text-3xl font-bold text-wPurple underline">
+          Medicines
+        </h1>
+        <Link to="/medicines/new">
+          <button className="inline-block rounded-full bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
+            Add New Medicine Here
+          </button>
+        </Link>
+        <MedicinesTable medicines={medicines} removeMedicine={removeMedicine} />
+      </div>
     </>
   );
 };
 
 export default MedicinesPage;
-

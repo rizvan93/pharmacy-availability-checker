@@ -25,7 +25,7 @@ const StoresPage = () => {
 
   return (
     <>
-      <div className="py- flex flex-row justify-between px-4 py-8">
+      <div className=" mt-14 flex flex-row justify-between px-4 py-6">
         <div className="w-20"></div>
         <h1 className="font-sans text-3xl font-bold text-wPurple underline">
           Stores
