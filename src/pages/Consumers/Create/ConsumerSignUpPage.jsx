@@ -6,14 +6,14 @@ export default function ConsumerSignUpPage({ setHome }) {
     setHome(false);
   }, []);
 
-return (
-<div className="bg-wAqua-10 min-h-screen flex items-center justify-center px-4">
-  <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 mt-1">
-    <h1 className="text-3xl text-center mb-5 text-wAqua font-semibold">New User Sign Up</h1>
-    <ConsumerSignUpForm />
-  </div>
-</div>
-
-);
-
+  return (
+    <div className="flex h-full bg-wAqua-10 px-4 py-2">
+      <div className="mt-1 w-full rounded-lg bg-white p-6 shadow-lg">
+        <h1 className="mb-5 text-center text-3xl font-semibold text-wAqua">
+          New User Sign Up
+        </h1>
+        <ConsumerSignUpForm />
+      </div>
+    </div>
+  );
 }

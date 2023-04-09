@@ -10,18 +10,20 @@ const AuthPage = ({ setUser }) => {
   }, []);
 
   return (
-    <>
-    <TopNavBar backButton={!home}/>
-    <div className="flex flex-col justify-center items-center h-[35rem]">
-    <div>
-      <p className="text-wAqua font-semibold text-xl">Log in for the full W+ experience</p>
+    <div className="flex h-screen flex-col">
+      <TopNavBar backButton={!home} />
+      <div className="flex h-[35rem] flex-1 flex-col items-center justify-center">
+        <div>
+          <p className="text-xl font-semibold text-wAqua">
+            Log in for the full W+ experience
+          </p>
+        </div>
+        <div>
+          <LoginForm setUser={setUser} />
+        </div>
+      </div>
+      <BotttomNavBar />
     </div>
-    <div>
-      <LoginForm setUser={setUser} />
-    </div>
-    <BotttomNavBar />
-  </div>
-    </>
   );
 };
 
