@@ -67,6 +67,7 @@ export default function EditDetailsPage() {
           body: JSON.stringify(pharmacist),
           headers: {
             "Content-Type": "application/json",
+            Authorization: ["bearer", token],
           },
         });
         const data = await res.json();

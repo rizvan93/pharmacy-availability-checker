@@ -40,8 +40,19 @@ const update = async (req, res) => {
       { new: true }
     );
 
-    const store = await Store.findOne({ name: defaultStore });
-    updatedPharmacist.defaultStore = store._id;
+    // const store = await Store.findOne({ name: defaultStore });
+    // updatedPharmacist.defaultStore = store._id;
+    // await updatedPharmacist.save();
+
+    let store = null;
+    if (defaultStore) {
+      store = await Store.findOne({ name: defaultStore });
+      if (!store) {
+        return res.status(404).json({ message: "Store not found" });
+      }
+    }
+
+    updatedPharmacist.defaultStore = store ? store._id : null;
     await updatedPharmacist.save();
 
     res.status(200).json({ updatedPharmacist });
