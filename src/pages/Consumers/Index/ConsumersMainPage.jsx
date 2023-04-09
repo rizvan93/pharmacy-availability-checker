@@ -10,20 +10,20 @@ export default function ConsumersMainPage({ setHome, setPage }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-wAqua-10">
-      <div className="container mx-auto flex flex-col items-center justify-center p-4">
-        <div className="m-4 rounded-tl-2xl bg-white p-4 shadow-md">
+    <div className=" bg-wAqua-10">
+      <div className="container mx-auto flex flex-col items-center justify-center p-2">
+        <div className="m-2 rounded-tl-2xl bg-white p-4 shadow-md">
           <Link to="/availability/pharmacists/null">
-            <p className="text-center text-4xl text-[#3A1730]">
+            <p className="ml-7 text-left text-2xl font-semibold text-wPurple">
               Check pharmacist availability
             </p>
             <img src={WatsonPharm} width="800" />
           </Link>
         </div>
 
-        <div className="m-4 rounded-tl-2xl bg-white p-4 shadow-md">
+        <div className="m-2 rounded-tl-2xl bg-white p-4 shadow-md">
           <Link to="/consumers/medicines">
-            <p className="text-center text-4xl text-[#3A1730]">
+            <p className="ml-7 text-left text-2xl font-semibold text-wPurple">
               Check medicine availability
             </p>
             <img src={WatsonMedi} width="800" />
