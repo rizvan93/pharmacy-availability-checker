@@ -40,40 +40,45 @@ export default function EditMedicineForm() {
       <fieldset className="ml-2 mt-20">
         <legend className="mb-2 font-bold">Medicine Edit</legend>
         <label className=" font-semibold">Name: </label>
+        <br />
         <input
-          className="mb-2 w-8/12 pl-2"
+          className=" mb-2 w-80 bg-gray-200 pl-2"
           name="name"
           value={medicine.name}
           onChange={handleChange}
         />
         <br />
         <label className=" font-semibold">Manufacturer: </label>
+        <br />
         <input
-          className=" mb-2 w-8/12 pl-2"
+          className=" mb-2 w-80 bg-gray-200 pl-2"
           name="manufacturer"
           value={medicine.manufacturer}
           onChange={handleChange}
         />
         <br />
         <label className=" font-semibold">Form: </label>
+        <br />
         <input
-          className=" mb-2 w-8/12 pl-2"
+          className=" mb-2 w-80 bg-gray-200 pl-2"
           name="form"
           value={medicine.form}
           onChange={handleChange}
         />
         <br />
         <label className=" font-semibold">Quantity: </label>
+        <br />
         <input
-          className=" mb-2 w-8/12 pl-2"
+          className=" mb-2 w-80 bg-gray-200 pl-2"
           name="quantity"
           value={medicine.quantity}
           onChange={handleChange}
         />
         <br />
         <label className=" font-semibold">Strength: </label>
+        <br />
         <input
-          className=" mb-2 w-8/12 pl-2"
+          className=" mb-2 w-80 bg-gray-200 pl-2"
           name="strength"
           value={medicine.strength}
           onChange={handleChange}
