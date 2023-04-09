@@ -50,6 +50,7 @@ const MedicineForm = () => {
             required
           />
         </label>
+        <br />
         <label>
           Manufacturer:{" "}
           <input
@@ -59,6 +60,7 @@ const MedicineForm = () => {
             required
           />
         </label>
+        <br />
         <label>
           Form:{" "}
           <input
@@ -68,6 +70,7 @@ const MedicineForm = () => {
             required
           />
         </label>
+        <br />
         <label>
           Quantity:{" "}
           <input
@@ -77,6 +80,7 @@ const MedicineForm = () => {
             required
           />
         </label>
+        <br />
         <label>
           Strength:{" "}
           <input
@@ -86,7 +90,10 @@ const MedicineForm = () => {
             required
           />
         </label>
-        <button>Add New Medicine</button>
+        <br />
+        <button className="mt-3 inline-block rounded-xl bg-wAqua px-3 py-1.5 text-white hover:bg-wAqua-50">
+          Add New Medicine
+        </button>
       </fieldset>
     </form>
   );
