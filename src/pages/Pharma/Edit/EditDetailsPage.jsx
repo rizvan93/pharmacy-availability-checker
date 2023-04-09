@@ -81,10 +81,10 @@ export default function EditDetailsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-wAqua-10">
+    <div className="mt-16 min-h-screen bg-wAqua-10">
       <div className="mx-auto max-w-md px-4 py-8">
         <Link to={`/pharmacists/${id}`}>
-          <button className="mb-4 rounded bg-blue-500 px-4 py-2 text-white">
+          <button className="mb-4 mt-2 rounded bg-wAqua px-4 py-2 font-semibold text-white">
             Back
           </button>
         </Link>
@@ -130,7 +130,7 @@ export default function EditDetailsPage() {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+              className=" mt-2 rounded bg-wAqua px-4 py-2 font-semibold text-white"
               type="submit"
             >
               Update
