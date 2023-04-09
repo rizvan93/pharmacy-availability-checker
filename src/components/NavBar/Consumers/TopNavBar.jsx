@@ -20,7 +20,7 @@ export default function TopNavBar({ user, backButton, setUser }) {
 
   return (
     <nav
-      className={`${background}`}
+      className={`${background} w-full px-4 py-3`}
       // className={`${background} fixed left-0 top-0 z-20 block w-full px-4 py-3`}
     >
       <div className="container mx-auto flex h-10 items-center justify-between">
