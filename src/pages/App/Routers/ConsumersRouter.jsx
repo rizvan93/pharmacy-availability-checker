@@ -15,89 +15,95 @@ const ConsumersRouter = ({ user, setUser }) => {
   const [page, setPage] = useState("home");
 
   return (
-    <>
-      <TopNavBar backButton={!home} user={user} setUser={setUser} />
-      
-      <Routes>
-        <Route
-        path="/info"
-        element={
-          <InfoPage
-            setHome={setHome}
-            user={user}
-            setPage={() => {
-              setPage("info");
-            }}
-          />
-        }
-      />
-        <Route
-          path="/new"
-          element={
-            <ConsumerSignUpPage
-              setHome={setHome}
-              setPage={() => {
-                setPage("");
-              }}
+    <div className="h-screen overflow-hidden">
+      <div className="flex  flex-col justify-between">
+        <TopNavBar backButton={!home} user={user} setUser={setUser} />
+        <div className="overflow-y-scroll">
+          <Routes>
+            <Route
+              path="/info"
+              element={
+                <InfoPage
+                  setHome={setHome}
+                  user={user}
+                  setPage={() => {
+                    setPage("info");
+                  }}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/medicines"
-          element={
-            <MedSearchPage
-              setHome={setHome}
-              user={user}
-              setPage={() => {
-                setPage("medicines");
-              }}
+            <Route
+              path="/new"
+              element={
+                <ConsumerSignUpPage
+                  setHome={setHome}
+                  setPage={() => {
+                    setPage("");
+                  }}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/pharmacists/:id"
-          element={
-            <PharmacistInfoPage setHome={setHome} userId={user?.accountId} />
-          }
-        />
-        <Route
-          path="/availability/:field/:id"
-          element={
-            <AvailabilityPage
-              setHome={setHome}
-              setPage={setPage}
-              userId={user?.accountId}
+            <Route
+              path="/medicines"
+              element={
+                <MedSearchPage
+                  setHome={setHome}
+                  user={user}
+                  setPage={() => {
+                    setPage("medicines");
+                  }}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/bookmarks"
-          element={
-            <Bookmarks
-              user={user}
-              setPage={() => {
-                setPage("bookmarks");
-              }}
+            <Route
+              path="/pharmacists/:id"
+              element={
+                <PharmacistInfoPage
+                  setHome={setHome}
+                  userId={user?.accountId}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/*"
-          element={
-            <ConsumersMainPage
-              user={user}
-              setUser={setUser}
-              setHome={setHome}
-              setPage={() => {
-                setPage("home");
-              }}
+            <Route
+              path="/availability/:field/:id"
+              element={
+                <AvailabilityPage
+                  setHome={setHome}
+                  setPage={setPage}
+                  userId={user?.accountId}
+                />
+              }
             />
-          }
-        />
-        {/* <Route path="/bookmarks" element={<Bookmarks user={user} />} /> */}
-      </Routes>
-      <BottomNavBar user={user} page={page} />
-    </>
+            <Route
+              path="/bookmarks"
+              element={
+                <Bookmarks
+                  user={user}
+                  setPage={() => {
+                    setPage("bookmarks");
+                  }}
+                />
+              }
+            />
+            <Route
+              path="/*"
+              element={
+                <ConsumersMainPage
+                  user={user}
+                  setUser={setUser}
+                  setHome={setHome}
+                  setPage={() => {
+                    setPage("home");
+                  }}
+                />
+              }
+            />
+            {/* <Route path="/bookmarks" element={<Bookmarks user={user} />} /> */}
+          </Routes>
+        </div>
+        <BottomNavBar user={user} page={page} />
+      </div>
+    </div>
   );
 };
 

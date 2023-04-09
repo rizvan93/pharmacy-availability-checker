@@ -4,7 +4,8 @@ import Icon from "./NavBarButtons/Icon";
 
 export default function BotttomNavBar({ user, page }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 bg-wAqua-5 px-2 py-2">
+    <nav>
+      {/* <div className="fixed inset-x-0 bottom-0 bg-wAqua-5 px-2 py-2"> */}
       <div className="container mx-auto flex items-center justify-between justify-items-center">
         <Link to="/" className="shrink">
           <Icon field="home" selected={page === "home"} />
@@ -24,6 +25,6 @@ export default function BotttomNavBar({ user, page }) {
           </Link>
         ) : null}
       </div>
-    </div>
+    </nav>
   );
 }

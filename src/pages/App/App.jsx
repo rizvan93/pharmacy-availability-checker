@@ -38,7 +38,6 @@ function App() {
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
           <NavBar user={user} setUser={setUser} />
         ) : null}
-        <br />
         <Routes>
           <Route path="/login" element={<AuthPage setUser={setUser} />} />
           <Route path="/users/*" element={<UsersRouter user={user} />} />

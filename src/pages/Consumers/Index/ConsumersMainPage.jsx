@@ -11,7 +11,6 @@ export default function ConsumersMainPage({ setHome, setPage }) {
 
   return (
     <div className="min-h-screen bg-wAqua-10">
-      <br />
       <div className="container mx-auto flex flex-col items-center justify-center p-4">
         <div className="m-4 rounded-tl-2xl bg-white p-4 shadow-md">
           <Link to="/availability/pharmacists/null">
