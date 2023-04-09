@@ -6,11 +6,19 @@ const StoreParticularsFieldset = ({ form, setForm }) => {
   if (form) {
     return (
       <>
-        <label className="font-semibold">Name: </label>{" "}
-        <input name="name" value={form.name} onChange={handleChange} required />
+        <label className="font-semibold">Name: </label> <br />
+        <input
+          className="mb-4 bg-gray-200 p-2"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
         <br />
         <label className="font-semibold">Street Address: </label>
+        <br />
         <input
+          className="mb-4 bg-gray-200 p-2"
           name="streetAddress"
           value={form.streetAddress}
           onChange={handleChange}
@@ -19,7 +27,9 @@ const StoreParticularsFieldset = ({ form, setForm }) => {
         />
         <br />
         <label className="font-semibold">Unit Number: </label>
+        <br />
         <input
+          className="mb-4 bg-gray-200 p-2"
           name="unitNumber"
           value={form.unitNumber}
           onChange={handleChange}
@@ -28,7 +38,9 @@ const StoreParticularsFieldset = ({ form, setForm }) => {
         />
         <br />
         <label className="font-semibold">Postal Code: </label>
+        <br />
         <input
+          className="mb-4 bg-gray-200 p-2"
           name="postalCode"
           value={form.postalCode}
           onChange={handleChange}

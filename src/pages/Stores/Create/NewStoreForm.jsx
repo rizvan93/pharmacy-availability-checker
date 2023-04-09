@@ -35,15 +35,18 @@ const StoreForm = () => {
   };
 
   return (
-    <form className="ml-1 mt-20" onSubmit={handleSubmit}>
-      <fieldset>
-        <StoreParticularsFieldset form={form} setForm={setForm} />
-        <br />
-        <button className="mt-3 inline-block rounded-xl bg-wAqua px-4 py-1.5 text-white hover:bg-wAqua-50">
-          Add Store
-        </button>
-      </fieldset>
-    </form>
+    <div className=" mt-16 px-10">
+      <h1 className="mb-4 font-bold">New Store</h1>
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <StoreParticularsFieldset form={form} setForm={setForm} />
+          <br />
+          <button className="mt-3 inline-block rounded-xl bg-wAqua px-4 py-1.5 text-white hover:bg-wAqua-50">
+            Add Store
+          </button>
+        </fieldset>
+      </form>
+    </div>
   );
 };
 

@@ -63,7 +63,7 @@ const UserCreateForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset className="px-10 py-6">
-        <label>
+        <label className="font-semibold">
           {" "}
           Name: <br />
           <input
@@ -76,7 +76,7 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label>
+        <label className="font-semibold">
           {" "}
           User ID: <br />
           <input
@@ -89,7 +89,7 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label>
+        <label className="font-semibold">
           {" "}
           Password: <br />
           <input
@@ -102,7 +102,7 @@ const UserCreateForm = () => {
         </label>
         <br />
 
-        <label>
+        <label className="font-semibold">
           {" "}
           Account Type:
           <br />
@@ -145,7 +145,7 @@ const UserCreateForm = () => {
         )}
 
         <br />
-        <button className="bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
+        <button className="rounded-xl bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
           Add New User
         </button>
       </fieldset>

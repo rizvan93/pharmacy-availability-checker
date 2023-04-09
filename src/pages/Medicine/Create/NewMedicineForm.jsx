@@ -41,55 +41,51 @@ const MedicineForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>
-        <label>
-          Name:{" "}
-          <input
-            name="name"
-            value={medicine.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <label className="font-semibold">Name: </label>
         <br />
-        <label>
-          Manufacturer:{" "}
-          <input
-            name="manufacturer"
-            value={medicine.manufacturer}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <input
+          className="mb-4 bg-gray-200 p-2"
+          name="name"
+          value={medicine.name}
+          onChange={handleChange}
+          required
+        />
         <br />
-        <label>
-          Form:{" "}
-          <input
-            name="form"
-            value={medicine.form}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <label className="font-semibold">Manufacturer: </label> <br />
+        <input
+          className="mb-4 bg-gray-200 p-2"
+          name="manufacturer"
+          value={medicine.manufacturer}
+          onChange={handleChange}
+          required
+        />
         <br />
-        <label>
-          Quantity:{" "}
-          <input
-            name="quantity"
-            value={medicine.quantity}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <label className="font-semibold">Form: </label> <br />
+        <input
+          className="mb-4 bg-gray-200 p-2"
+          name="form"
+          value={medicine.form}
+          onChange={handleChange}
+          required
+        />
         <br />
-        <label>
-          Strength:{" "}
-          <input
-            name="strength"
-            value={medicine.strength}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <label className="font-semibold">Quantity: </label> <br />
+        <input
+          className="mb-4 bg-gray-200 p-2"
+          name="quantity"
+          value={medicine.quantity}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label className="font-semibold">Strength: </label> <br />
+        <input
+          className="mb-4 bg-gray-200 p-2"
+          name="strength"
+          value={medicine.strength}
+          onChange={handleChange}
+          required
+        />
         <br />
         <button className="mt-3 inline-block rounded-xl bg-wAqua px-3 py-1.5 text-white hover:bg-wAqua-50">
           Add New Medicine
