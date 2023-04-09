@@ -39,14 +39,14 @@ export default function UserPage() {
 
   return (
     <div className="mt-14 py-8">
-      <div className="flex items-center justify-between">
+      <div className="ml-1 flex items-center justify-between">
         <UserTypeFilter handleFilter={handleFilter} />
-        <h1 className="font-sans text-3xl font-bold text-wPurple underline">
+        <h1 className="font-sans text-3xl font-bold  text-wPurple underline">
           Users
         </h1>
 
         <Link to="/users/new">
-          <button className="inline-block rounded-full bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
+          <button className="mr-1 inline-block rounded-xl bg-wAqua px-4 py-1.5 text-white hover:bg-wAqua-50">
             Add New User
           </button>
         </Link>

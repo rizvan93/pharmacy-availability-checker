@@ -25,13 +25,13 @@ const StoresPage = () => {
 
   return (
     <>
-      <div className=" mt-14 flex flex-row justify-between px-4 py-6">
+      <div className="mt-16 flex w-screen flex-col items-center justify-center py-2">
         <div className="w-20"></div>
-        <h1 className="font-sans text-3xl font-bold text-wPurple underline">
+        <h1 className="mb-2 font-sans text-3xl font-bold text-wPurple underline">
           Stores
         </h1>
         <Link to="/stores/new">
-          <button className="inline-block rounded-full bg-wAqua px-4 py-2 text-white hover:bg-wAqua-50">
+          <button className="inline-block rounded-xl bg-wAqua px-4 py-1.5 text-white hover:bg-wAqua-50">
             Add New Store
           </button>
         </Link>
