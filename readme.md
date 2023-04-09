@@ -21,7 +21,7 @@ A MERN stack app that is being developed as a class project at General Assembly.
 # Wireframe
 ![admin](readmeImg/Wireframe_Admin.jpg)
 ![consumer](readmeImg/Wireframe_Consumer.jpg)
-![pharmacist](readmeImg/Wireframe_Pharmacist.png)
+![pharmacist](readmeImg/Wireframe_Pharmacist.jpg)
 
 # User Stories
 As a consumer user, I want to 
