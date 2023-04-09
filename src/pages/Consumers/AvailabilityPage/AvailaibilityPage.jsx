@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
 import StoreMap from "../components/StoreMap";
 import StoreCard from "./StoreCard";
@@ -7,6 +7,7 @@ import BookmarkButton from "../MedSearch/components/BookmarkButton";
 
 const AvailabilityPage = ({ setHome, setPage, userId }) => {
   const { field, id } = useParams();
+  const fetchedStoresCount = useRef(0);
   const [stores, setStores] = useState();
   const [display, setDisplay] = useState("Pharmacists");
   const [currentPosition, setCurrentPosition] = useState(null);
@@ -17,42 +18,33 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
       setPage("pharmacists");
     }
 
-    const geoOptions = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
+    navigator.geolocation.getCurrentPosition(
+      geoSuccess(setCurrentPosition),
+      geoError,
+      geoOptions
+    );
 
-    function geoSuccess(pos) {
-      const crd = pos.coords;
-      setCurrentPosition(crd);
-    }
-
-    function geoError(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-  }, [field, id]);
-
-  useEffect(() => {
     const getStores = async () => {
-      const response = await fetch(
-        `/api/stores/availability/?field=${field}&fieldId=${id}`
-      );
-      const data = await response.json();
-      if (!data.error) {
-        setStores(
-          data.map((s) => {
-            const store = {
-              ...s,
-            };
-            if (s.stocks) {
-              store.stocks = s?.stocks[0].quantity;
-            }
-            return store;
-          })
+      try {
+        const response = await fetch(
+          `/api/stores/availability/?field=${field}&fieldId=${id}`
         );
+        const data = await response.json();
+        if (!data.error) {
+          setStores(
+            data.map((s) => {
+              const store = {
+                ...s,
+              };
+              if (s.stocks) {
+                store.stocks = s?.stocks[0].quantity;
+              }
+              return store;
+            })
+          );
+        }
+      } finally {
+        fetchedStoresCount.current += 1;
       }
     };
     getStores();
@@ -67,6 +59,15 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
       getMedicine();
     }
   }, [field, id]);
+
+  useEffect(() => {
+    if (currentPosition && stores) {
+      const sortedStores = [...stores].sort((a, b) =>
+        compareDistances(a, b, currentPosition)
+      );
+      setStores(sortedStores);
+    }
+  }, [currentPosition, fetchedStoresCount.current]);
 
   return (
     <>
@@ -83,6 +84,32 @@ const AvailabilityPage = ({ setHome, setPage, userId }) => {
       ))}
     </>
   );
+};
+
+const geoOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+const geoSuccess = (setCurrentPosition) => (pos) => {
+  const crd = pos.coords;
+  setCurrentPosition(crd);
+};
+
+const geoError = (err) => {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+};
+
+const compareDistances = (a, b, currentPosition) => {
+  const aLatDiff = a.lat - currentPosition.latitude;
+  const aLonDiff = a.lon - currentPosition.longitude;
+  const aDist = (aLatDiff ** 2 + aLonDiff ** 2) ** 0.5;
+  const bLatDiff = b.lat - currentPosition.latitude;
+  const bLonDiff = b.lon - currentPosition.longitude;
+  const bDist = (bLatDiff ** 2 + bLonDiff ** 2) ** 0.5;
+
+  return aDist - bDist;
 };
 
 export default AvailabilityPage;

@@ -12,7 +12,6 @@ const StoreMap = ({ stores, currentPosition }) => {
 
   useEffect(() => {
     if (!currentPosition) return;
-    console.log("currentPosition: ", currentPosition);
 
     const updateCenter = (latLong, zoom) => {
       map.target.setView(latLong, zoom);
