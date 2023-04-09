@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function UserEditForm() {
   const { id } = useParams();
-  const [users, setUsers] = useState({ name: "", accountType: "" });
+  const [users, setUsers] = useState({ name: "", userId: "", accountType: "" });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +15,7 @@ export default function UserEditForm() {
         },
       });
       const user = await response.json();
+      setUsers(user)
     };
     fetchUsers();
   }, [id]);
@@ -27,10 +28,12 @@ export default function UserEditForm() {
 
   const handleUpdate = async (event) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(`/api/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: ["bearer", token],
         },
         body: JSON.stringify(users),
       });
