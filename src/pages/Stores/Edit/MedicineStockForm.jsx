@@ -18,6 +18,7 @@ const MedicineStockForm = ({ medicine, store, setStore }) => {
     <>
       <label className="font-semibold">{medicine.name} :</label>
       <input
+        className="mb-2 bg-gray-200"
         name="quantity"
         type="number"
         value={
