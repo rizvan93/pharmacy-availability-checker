@@ -11,7 +11,7 @@ export default function NavBar({ user, setUser }) {
   };
 
   return (
-    <div className="w-full bg-wAqua px-4 py-3 text-center text-wAqua-5">
+    <div className="w-full bg-wAqua py-3 text-center text-wAqua-5 md:px-4">
       <div className="container mx-auto ">
         <nav className="inline-block">
           {user && user.accountType !== "Pharmacist" && (
@@ -50,7 +50,7 @@ export default function NavBar({ user, setUser }) {
           {user && user.accountType === "Pharmacist" && (
             <>
               <span className=" float-right inline-block list-none px-3 py-2 font-semibold">
-                <LoggedInOptions setUser={setUser} />
+                <LogoutButton setUser={setUser} />
               </span>
             </>
           )}

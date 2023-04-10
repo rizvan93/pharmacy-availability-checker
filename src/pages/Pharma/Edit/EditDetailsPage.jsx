@@ -81,8 +81,8 @@ export default function EditDetailsPage() {
   };
 
   return (
-    <div className="mt-16 min-h-screen bg-wAqua-10">
-      <div className="mx-auto max-w-md px-4 py-8">
+    <div className="min-h-screen bg-wAqua-10">
+      <div className="mx-auto max-w-md px-4">
         <Link to={`/pharmacists/${id}`}>
           <button className="mb-4 mt-2 rounded bg-wAqua px-4 py-2 font-semibold text-white">
             Back

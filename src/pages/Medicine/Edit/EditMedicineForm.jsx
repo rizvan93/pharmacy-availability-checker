@@ -37,7 +37,7 @@ export default function EditMedicineForm() {
 
   return (
     <>
-      <fieldset className="ml-2 mt-20">
+      <fieldset className="ml-2">
         <legend className="mb-2 font-bold">Medicine Edit</legend>
         <label className=" font-semibold">Name: </label>
         <br />

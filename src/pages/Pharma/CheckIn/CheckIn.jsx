@@ -88,7 +88,7 @@ export default function CheckIn() {
     return <p>Loading...</p>;
   }
   return (
-    <div className="mt-20 min-h-screen bg-wAqua-10">
+    <div className="min-h-screen bg-wAqua-10">
       <div className="mx-auto max-w-md px-4 py-8">
         <div className="rounded bg-white px-8 pb-8 pt-6 shadow-md">
           <h1 className="mb-4 text-center text-2xl font-bold">Check In Page</h1>
