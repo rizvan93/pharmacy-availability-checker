@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import LoggedInOptions from "./LoggedInOptions";
+import LogoutButton from "./LogoutButton";
 
 export default function NavBar({ user, setUser }) {
   const [dropdown, setDropdown] = useState(false);
@@ -10,7 +11,7 @@ export default function NavBar({ user, setUser }) {
   };
 
   return (
-    <div className="fixed w-screen bg-wAqua py-3 text-center text-wAqua-5">
+    <div className="fixed w-screen bg-wAqua text-center text-wAqua-5">
       <div className="container mx-auto ">
         <nav className="inline-block">
           {user && user.accountType !== "Pharmacist" && (
@@ -37,7 +38,7 @@ export default function NavBar({ user, setUser }) {
               </Link>
               &nbsp; | &nbsp;
               <span className=" inline-block list-none px-3 py-2">
-                <LoggedInOptions setUser={setUser} />
+                <LogoutButton setUser={setUser} />
               </span>
             </>
           )}

@@ -33,32 +33,34 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className="flex h-screen flex-col justify-between">
         {user &&
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
           <NavBar user={user} setUser={setUser} />
         ) : null}
-        <Routes>
-          <Route path="/login" element={<AuthPage setUser={setUser} />} />
-          <Route path="/users/*" element={<UsersRouter user={user} />} />
-          <Route path="/stores/*" element={<StoresRouter user={user} />} />
-          <Route
-            path="/consumers/*"
-            element={<ConsumersRouter user={user} setUser={setUser} />}
-          />
-          <Route
-            path="/medicines/*"
-            element={<MedicinesRouter user={user} />}
-          />
-          <Route
-            path="/pharmacists/*"
-            element={<PharmacistsRouter user={user} />}
-          />
-          <Route
-            path="/*"
-            element={<ConsumersRouter user={user} setUser={setUser} />}
-          />
-        </Routes>
+        <div className="flex-1">
+          <Routes>
+            <Route path="/login" element={<AuthPage setUser={setUser} />} />
+            <Route path="/users/*" element={<UsersRouter user={user} />} />
+            <Route path="/stores/*" element={<StoresRouter user={user} />} />
+            <Route
+              path="/consumers/*"
+              element={<ConsumersRouter user={user} setUser={setUser} />}
+            />
+            <Route
+              path="/medicines/*"
+              element={<MedicinesRouter user={user} />}
+            />
+            <Route
+              path="/pharmacists/*"
+              element={<PharmacistsRouter user={user} />}
+            />
+            <Route
+              path="/*"
+              element={<ConsumersRouter user={user} setUser={setUser} />}
+            />
+          </Routes>
+        </div>
       </div>
     </div>
   );
