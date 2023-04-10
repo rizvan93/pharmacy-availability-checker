@@ -19,22 +19,22 @@ export default function UserInfoPage() {
 
   return (
     <>
-      <h1 className="mt-20 px-10 font-bold">User Details</h1>
+      <h1 className="font-bold">User Details</h1>
       <div className="flex justify-center">
         <table>
-        <tbody>
-          <tr>
-            <th className="py-2 pr-2">Name</th>
-            <td>{user.name}</td>
-          </tr>
-          <tr>
-            <th className="py-2 pr-2">User ID</th>
-            <td>{user.userId}</td>
-          </tr>
-          <tr>
-            <th className="py-2 pr-5">Account Type</th>
-            <td>{user.accountType}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th className="py-2 pr-2">Name</th>
+              <td>{user.name}</td>
+            </tr>
+            <tr>
+              <th className="py-2 pr-2">User ID</th>
+              <td>{user.userId}</td>
+            </tr>
+            <tr>
+              <th className="py-2 pr-5">Account Type</th>
+              <td>{user.accountType}</td>
+            </tr>
           </tbody>
         </table>
       </div>

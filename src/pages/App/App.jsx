@@ -38,7 +38,7 @@ function App() {
         (user.accountType === "Admin" || user.accountType === "Pharmacist") ? (
           <NavBar user={user} setUser={setUser} />
         ) : null}
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-scroll">
           <Routes>
             <Route path="/login" element={<AuthPage setUser={setUser} />} />
             <Route path="/users/*" element={<UsersRouter user={user} />} />

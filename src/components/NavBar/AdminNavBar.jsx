@@ -11,7 +11,7 @@ export default function NavBar({ user, setUser }) {
   };
 
   return (
-    <div className="fixed w-screen bg-wAqua text-center text-wAqua-5">
+    <div className="w-full bg-wAqua px-4 py-3 text-center text-wAqua-5">
       <div className="container mx-auto ">
         <nav className="inline-block">
           {user && user.accountType !== "Pharmacist" && (

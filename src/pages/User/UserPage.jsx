@@ -38,7 +38,7 @@ export default function UserPage() {
   };
 
   return (
-    <div className="mt-14 py-8">
+    <div className="">
       <div className="ml-1 flex items-center justify-between">
         <UserTypeFilter handleFilter={handleFilter} />
         <h1 className="font-sans text-3xl font-bold  text-wPurple underline">
