@@ -35,7 +35,7 @@ const StoreForm = () => {
   };
 
   return (
-    <div className=" mt-16 px-10">
+    <div className="">
       <h1 className="mb-4 font-bold">New Store</h1>
       <form onSubmit={handleSubmit}>
         <fieldset>

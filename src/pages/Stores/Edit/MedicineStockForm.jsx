@@ -15,10 +15,10 @@ const MedicineStockForm = ({ medicine, store, setStore }) => {
   };
 
   return (
-    <>
-      <label className="font-semibold">{medicine.name} :</label>
+    <div className="flex w-full flex-row">
+      <label className="flex-1 font-semibold">{medicine.name} :</label>
       <input
-        className="mb-2 bg-gray-200"
+        className="mb-2 max-w-sm bg-gray-200"
         name="quantity"
         type="number"
         value={
@@ -27,7 +27,7 @@ const MedicineStockForm = ({ medicine, store, setStore }) => {
         onChange={handleChange}
       />
       <br />
-    </>
+    </div>
   );
 };
 
