@@ -17,7 +17,7 @@ const ConsumersRouter = ({ user, setUser }) => {
   return (
     <div className="flex  h-screen flex-col justify-between">
       <TopNavBar backButton={!home} user={user} setUser={setUser} />
-      <div className="flex-1 overflow-y-scroll">
+      <div className="z-0 flex-1 overflow-y-scroll">
         <Routes>
           <Route
             path="/info"
