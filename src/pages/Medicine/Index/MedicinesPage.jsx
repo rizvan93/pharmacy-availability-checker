@@ -20,7 +20,7 @@ const MedicinesPage = () => {
 
   return (
     <>
-      <div className="flex w-screen flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center">
         <div className="flex w-full flex-row justify-between">
           <h1 className="mb-2 flex-1 font-sans text-3xl font-bold text-wPurple underline">
             Medicines

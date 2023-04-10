@@ -18,7 +18,7 @@ export default function UserInfoPage() {
   }, []);
 
   return (
-    <>
+    <div className="min-w-full">
       <h1 className="font-bold">User Details</h1>
       <div className="flex justify-center">
         <table>
@@ -45,6 +45,6 @@ export default function UserInfoPage() {
           </button>
         </Link>
       </div>
-    </>
+    </div>
   );
 }
